@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://21orft1krrma"
-path="res://.godot/imported/stewardess.png-6d91c9acf0ef30ae99298eb640508453.ctex"
+uid="uid://c0pcdotngcx5h"
+path="res://.godot/imported/trolley_shadow.png-93f3435e0293698cad37eada01946a92.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/stewardess.png"
-dest_files=["res://.godot/imported/stewardess.png-6d91c9acf0ef30ae99298eb640508453.ctex"]
+source_file="res://assets/obstacles/trolley_shadow.png"
+dest_files=["res://.godot/imported/trolley_shadow.png-93f3435e0293698cad37eada01946a92.ctex"]
 
 [params]
 
