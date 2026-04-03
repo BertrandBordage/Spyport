@@ -62,8 +62,10 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if velocity.length() > 0 and abs(velocity.x) > 0.5:
 		%Sprite.play('walk')
 		%Sprite.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+		%Sprite.speed_scale = velocity.length() / character_type.SPEED
 	else:
 		%Sprite.play('default')
+		%Sprite.speed_scale = 1.0
 	move_and_slide()
 
 
