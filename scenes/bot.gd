@@ -82,6 +82,6 @@ func _on_wait_timer_timeout() -> void:
 		action = Action.WAIT
 		wait()
 	elif action == Action.EMBARK:
-		agent.target_position = Vector2(Globals.WIDTH, Globals.HEIGHT)
+		agent.target_position = Vector2(Globals.width, Globals.height)
 	else:
 		agent.target_position = Globals.get_random_position()

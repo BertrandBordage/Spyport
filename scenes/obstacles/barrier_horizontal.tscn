@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b5pwwebdur801"]
+
+[ext_resource type="Texture2D" uid="uid://ctg0w1uyw18ki" path="res://assets/obstacles/barrier-horizontal.png" id="1_nkv6l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1y61k"]
+size = Vector2(30, 4)
+
+[node name="BarrierHorizontal" type="StaticBody2D" unique_id=917908701]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=2013851750]
+position = Vector2(0, -8)
+texture = ExtResource("1_nkv6l")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=212203439]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_1y61k")

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://jqo1hl4ga4pj"]
+
+[ext_resource type="PackedScene" uid="uid://db5oaweckqpfi" path="res://scenes/obstacles/barrier_vertical.tscn" id="1_s1wtc"]
+
+[node name="Barrier4Vertical" type="Node2D" unique_id=1739968793]
+y_sort_enabled = true
+
+[node name="BarrierVertical" parent="." unique_id=269455446 instance=ExtResource("1_s1wtc")]
+position = Vector2(0, -48)
+
+[node name="BarrierVertical2" parent="." unique_id=1600269279 instance=ExtResource("1_s1wtc")]
+position = Vector2(0, -16)
+
+[node name="BarrierVertical3" parent="." unique_id=63719184 instance=ExtResource("1_s1wtc")]
+position = Vector2(0, 16)
+
+[node name="BarrierVertical4" parent="." unique_id=1745170826 instance=ExtResource("1_s1wtc")]
+position = Vector2(0, 48)

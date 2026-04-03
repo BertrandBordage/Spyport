@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://x6ihumprisyf"]
+
+[ext_resource type="PackedScene" uid="uid://b5pwwebdur801" path="res://scenes/obstacles/barrier_horizontal.tscn" id="1_p3ydm"]
+
+[node name="Barrier4Horizontal" type="Node2D" unique_id=333045975]
+y_sort_enabled = true
+
+[node name="BarrierHorizontal" parent="." unique_id=917908701 instance=ExtResource("1_p3ydm")]
+position = Vector2(37, 0)
+
+[node name="BarrierHorizontal2" parent="." unique_id=1115106885 instance=ExtResource("1_p3ydm")]
+position = Vector2(12, 0)
+
+[node name="BarrierHorizontal3" parent="." unique_id=81237523 instance=ExtResource("1_p3ydm")]
+position = Vector2(-13, 0)
+
+[node name="BarrierHorizontal4" parent="." unique_id=1688270313 instance=ExtResource("1_p3ydm")]
+position = Vector2(-38, 0)

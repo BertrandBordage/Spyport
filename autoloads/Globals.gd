@@ -1,7 +1,7 @@
 extends Node
 
-const WIDTH := 1280
-const HEIGHT := 720
+var width := DisplayServer.window_get_size().x
+var height := DisplayServer.window_get_size().y
 var character_types: Array[CharacterType] = [
 	preload("res://resources/characters/janitor.tres"),
 	preload("res://resources/characters/stewardess.tres"),
@@ -16,4 +16,4 @@ var character_types: Array[CharacterType] = [
 
 
 func get_random_position():
-	return Vector2(randf_range(0, WIDTH), randf_range(0, HEIGHT))
+	return Vector2(randf_range(0, width), randf_range(0, height))

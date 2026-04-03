@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://cjt70p7ipop5k"]
 
+[ext_resource type="PackedScene" uid="uid://x6ihumprisyf" path="res://scenes/obstacles/barrier_4_horizontal.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://jqo1hl4ga4pj" path="res://scenes/obstacles/barrier_4_vertical.tscn" id="3_lnu2h"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
-vertices = PackedVector2Array(870, 631, 1264, 631, 1264, 704, 793, 704, 793, 481, 870, 567, 1194, 481, 1264, 567, 1264, 36, 1194, 417, 16, 36, 762, 417, 16, 704, 729, 438, 762, 438, 729, 704)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(11, 14, 13), PackedInt32Array(12, 13, 15)])
+vertices = PackedVector2Array(857, 624, 1264, 624, 1264, 704, 794, 704, 794, 480, 857, 588, 1194, 480, 1264, 588, 1264, 44, 1194, 444, 16, 44, 757, 444, 16, 704, 757, 704)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-26, -30, 1328, -30, 1320, 738, -34, 728)])
 agent_radius = 16.0
 
@@ -31,12 +33,6 @@ size = Vector2(40, 760)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
 size = Vector2(40, 760)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
-size = Vector2(400, 32)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
-size = Vector2(32, 300)
 
 [node name="Game" type="Node2D" unique_id=172334311]
 
@@ -77,16 +73,37 @@ shape = SubResource("RectangleShape2D_lbhrr")
 position = Vector2(1300, 360)
 shape = SubResource("RectangleShape2D_iywne")
 
-[node name="LineBarrier" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1016116991]
-position = Vector2(1086, 599)
-shape = SubResource("RectangleShape2D_uwrxv")
+[node name="Spawner" parent="NavigationRegion2D" unique_id=1843805809 instance=ExtResource("2_yqjtg")]
 
-[node name="LineBarrier2" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=2063851423]
-position = Vector2(978, 449)
-shape = SubResource("RectangleShape2D_uwrxv")
+[node name="Barriers" type="Node2D" parent="NavigationRegion2D/Spawner" unique_id=1279141564]
+y_sort_enabled = true
 
-[node name="LineBarrier3" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=2129470371]
-position = Vector2(761, 604)
-shape = SubResource("RectangleShape2D_p57ef")
+[node name="Barrier4Horizontal" parent="NavigationRegion2D/Spawner/Barriers" unique_id=333045975 instance=ExtResource("2_lnu2h")]
+position = Vector2(1226, 608)
 
-[node name="Spawner" parent="." unique_id=1843805809 instance=ExtResource("2_yqjtg")]
+[node name="Barrier4Horizontal2" parent="NavigationRegion2D/Spawner/Barriers" unique_id=394034697 instance=ExtResource("2_lnu2h")]
+position = Vector2(1126, 608)
+
+[node name="Barrier4Horizontal3" parent="NavigationRegion2D/Spawner/Barriers" unique_id=1942318833 instance=ExtResource("2_lnu2h")]
+position = Vector2(1026, 608)
+
+[node name="Barrier4Horizontal4" parent="NavigationRegion2D/Spawner/Barriers" unique_id=24120928 instance=ExtResource("2_lnu2h")]
+position = Vector2(926, 608)
+
+[node name="Barrier4Horizontal5" parent="NavigationRegion2D/Spawner/Barriers" unique_id=1134089405 instance=ExtResource("2_lnu2h")]
+position = Vector2(1126, 464)
+
+[node name="Barrier4Horizontal6" parent="NavigationRegion2D/Spawner/Barriers" unique_id=1949606124 instance=ExtResource("2_lnu2h")]
+position = Vector2(1026, 464)
+
+[node name="Barrier4Horizontal7" parent="NavigationRegion2D/Spawner/Barriers" unique_id=5228672 instance=ExtResource("2_lnu2h")]
+position = Vector2(926, 464)
+
+[node name="Barrier4Horizontal8" parent="NavigationRegion2D/Spawner/Barriers" unique_id=1225441923 instance=ExtResource("2_lnu2h")]
+position = Vector2(826, 464)
+
+[node name="Barrier4Vertical" parent="NavigationRegion2D/Spawner/Barriers" unique_id=1739968793 instance=ExtResource("3_lnu2h")]
+position = Vector2(775, 526)
+
+[node name="Barrier4Vertical2" parent="NavigationRegion2D/Spawner/Barriers" unique_id=2119947042 instance=ExtResource("3_lnu2h")]
+position = Vector2(775, 654)
