@@ -1,12 +1,12 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://mnyxe1masbvi"]
 
-[ext_resource type="Texture2D" uid="uid://dxwxphy7e4u3b" path="res://assets/characters/janitor.png" id="1_msfl8"]
+[ext_resource type="Texture2D" uid="uid://islwx4faebvr" path="res://assets/characters/janitor.png" id="1_kvf82"]
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_msfl8")
+"texture": ExtResource("1_kvf82")
 }],
 "loop": true,
 "name": &"default",
