@@ -1,12 +1,52 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://cuensagcjfs5d"]
 
-[ext_resource type="Texture2D" uid="uid://i6yha20t2275" path="res://assets/characters/tourist.png" id="1_sgedx"]
+[ext_resource type="Texture2D" uid="uid://3hac2ohpwe0l" path="res://assets/characters/tourist.png" id="1_sgedx"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sgedx"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ah4ae"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_npukt"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ka6b3"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ylf5d"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e6b8m"]
+atlas = ExtResource("1_sgedx")
+region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_sgedx")
+"texture": SubResource("AtlasTexture_sgedx")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ah4ae")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_npukt")
 }],
 "loop": true,
 "name": &"default",
@@ -14,7 +54,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_sgedx")
+"texture": SubResource("AtlasTexture_ka6b3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylf5d")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e6b8m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ylf5d")
 }],
 "loop": true,
 "name": &"walk",
