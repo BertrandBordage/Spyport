@@ -12,22 +12,29 @@ height = 16.0
 [node name="Bot" type="CharacterBody2D" unique_id=1198885259]
 script = ExtResource("1_qpkb6")
 
-[node name="Shadow" type="Sprite2D" parent="." unique_id=659988595]
+[node name="Visuals" type="Node2D" parent="." unique_id=862133918]
+unique_name_in_owner = true
+
+[node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=659988595]
+unique_name_in_owner = true
 z_index = -1
 z_as_relative = false
 texture = ExtResource("2_hhacj")
 
-[node name="Blood" type="Sprite2D" parent="." unique_id=507035701]
+[node name="Blood" type="Sprite2D" parent="Visuals" unique_id=507035701]
+unique_name_in_owner = true
 visible = false
+z_index = -1
 position = Vector2(0, -8)
 texture = ExtResource("3_hon3i")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=612182173]
+[node name="Sprite" type="AnimatedSprite2D" parent="Visuals" unique_id=612182173]
 unique_name_in_owner = true
 position = Vector2(0, -16)
 sprite_frames = ExtResource("2_qpkb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162001147]
+unique_name_in_owner = true
 position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hhacj")

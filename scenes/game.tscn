@@ -3,6 +3,8 @@
 [ext_resource type="PackedScene" uid="uid://x6ihumprisyf" path="res://scenes/obstacles/barrier_4_horizontal.tscn" id="2_lnu2h"]
 [ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://jqo1hl4ga4pj" path="res://scenes/obstacles/barrier_4_vertical.tscn" id="3_lnu2h"]
+[ext_resource type="Texture2D" uid="uid://cqty55b86shh3" path="res://assets/decor/ground-arrow-corner.png" id="4_iywne"]
+[ext_resource type="Texture2D" uid="uid://col5ers8m52yk" path="res://assets/decor/ground-arrow.png" id="5_p57ef"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
 vertices = PackedVector2Array(857, 624, 1264, 624, 1264, 704, 794, 704, 794, 480, 857, 588, 1194, 480, 1264, 588, 1264, 44, 1194, 444, 16, 44, 757, 444, 16, 704, 757, 704)
@@ -35,6 +37,22 @@ size = Vector2(40, 760)
 size = Vector2(40, 760)
 
 [node name="Game" type="Node2D" unique_id=172334311]
+
+[node name="Ground" type="Node2D" parent="." unique_id=222989152]
+position = Vector2(1, 0)
+
+[node name="SignGroundArrowCorner" type="Sprite2D" parent="Ground" unique_id=159997025]
+position = Vector2(1210, 420)
+rotation = -3.1415925
+texture = ExtResource("4_iywne")
+
+[node name="SignGroundArrow" type="Sprite2D" parent="Ground" unique_id=1355579107]
+position = Vector2(668, 401)
+texture = ExtResource("5_p57ef")
+
+[node name="SignGroundArrow2" type="Sprite2D" parent="Ground" unique_id=550541230]
+position = Vector2(84, 401)
+texture = ExtResource("5_p57ef")
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=949902908]
 navigation_polygon = SubResource("NavigationPolygon_yqjtg")

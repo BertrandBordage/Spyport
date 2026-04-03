@@ -23,14 +23,16 @@ var action := Action.WAIT
 var is_dead := false:
 	set(value):
 		is_dead = value
+		%Sprite.play("dead")
 		%Shadow.visible = not is_dead
 		%Blood.visible = is_dead
+		%CollisionShape2D.disabled = true
 
 
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
 	%Sprite.sprite_frames = character_type.sprite_frames
-	%Sprite.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
+	%Visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	_on_wait_timer_timeout()
 
 
@@ -40,6 +42,9 @@ func wait() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if is_dead:
+		return
+
 	agent.velocity = Vector2.ZERO
 	if action == Action.WAIT:
 		return
@@ -57,6 +62,9 @@ func _physics_process(_delta: float) -> void:
 		)
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
+	if is_dead:
+		return
+
 	velocity = lerp(
 		velocity,
 		safe_velocity,
@@ -66,8 +74,8 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	)
 	if velocity.length() > 0 and abs(velocity.x) > 0.5:
 		%Sprite.play('walk')
-		%Sprite.scale.x = 1.0 if velocity.x > 0.0 else -1.0
-		%Sprite.speed_scale = velocity.length() / character_type.SPEED
+		%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
@@ -83,7 +91,7 @@ func _on_wait_timer_timeout() -> void:
 	if action == Action.WAIT:
 		wait()
 	elif action == Action.TURN:
-		%Sprite.scale.x = -%Sprite.scale.x
+		%Visuals.scale.x = -%Visuals.scale.x
 		action = Action.WAIT
 		wait()
 	elif action == Action.EMBARK:

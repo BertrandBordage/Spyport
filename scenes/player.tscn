@@ -5,6 +5,9 @@
 [ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="3_dqkch"]
 [ext_resource type="SpriteFrames" uid="uid://cuensagcjfs5d" path="res://assets/characters/tourist-frames.tres" id="4_qlg0r"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(8, 25)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
 height = 16.0
@@ -12,23 +15,36 @@ height = 16.0
 [node name="Player" type="CharacterBody2D" unique_id=591049096]
 script = ExtResource("1_g2els")
 
-[node name="Shadow" type="Sprite2D" parent="." unique_id=1900858868]
+[node name="Visuals" type="Node2D" parent="." unique_id=1772829469]
+unique_name_in_owner = true
+y_sort_enabled = true
+
+[node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=1900858868]
 unique_name_in_owner = true
 z_index = -1
 z_as_relative = false
 texture = ExtResource("2_qhqgy")
 region_rect = Rect2(0, 0, 32, 32)
 
-[node name="Blood" type="Sprite2D" parent="." unique_id=321229857]
+[node name="Blood" type="Sprite2D" parent="Visuals" unique_id=321229857]
 unique_name_in_owner = true
 visible = false
+z_index = -1
 position = Vector2(0, -6)
 texture = ExtResource("3_dqkch")
 
-[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=551960305]
+[node name="Sprite" type="AnimatedSprite2D" parent="Visuals" unique_id=551960305]
 unique_name_in_owner = true
 position = Vector2(0, -16)
 sprite_frames = ExtResource("4_qlg0r")
+
+[node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
+unique_name_in_owner = true
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
+position = Vector2(13, -1.5)
+shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
@@ -39,3 +55,10 @@ shape = SubResource("CapsuleShape2D_qhqgy")
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
 avoidance_enabled = true
 neighbor_distance = 100.0
+
+[node name="AttackTimer" type="Timer" parent="." unique_id=1005384109]
+unique_name_in_owner = true
+wait_time = 0.2
+one_shot = true
+
+[connection signal="timeout" from="AttackTimer" to="." method="_on_attack_timer_timeout"]
