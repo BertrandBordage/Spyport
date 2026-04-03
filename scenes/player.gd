@@ -47,6 +47,7 @@ func _physics_process(_delta: float) -> void:
 		player_mapping[Direction.DOWN],
 	)
 	if velocity.length() > 0.0:
+		%Sprite.play('walk')
 		%Sprite.scale.x = -1.0 if velocity.x < 0 else 1.0
 		move_and_slide()
 		for i in get_slide_collision_count():
@@ -56,6 +57,8 @@ func _physics_process(_delta: float) -> void:
 				collider.apply_central_impulse(
 					-collision.get_normal() * character_type.PUSH_STRENGTH
 				)
+	else:
+		%Sprite.play('default')
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D
