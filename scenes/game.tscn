@@ -10,7 +10,7 @@ agent_radius = 16.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 normal = Vector2(0, 1)
-distance = 20.0
+distance = 28.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_yqjtg"]
 
@@ -62,7 +62,7 @@ position = Vector2(1280, 360)
 shape = SubResource("WorldBoundaryShape2D_lbhrr")
 
 [node name="TopWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1690404265]
-position = Vector2(640, 0)
+position = Vector2(639, 8)
 shape = SubResource("RectangleShape2D_yqjtg")
 
 [node name="BottomWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1857206988]

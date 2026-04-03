@@ -1,6 +1,15 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://mnyxe1masbvi"]
 
-[ext_resource type="Texture2D" uid="uid://bdvdlqpmmb8gh" path="res://assets/characters/janitor.png" id="1_kvf82"]
+[ext_resource type="Texture2D" uid="uid://21orft1krrma" path="res://assets/characters/stewardess.png" id="1_7yq3t"]
+[ext_resource type="Texture2D" uid="uid://cej53nt5i720l" path="res://assets/characters/janitor.png" id="1_kvf82"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cx51j"]
+atlas = ExtResource("1_7yq3t")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bb1nb"]
+atlas = ExtResource("1_kvf82")
+region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvf82"]
 atlas = ExtResource("1_kvf82")
@@ -20,6 +29,22 @@ region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cx51j")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bb1nb")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kvf82")

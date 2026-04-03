@@ -1,12 +1,52 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://ct1ktpp4816df"]
 
-[ext_resource type="Texture2D" uid="uid://cnxibibs1g8jk" path="res://assets/characters/stewardess.png" id="1_kjuro"]
+[ext_resource type="Texture2D" uid="uid://21orft1krrma" path="res://assets/characters/stewardess.png" id="1_kjuro"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjuro"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_57iyf"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8a82m"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4gjlw"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x70kg"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0hkm7"]
+atlas = ExtResource("1_kjuro")
+region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kjuro")
+"texture": SubResource("AtlasTexture_kjuro")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_57iyf")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8a82m")
 }],
 "loop": true,
 "name": &"default",
@@ -14,7 +54,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kjuro")
+"texture": SubResource("AtlasTexture_4gjlw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x70kg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0hkm7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x70kg")
 }],
 "loop": true,
 "name": &"walk",
