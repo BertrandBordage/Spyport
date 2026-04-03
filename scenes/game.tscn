@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://cjt70p7ipop5k"]
+
+[ext_resource type="PackedScene" uid="uid://drdn30hrffh7q" path="res://scenes/player.tscn" id="1_uwrxv"]
+
+[node name="Game" type="Node2D" unique_id=172334311]
+y_sort_enabled = true
+
+[node name="Player" parent="." unique_id=591049096 instance=ExtResource("1_uwrxv")]
+position = Vector2(210, 118)
+
+[node name="Player2" parent="." unique_id=411182666 instance=ExtResource("1_uwrxv")]
+position = Vector2(1062, 131)
+player_index = 1
+
+[node name="Player3" parent="." unique_id=44593185 instance=ExtResource("1_uwrxv")]
+position = Vector2(214, 512)
+player_index = 2
+
+[node name="Player4" parent="." unique_id=2078045082 instance=ExtResource("1_uwrxv")]
+position = Vector2(1091, 536)
+player_index = 3
