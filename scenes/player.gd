@@ -38,6 +38,7 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 @export var player_index: PlayerIndex = PlayerIndex.ONE
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
+var is_attacking := false
 var is_dead := false:
 	set(value):
 		is_dead = value
@@ -50,11 +51,23 @@ func _ready() -> void:
 	%Sprite.sprite_frames = character_type.sprite_frames
 	%Visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 
+func move_slide_and_collide() -> void:
+	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider is RigidBody2D:
+			collider.apply_central_impulse(
+				collision.get_normal() * character_type.PUSH_STRENGTH
+				# Proportional to the player velocity when touching.
+				* collision.get_travel().dot(collision.get_normal())
+			)
+
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
-	if is_attacking():
-		move_and_slide()
+	if is_attacking:
+		move_slide_and_collide()
 		return
 
 	velocity = character_type.SPEED * Input.get_vector(
@@ -67,35 +80,39 @@ func _physics_process(_delta: float) -> void:
 		%Sprite.play('walk')
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 		%Visuals.scale.x = -1.0 if velocity.x < 0 else 1.0
-		move_and_slide()
-		for i in get_slide_collision_count():
-			var collision := get_slide_collision(i)
-			var collider := collision.get_collider()
-			if collider is RigidBody2D:
-				collider.apply_central_impulse(
-					-collision.get_normal() * character_type.PUSH_STRENGTH
-				)
+		move_slide_and_collide()
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if Input.is_action_just_pressed(player_mapping["attack"]):
-		%AttackTimer.start()
+	if not is_attacking and Input.is_action_just_pressed(player_mapping["attack"]):
+		is_attacking = true
 		%Sprite.play("attack")
+		var tween := create_tween()
+		tween.tween_property(
+			self, "velocity:x",
+			-character_type.ATTACK_CHARGE_SPEED * signf(%Visuals.scale.x),
+			0.2,
+		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+		tween.tween_callback(on_attack_action)
 
-func is_attacking() -> bool:
-	return not %AttackTimer.is_stopped()
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D
 
 
-func _on_attack_timer_timeout() -> void:
+func on_attack_action() -> void:
 	for body in %AttackArea.get_overlapping_bodies():
-		if body is Player or body is Bot:
+		if body is Player or body is Bot and body != self:
 			body.is_dead = true
 	var tween := create_tween()
 	tween.tween_property(
-		self, "global_position:x", 32 * signf(%Visuals.scale.x), 0.08,
-	).as_relative().set_ease(Tween.EASE_IN_OUT)
+		self, "velocity:x",
+		character_type.ATTACK_SPEED * signf(%Visuals.scale.x),
+		0.1,
+	).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
+	tween.tween_callback(on_attack_end)
+
+func on_attack_end() -> void:
+	is_attacking = false
