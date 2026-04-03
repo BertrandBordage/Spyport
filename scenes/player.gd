@@ -52,6 +52,7 @@ func _physics_process(_delta: float) -> void:
 	)
 	if velocity.length() > 0.0:
 		%Sprite.play('walk')
+		%Sprite.speed_scale = velocity.length() / character_type.SPEED
 		%Sprite.scale.x = -1.0 if velocity.x < 0 else 1.0
 		move_and_slide()
 		for i in get_slide_collision_count():
@@ -63,6 +64,7 @@ func _physics_process(_delta: float) -> void:
 				)
 	else:
 		%Sprite.play('default')
+		%Sprite.speed_scale = 1.0
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D
