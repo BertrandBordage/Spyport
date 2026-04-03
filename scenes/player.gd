@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
  
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3 }

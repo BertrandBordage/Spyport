@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://cjt70p7ipop5k"]
 
 [ext_resource type="PackedScene" uid="uid://drdn30hrffh7q" path="res://scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 normal = Vector2(0, 1)
@@ -49,3 +50,5 @@ shape = SubResource("WorldBoundaryShape2D_lnu2h")
 [node name="Right" type="CollisionShape2D" parent="Boundaries" unique_id=478767772]
 position = Vector2(1280, 360)
 shape = SubResource("WorldBoundaryShape2D_lbhrr")
+
+[node name="Spawner" parent="." unique_id=1843805809 instance=ExtResource("2_yqjtg")]
