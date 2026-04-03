@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterType" format=3 uid="uid://dt4s2jvkthymw"]
+
+[ext_resource type="Script" uid="uid://cuvctrqtn5qxf" path="res://resources/character_type.gd" id="1_xua6g"]
+[ext_resource type="SpriteFrames" uid="uid://ct1ktpp4816df" path="res://assets/characters/stewardess-frames.tres" id="2_ndktj"]
+
+[resource]
+script = ExtResource("1_xua6g")
+sprite_frames = ExtResource("2_ndktj")
+metadata/_custom_type_script = "uid://cuvctrqtn5qxf"

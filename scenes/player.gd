@@ -35,6 +35,10 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 
 @export var player_index: PlayerIndex = PlayerIndex.ONE
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
+var character_type: CharacterType = Globals.character_types.pick_random()
+
+func _ready() -> void:
+	%Sprite.sprite_frames = character_type.sprite_frames
 
 func _physics_process(_delta: float) -> void:
 	velocity = SPEED * Input.get_vector(

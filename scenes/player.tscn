@@ -1,18 +1,7 @@
 [gd_scene format=3 uid="uid://drdn30hrffh7q"]
 
 [ext_resource type="Script" uid="uid://triwf4n52fmy" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://dxwxphy7e4u3b" path="res://assets/characters/janitor.png" id="2_g2els"]
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_g2els"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": ExtResource("2_g2els")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" uid="uid://mnyxe1masbvi" path="res://assets/characters/janitor-frames.tres" id="2_g2els"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
@@ -23,7 +12,7 @@ script = ExtResource("1_g2els")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=551960305]
 unique_name_in_owner = true
-sprite_frames = SubResource("SpriteFrames_g2els")
+sprite_frames = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 position = Vector2(0, 14)

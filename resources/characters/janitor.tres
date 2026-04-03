@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterType" format=3 uid="uid://dsxy52slqmu12"]
+
+[ext_resource type="Script" uid="uid://cuvctrqtn5qxf" path="res://resources/character_type.gd" id="1_m5cmt"]
+[ext_resource type="SpriteFrames" uid="uid://mnyxe1masbvi" path="res://assets/characters/janitor-frames.tres" id="2_pkqiu"]
+
+[resource]
+script = ExtResource("1_m5cmt")
+sprite_frames = ExtResource("2_pkqiu")
+metadata/_custom_type_script = "uid://cuvctrqtn5qxf"
