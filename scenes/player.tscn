@@ -16,6 +16,7 @@ position = Vector2(0, -14)
 sprite_frames = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
+unique_name_in_owner = true
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
 

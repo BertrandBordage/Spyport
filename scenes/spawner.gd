@@ -3,6 +3,7 @@ extends Node2D
 
 const bot_scene := preload("res://scenes/bot.tscn")
 const player_scene := preload("res://scenes/player.tscn")
+const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
 
 @onready var physics_state := get_world_2d().direct_space_state
 var shape_params := PhysicsShapeQueryParameters2D.new()
@@ -31,3 +32,8 @@ func _ready() -> void:
 		var bot: Bot = bot_scene.instantiate()
 		var collision_shape := bot.get_collision_shape()
 		spawn_child_in_empty_space(bot, collision_shape)
+
+	for i in range(20):
+		var trolley: Trolley = trolley_scene.instantiate()
+		var collision_shape := trolley.get_collision_shape()
+		spawn_child_in_empty_space(trolley, collision_shape)

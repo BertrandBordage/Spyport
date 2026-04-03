@@ -25,6 +25,7 @@ var action := Action.WAIT
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
 	%Sprite.sprite_frames = character_type.sprite_frames
+	%Sprite.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	_on_wait_timer_timeout()
 
 
@@ -58,8 +59,11 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	).limit_length(
 		character_type.SPEED * (0.2 if action == Action.WAIT else 1.0)
 	)
-	if velocity.length() > 0 and abs(velocity.x) > 1e-1:
+	if velocity.length() > 0 and abs(velocity.x) > 0.5:
+		%Sprite.play('walk')
 		%Sprite.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+	else:
+		%Sprite.play('default')
 	move_and_slide()
 
 

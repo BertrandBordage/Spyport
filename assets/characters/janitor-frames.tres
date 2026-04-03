@@ -1,14 +1,47 @@
 [gd_resource type="SpriteFrames" format=3 uid="uid://mnyxe1masbvi"]
 
-[ext_resource type="Texture2D" uid="uid://islwx4faebvr" path="res://assets/characters/janitor.png" id="1_kvf82"]
+[ext_resource type="Texture2D" uid="uid://bdvdlqpmmb8gh" path="res://assets/characters/janitor.png" id="1_kvf82"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvf82"]
+atlas = ExtResource("1_kvf82")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7yq3t"]
+atlas = ExtResource("1_kvf82")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6dswf"]
+atlas = ExtResource("1_kvf82")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0ns4m"]
+atlas = ExtResource("1_kvf82")
+region = Rect2(64, 0, 32, 32)
 
 [resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_kvf82")
+"texture": SubResource("AtlasTexture_kvf82")
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7yq3t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dswf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0ns4m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6dswf")
+}],
+"loop": true,
+"name": &"walk",
 "speed": 5.0
 }]

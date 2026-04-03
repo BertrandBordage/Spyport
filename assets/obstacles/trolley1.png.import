@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c72b2mdx6vpd1"
-path="res://.godot/imported/chariot2.png-e18dafab159724b1f99ab4a7c5201a09.ctex"
+uid="uid://cyd5t6drm5bpm"
+path="res://.godot/imported/trolley1.png-1059d9914cfc8d385ec636668ca3575a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/chariot2.png"
-dest_files=["res://.godot/imported/chariot2.png-e18dafab159724b1f99ab4a7c5201a09.ctex"]
+source_file="res://assets/obstacles/trolley1.png"
+dest_files=["res://.godot/imported/trolley1.png-1059d9914cfc8d385ec636668ca3575a.ctex"]
 
 [params]
 
