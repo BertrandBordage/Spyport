@@ -25,8 +25,15 @@ var is_dead := false:
 		is_dead = value
 		%Sprite.play("dead")
 		%Shadow.visible = not is_dead
-		%Blood.visible = is_dead
-		%CollisionShape2D.disabled = true
+		if is_dead:
+			%WaitTimer.stop()
+			%CollisionShape2D.disabled = true
+			%Blood.visible = is_dead
+			%Blood.scale = Vector2.ZERO
+			var tween := create_tween()
+			tween.tween_property(
+				%Blood, 'scale', Vector2(1.5, 1.5), 5.0,
+			).set_ease(Tween.EASE_OUT)
 
 
 func _ready() -> void:
