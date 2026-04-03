@@ -37,6 +37,7 @@ var character_type: CharacterType = Globals.character_types.pick_random()
 
 func _ready() -> void:
 	%Sprite.sprite_frames = character_type.sprite_frames
+	%Sprite.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 
 func _physics_process(_delta: float) -> void:
 	velocity = character_type.SPEED * Input.get_vector(
@@ -48,6 +49,13 @@ func _physics_process(_delta: float) -> void:
 	if velocity.length() > 0.0:
 		%Sprite.scale.x = -1.0 if velocity.x < 0 else 1.0
 		move_and_slide()
+		for i in get_slide_collision_count():
+			var collision := get_slide_collision(i)
+			var collider := collision.get_collider()
+			if collider is RigidBody2D:
+				collider.apply_central_impulse(
+					-collision.get_normal() * character_type.PUSH_STRENGTH
+				)
 
 func get_collision_shape() -> CollisionShape2D:
-	return $CollisionShape2D
+	return %CollisionShape2D

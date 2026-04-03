@@ -25,6 +25,7 @@ var action := Action.WAIT
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
 	%Sprite.sprite_frames = character_type.sprite_frames
+	%Sprite.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	_on_wait_timer_timeout()
 
 
