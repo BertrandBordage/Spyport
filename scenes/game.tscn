@@ -1,7 +1,12 @@
 [gd_scene format=3 uid="uid://cjt70p7ipop5k"]
 
-[ext_resource type="PackedScene" uid="uid://drdn30hrffh7q" path="res://scenes/player.tscn" id="1_uwrxv"]
 [ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
+vertices = PackedVector2Array(870, 631, 1264, 631, 1264, 704, 793, 704, 793, 481, 870, 567, 1194, 481, 1264, 567, 1264, 36, 1194, 417, 16, 36, 762, 417, 16, 704, 729, 438, 762, 438, 729, 704)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13), PackedInt32Array(11, 14, 13), PackedInt32Array(12, 13, 15)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-26, -30, 1328, -30, 1320, 738, -34, 728)])
+agent_radius = 16.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 normal = Vector2(0, 1)
@@ -15,40 +20,73 @@ normal = Vector2(1, 0)
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_lbhrr"]
 normal = Vector2(-1, 0)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
+size = Vector2(1320, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lnu2h"]
+size = Vector2(1320, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lbhrr"]
+size = Vector2(40, 760)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iywne"]
+size = Vector2(40, 760)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uwrxv"]
+size = Vector2(400, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p57ef"]
+size = Vector2(32, 300)
+
 [node name="Game" type="Node2D" unique_id=172334311]
-y_sort_enabled = true
 
-[node name="Player" parent="." unique_id=591049096 instance=ExtResource("1_uwrxv")]
-position = Vector2(210, 118)
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="." unique_id=949902908]
+navigation_polygon = SubResource("NavigationPolygon_yqjtg")
 
-[node name="Player2" parent="." unique_id=411182666 instance=ExtResource("1_uwrxv")]
-position = Vector2(1062, 131)
-player_index = 1
+[node name="Boundaries" type="StaticBody2D" parent="NavigationRegion2D" unique_id=261153962]
 
-[node name="Player3" parent="." unique_id=44593185 instance=ExtResource("1_uwrxv")]
-position = Vector2(214, 512)
-player_index = 2
-
-[node name="Player4" parent="." unique_id=2078045082 instance=ExtResource("1_uwrxv")]
-position = Vector2(1091, 536)
-player_index = 3
-
-[node name="Boundaries" type="StaticBody2D" parent="." unique_id=261153962]
-
-[node name="Top" type="CollisionShape2D" parent="Boundaries" unique_id=1787289749]
+[node name="Top" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1787289749]
 position = Vector2(640, 0)
 shape = SubResource("WorldBoundaryShape2D_uwrxv")
 
-[node name="Bottom" type="CollisionShape2D" parent="Boundaries" unique_id=1495977580]
+[node name="Bottom" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1495977580]
 position = Vector2(640, 720)
 shape = SubResource("WorldBoundaryShape2D_yqjtg")
 
-[node name="Left" type="CollisionShape2D" parent="Boundaries" unique_id=1964116065]
+[node name="Left" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1964116065]
 position = Vector2(0, 360)
 shape = SubResource("WorldBoundaryShape2D_lnu2h")
 
-[node name="Right" type="CollisionShape2D" parent="Boundaries" unique_id=478767772]
+[node name="Right" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=478767772]
 position = Vector2(1280, 360)
 shape = SubResource("WorldBoundaryShape2D_lbhrr")
+
+[node name="TopWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1690404265]
+position = Vector2(640, 0)
+shape = SubResource("RectangleShape2D_yqjtg")
+
+[node name="BottomWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1857206988]
+position = Vector2(640, 740)
+shape = SubResource("RectangleShape2D_lnu2h")
+
+[node name="LeftWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1059633499]
+position = Vector2(-20, 360)
+shape = SubResource("RectangleShape2D_lbhrr")
+
+[node name="RightWall" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=577643464]
+position = Vector2(1300, 360)
+shape = SubResource("RectangleShape2D_iywne")
+
+[node name="LineBarrier" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=1016116991]
+position = Vector2(1086, 599)
+shape = SubResource("RectangleShape2D_uwrxv")
+
+[node name="LineBarrier2" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=2063851423]
+position = Vector2(978, 449)
+shape = SubResource("RectangleShape2D_uwrxv")
+
+[node name="LineBarrier3" type="CollisionShape2D" parent="NavigationRegion2D/Boundaries" unique_id=2129470371]
+position = Vector2(761, 604)
+shape = SubResource("RectangleShape2D_p57ef")
 
 [node name="Spawner" parent="." unique_id=1843805809 instance=ExtResource("2_yqjtg")]
