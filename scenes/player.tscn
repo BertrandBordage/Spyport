@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://drdn30hrffh7q"]
 
 [ext_resource type="Script" uid="uid://triwf4n52fmy" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="SpriteFrames" uid="uid://mnyxe1masbvi" path="res://assets/characters/janitor-frames.tres" id="2_g2els"]
 [ext_resource type="Texture2D" uid="uid://bkv2hkpd2p0es" path="res://assets/characters/character-shadow.png" id="2_qhqgy"]
+[ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="3_dqkch"]
+[ext_resource type="SpriteFrames" uid="uid://cuensagcjfs5d" path="res://assets/characters/tourist-frames.tres" id="4_qlg0r"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
@@ -12,18 +13,26 @@ height = 16.0
 script = ExtResource("1_g2els")
 
 [node name="Shadow" type="Sprite2D" parent="." unique_id=1900858868]
+unique_name_in_owner = true
 z_index = -1
 z_as_relative = false
-position = Vector2(0, 2)
 texture = ExtResource("2_qhqgy")
+region_rect = Rect2(0, 0, 32, 32)
+
+[node name="Blood" type="Sprite2D" parent="." unique_id=321229857]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -6)
+texture = ExtResource("3_dqkch")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=551960305]
 unique_name_in_owner = true
-position = Vector2(0, -14)
-sprite_frames = ExtResource("2_g2els")
+position = Vector2(0, -16)
+sprite_frames = ExtResource("4_qlg0r")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
+position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
 

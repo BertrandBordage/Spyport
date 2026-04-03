@@ -38,6 +38,11 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 @export var player_index: PlayerIndex = PlayerIndex.ONE
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
+var is_dead := false:
+	set(value):
+		is_dead = value
+		%Shadow.visible = not is_dead
+		%Blood.visible = is_dead
 
 func _ready() -> void:
 	%Sprite.sprite_frames = character_type.sprite_frames

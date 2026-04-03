@@ -20,6 +20,11 @@ var actions_probabilities = [
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
 var action := Action.WAIT
+var is_dead := false:
+	set(value):
+		is_dead = value
+		%Shadow.visible = not is_dead
+		%Blood.visible = is_dead
 
 
 func _ready() -> void:
