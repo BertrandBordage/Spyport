@@ -4,8 +4,6 @@ extends CharacterBody2D
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3 }
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-const SPEED := 200.0
-
 const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 	PlayerIndex.ONE: {
 		Direction.UP: "player_0_up",
@@ -41,7 +39,7 @@ func _ready() -> void:
 	%Sprite.sprite_frames = character_type.sprite_frames
 
 func _physics_process(_delta: float) -> void:
-	velocity = SPEED * Input.get_vector(
+	velocity = character_type.SPEED * Input.get_vector(
 		player_mapping[Direction.LEFT],
 		player_mapping[Direction.RIGHT],
 		player_mapping[Direction.UP],
@@ -50,3 +48,6 @@ func _physics_process(_delta: float) -> void:
 	if velocity.length() > 0.0:
 		%Sprite.scale.x = -1.0 if velocity.x < 0 else 1.0
 		move_and_slide()
+
+func get_collision_shape() -> CollisionShape2D:
+	return $CollisionShape2D

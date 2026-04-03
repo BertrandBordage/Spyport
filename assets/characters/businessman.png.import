@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://islwx4faebvr"
-path="res://.godot/imported/janitor.png-4d0f2437ab35055dab8cb466897f5d3d.ctex"
+uid="uid://jh7w17gy2k4r"
+path="res://.godot/imported/businessman.png-44cf25603c465da875a6b2aaae273706.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/janitor.png"
-dest_files=["res://.godot/imported/janitor.png-4d0f2437ab35055dab8cb466897f5d3d.ctex"]
+source_file="res://assets/characters/businessman.png"
+dest_files=["res://.godot/imported/businessman.png-44cf25603c465da875a6b2aaae273706.ctex"]
 
 [params]
 

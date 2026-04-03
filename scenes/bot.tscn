@@ -7,16 +7,25 @@
 radius = 2.0
 height = 16.0
 
-[node name="Bot" type="AnimatableBody2D" unique_id=325416557]
+[node name="Bot" type="CharacterBody2D" unique_id=1198885259]
 script = ExtResource("1_qpkb6")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=612182173]
 unique_name_in_owner = true
+position = Vector2(0, -14)
 sprite_frames = ExtResource("2_qpkb6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1162001147]
-position = Vector2(0, 14)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_hhacj")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=566501239]
+unique_name_in_owner = true
+avoidance_enabled = true
+neighbor_distance = 100.0
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=188750517]
+unique_name_in_owner = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

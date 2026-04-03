@@ -1,0 +1,14 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://cuensagcjfs5d"]
+
+[ext_resource type="Texture2D" uid="uid://i6yha20t2275" path="res://assets/characters/tourist.png" id="1_sgedx"]
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_sgedx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
