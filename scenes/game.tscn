@@ -151,3 +151,6 @@ shape = SubResource("RectangleShape2D_kvpfn")
 debug_color = Color(0.9933763, 0, 0.2452861, 0.41960785)
 
 [node name="AudioBackground" parent="." unique_id=56959081 instance=ExtResource("7_u5sy4")]
+
+[node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=188571592]
+position = Vector2(640, 360)

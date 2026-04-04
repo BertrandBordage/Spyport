@@ -172,6 +172,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		action = Action.ATTACK
 		%Sprite.play("attack")
 		%AttackCollisionShape.disabled = false
+		%DashPlayer.play()
 		var tween := create_tween()
 		tween.tween_property(
 			self, "velocity:x",
@@ -190,6 +191,7 @@ func on_attack_action() -> void:
 		if body is Character and body != self:
 			body.is_dead = true
 			Globals.character_died.emit(body, self)
+			%AttackPlayer.play()
 	%AttackCollisionShape.disabled = true
 	var tween := create_tween()
 	tween.tween_property(
