@@ -8,6 +8,7 @@ const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
 func _ready() -> void:
 	Globals.spawner = self
 	Globals.physics_state = get_world_2d().direct_space_state
+	Globals.character_died.connect(_on_character_died)
 	
 	for _i in range(300):
 		var character: Character = character_scene.instantiate()
@@ -33,6 +34,16 @@ static func is_available_character(node: Node):
 	)
 
 
+func replace_bot_with_player(player_index: Character.PlayerIndex) -> void:
+	var available_characters := get_children().filter(is_available_character)
+	if available_characters.size() == 0:
+		return
+	var character: Character = available_characters.pick_random()
+	character.player_index = player_index
+	Globals.players_characters[character.player_index] = character
+	Globals.player_joined.emit(character)
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	for player_index in range(4):
 		if player_index in Globals.players_characters:
@@ -40,9 +51,12 @@ func _unhandled_input(event: InputEvent) -> void:
 		if event.is_action_pressed(
 			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
 		):
-			var character: Character = get_children().filter(
-				is_available_character
-			).pick_random()
-			character.player_index = player_index as Character.PlayerIndex
-			Globals.players_characters[character.player_index] = character
-			Globals.player_joined.emit(character)
+			replace_bot_with_player(player_index)
+
+func _on_character_died(character: Character, _killer: Character) -> void:
+	if character.is_bot:
+		return
+
+	await get_tree().create_timer(5.0).timeout
+
+	replace_bot_with_player(character.player_index)

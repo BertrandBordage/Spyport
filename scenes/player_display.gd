@@ -29,8 +29,9 @@ func blink() -> void:
 func _on_player_joined(_character: Character) -> void:
 	if _character.player_index == player_index:
 		character = _character
-		%EmptySprite.queue_free()
+		%EmptySprite.visible = false
 		%Sprite.sprite_frames = character.character_type.sprite_frames
+		%Sprite.animation = "default"
 		%Sprite.visible = true
 	elif _character.player_index == player_index - 1:
 		blink()
@@ -45,8 +46,11 @@ func set_shaking(value: float) -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	if not is_instance_valid(character) or character.is_dead:
-		set_shaking(0)
+	if not is_instance_valid(character):
+		return
+
+	if character.is_dead:
+		set_shaking(0.0)
 		return
 
 	var closest_distance: float = INF
