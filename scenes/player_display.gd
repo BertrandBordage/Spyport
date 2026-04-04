@@ -42,7 +42,7 @@ func _on_character_died(_character: Character, _killer: Character) -> void:
 
 
 func set_shaking(value: float) -> void:
-	%Sprite.material.set_shader_parameter("shaking", value)
+	%Sprite.set_instance_shader_parameter("shaking", value)
 
 
 func _physics_process(_delta: float) -> void:
