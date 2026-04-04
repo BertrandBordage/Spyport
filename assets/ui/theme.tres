@@ -4,6 +4,10 @@
 [ext_resource type="Texture2D" uid="uid://ben1hh4ht4olx" path="res://assets/ui/panel-container-9-patch.png" id="1_ib6tx"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fenpc"]
+content_margin_left = 16.0
+content_margin_top = 16.0
+content_margin_right = 16.0
+content_margin_bottom = 16.0
 texture = ExtResource("1_ib6tx")
 texture_margin_left = 4.0
 texture_margin_top = 3.0
