@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://offq52sjwn83"
-path="res://.godot/imported/glass_horizontal_0.png-8708f05dd83239e01526d5300e07025d.ctex"
+uid="uid://6sjcxd5duol2"
+path="res://.godot/imported/wall_horizontal_1.png-15dfb59520bf36d4764a8f1de9c1c2c5.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/glass_horizontal_0.png"
-dest_files=["res://.godot/imported/glass_horizontal_0.png-8708f05dd83239e01526d5300e07025d.ctex"]
+source_file="res://assets/obstacles/wall_horizontal_1.png"
+dest_files=["res://.godot/imported/wall_horizontal_1.png-15dfb59520bf36d4764a8f1de9c1c2c5.ctex"]
 
 [params]
 

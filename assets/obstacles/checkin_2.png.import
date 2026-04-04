@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c6so60r26iomf"
-path="res://.godot/imported/check_device_horizontal_1.png-f304c3efe41e73a49ed1b7e30a2482a3.ctex"
+uid="uid://qwb308wv1pnm"
+path="res://.godot/imported/checkin_2.png-de58cdc4f58c9d06b04152986f8ca67a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/check_device_horizontal_1.png"
-dest_files=["res://.godot/imported/check_device_horizontal_1.png-f304c3efe41e73a49ed1b7e30a2482a3.ctex"]
+source_file="res://assets/obstacles/checkin_2.png"
+dest_files=["res://.godot/imported/checkin_2.png-de58cdc4f58c9d06b04152986f8ca67a.ctex"]
 
 [params]
 

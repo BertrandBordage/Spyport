@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5tp767l86b8i"
-path="res://.godot/imported/advert_0.png-439a1d05fb1f65a8cdb228739d56fbfc.ctex"
+uid="uid://bwa7guc32fktl"
+path="res://.godot/imported/advert_1.png-3e69c138bbba2cfcd7cfa78f8436cca1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/advert_0.png"
-dest_files=["res://.godot/imported/advert_0.png-439a1d05fb1f65a8cdb228739d56fbfc.ctex"]
+source_file="res://assets/obstacles/advert_1.png"
+dest_files=["res://.godot/imported/advert_1.png-3e69c138bbba2cfcd7cfa78f8436cca1.ctex"]
 
 [params]
 
