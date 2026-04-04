@@ -1,8 +1,7 @@
 class_name Spawner
 extends Node2D
 
-const bot_scene := preload("res://scenes/bot.tscn")
-const player_scene := preload("res://scenes/player.tscn")
+const character_scene := preload("res://scenes/character.tscn")
 const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
 
 @onready var physics_state := get_world_2d().direct_space_state
@@ -22,18 +21,27 @@ func spawn_child_in_empty_space(
 
 
 func _ready() -> void:
-	for i in range(4):
-		var player: Player = player_scene.instantiate()
-		player.player_index = i as Player.PlayerIndex
-		var collision_shape := player.get_collision_shape()
-		spawn_child_in_empty_space(player, collision_shape)
-	
 	for _i in range(300):
-		var bot: Bot = bot_scene.instantiate()
-		var collision_shape := bot.get_collision_shape()
-		spawn_child_in_empty_space(bot, collision_shape)
+		var character: Character = character_scene.instantiate()
+		character.player_index = Character.PlayerIndex.BOT
+		var collision_shape := character.get_collision_shape()
+		spawn_child_in_empty_space(character, collision_shape)
 
 	for i in range(20):
 		var trolley: Trolley = trolley_scene.instantiate()
 		var collision_shape := trolley.get_collision_shape()
 		spawn_child_in_empty_space(trolley, collision_shape)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	for player_index in range(4):
+		if player_index in Globals.players_characters:
+			continue
+		if event.is_action_pressed(
+			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
+		):
+			var character: Character = get_children().filter(
+				func (child): return child is Character
+			).pick_random()
+			character.player_index = player_index as Character.PlayerIndex
+			Globals.players_characters[character.player_index] = character

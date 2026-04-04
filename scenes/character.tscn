@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://drdn30hrffh7q"]
 
-[ext_resource type="Script" uid="uid://triwf4n52fmy" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://bkv2hkpd2p0es" path="res://assets/characters/character-shadow.png" id="2_qhqgy"]
-[ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="3_dqkch"]
-[ext_resource type="SpriteFrames" uid="uid://cuensagcjfs5d" path="res://assets/characters/tourist-frames.tres" id="4_qlg0r"]
+[ext_resource type="Script" uid="uid://triwf4n52fmy" path="res://scenes/character.gd" id="1_my7n2"]
+[ext_resource type="Texture2D" uid="uid://bkv2hkpd2p0es" path="res://assets/characters/character-shadow.png" id="2_dp8ca"]
+[ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="3_0lw5n"]
+[ext_resource type="SpriteFrames" uid="uid://cuensagcjfs5d" path="res://assets/characters/tourist-frames.tres" id="4_2cgup"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(8, 25)
@@ -12,8 +12,8 @@ size = Vector2(8, 25)
 radius = 2.0
 height = 16.0
 
-[node name="Player" type="CharacterBody2D" unique_id=591049096]
-script = ExtResource("1_g2els")
+[node name="Character" type="CharacterBody2D" unique_id=591049096]
+script = ExtResource("1_my7n2")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1772829469]
 unique_name_in_owner = true
@@ -21,30 +21,33 @@ y_sort_enabled = true
 
 [node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=1900858868]
 unique_name_in_owner = true
-z_index = -1
+z_index = -2
 z_as_relative = false
-texture = ExtResource("2_qhqgy")
+texture = ExtResource("2_dp8ca")
 region_rect = Rect2(0, 0, 32, 32)
 
 [node name="Blood" type="Sprite2D" parent="Visuals" unique_id=321229857]
 unique_name_in_owner = true
 visible = false
-z_index = -1
+z_index = -2
 position = Vector2(0, -6)
-texture = ExtResource("3_dqkch")
+texture = ExtResource("3_0lw5n")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visuals" unique_id=551960305]
 unique_name_in_owner = true
 position = Vector2(0, -16)
-sprite_frames = ExtResource("4_qlg0r")
+sprite_frames = ExtResource("4_2cgup")
+animation = &"dead"
 
 [node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
 unique_name_in_owner = true
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
+[node name="AttackCollisionShape" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
+unique_name_in_owner = true
 position = Vector2(13, -1.5)
 shape = SubResource("RectangleShape2D_dqkch")
+disabled = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
@@ -53,5 +56,13 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
+unique_name_in_owner = true
 avoidance_enabled = true
 neighbor_distance = 100.0
+
+[node name="WaitTimer" type="Timer" parent="." unique_id=921799941]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
+[connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
