@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c786ls5lbpcjv"
-path="res://.godot/imported/businessman.png-44cf25603c465da875a6b2aaae273706.ctex"
+uid="uid://ben1hh4ht4olx"
+path="res://.godot/imported/panel-container-9-patch.png-ca48e65f7a9f4c867feef7278db9c376.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/characters/businessman.png"
-dest_files=["res://.godot/imported/businessman.png-44cf25603c465da875a6b2aaae273706.ctex"]
+source_file="res://assets/ui/panel-container-9-patch.png"
+dest_files=["res://.godot/imported/panel-container-9-patch.png-ca48e65f7a9f4c867feef7278db9c376.ctex"]
 
 [params]
 
