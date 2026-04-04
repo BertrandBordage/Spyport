@@ -138,6 +138,8 @@ func _physics_process(_delta: float) -> void:
 			player_mapping[Direction.UP],
 			player_mapping[Direction.DOWN],
 		)
+		if velocity.length() > 0 and %StepsTimer.is_stopped():
+			_on_steps_timer_timeout()
 		apply_generic_velocity()
 
 func apply_generic_velocity() -> void:
@@ -222,3 +224,8 @@ func _on_wait_timer_timeout() -> void:
 		set_collision_mask_value(2, false)
 	else:
 		agent.target_position = Globals.get_random_position(%CollisionShape2D)
+
+
+func _on_steps_timer_timeout() -> void:
+	%StepsPlayer.play()
+	%StepsTimer.start(0.3 / clampf(velocity.length() / character_type.SPEED, 0.3, 1.0))
