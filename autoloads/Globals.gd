@@ -10,11 +10,8 @@ var character_types: Array[CharacterType] = [
 	preload("res://resources/characters/stewardess.tres"),
 	preload("res://resources/characters/guard.tres"),
 	preload("res://resources/characters/businessman.tres"),
-	preload("res://resources/characters/businessman.tres"),
-	preload("res://resources/characters/businessman.tres"),
 	preload("res://resources/characters/tourist.tres"),
-	preload("res://resources/characters/tourist.tres"),
-	preload("res://resources/characters/tourist.tres"),
+	preload("res://resources/characters/girl.tres"),
 ]
 var players_characters: Dictionary[Character.PlayerIndex, Character] = {}
 var players_scores: Dictionary[Character.PlayerIndex, int] = {

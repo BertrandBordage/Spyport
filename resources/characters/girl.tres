@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="CharacterType" format=3 uid="uid://cc5nsqjup2ofw"]
+
+[ext_resource type="Script" uid="uid://cuvctrqtn5qxf" path="res://resources/character_type.gd" id="1_742pv"]
+[ext_resource type="SpriteFrames" uid="uid://dssnhhwpbvqvu" path="res://assets/characters/girl-frames.tres" id="2_vvqqh"]
+
+[resource]
+script = ExtResource("1_742pv")
+sprite_frames = ExtResource("2_vvqqh")
+metadata/_custom_type_script = "uid://cuvctrqtn5qxf"

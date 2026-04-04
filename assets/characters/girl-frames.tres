@@ -1,0 +1,71 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dssnhhwpbvqvu"]
+
+[ext_resource type="Texture2D" uid="uid://chdbcupd1p3eu" path="res://assets/characters/girl.png" id="1_3pwr5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uou08"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hqmib"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4q7v"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_de7ab"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8j5ou"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8pk20"]
+atlas = ExtResource("1_3pwr5")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uou08")
+}],
+"loop": true,
+"name": &"attack",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hqmib")
+}],
+"loop": true,
+"name": &"dead",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4q7v")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_de7ab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j5ou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8pk20")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8j5ou")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
