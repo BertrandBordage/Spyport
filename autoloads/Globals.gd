@@ -16,4 +16,4 @@ var character_types: Array[CharacterType] = [
 
 
 func get_random_position():
-	return Vector2(randf_range(0, width), randf_range(0, height))
+	return Vector2(randf_range(0, width), randf_range(90, height))
