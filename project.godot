@@ -143,6 +143,11 @@ player_3_attack={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_2="Blocked by exit"
+2d_physics/layer_24="Exclusion zone"
+
 [physics]
 
 3d/physics_engine="Jolt Physics"

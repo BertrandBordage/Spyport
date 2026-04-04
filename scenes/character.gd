@@ -45,11 +45,11 @@ var bot_actions_probabilities = [
 	Action.WAIT,
 	Action.WAIT,
 	Action.WALK,
+	Action.WALK,
 	Action.TURN,
 	Action.TURN,
 	Action.TURN,
-	#Action.EMBARK,
-	#Action.EMBARK,
+	Action.EMBARK,
 ]
 
 @export var player_index: PlayerIndex = PlayerIndex.ONE:
@@ -114,10 +114,15 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if is_bot:
+		if action == Action.EMBARK:
+			# Updates the pathfinding.
+			agent.target_position = agent.target_position
 		agent.velocity = Vector2.ZERO
 		if action == Action.WAIT:
 			return
 		if agent.is_navigation_finished():
+			if action == Action.EMBARK:
+				queue_free()
 			action = Action.WAIT
 			wait()
 		else:
@@ -138,10 +143,11 @@ func _physics_process(_delta: float) -> void:
 		apply_generic_velocity()
 
 func apply_generic_velocity() -> void:
-	if velocity.length() > 0.0 and abs(velocity.x) > 0.5:
+	if velocity.length() > 0.0:
 		%Sprite.play('walk')
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
-		%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+		if abs(velocity.x) > 0.5:
+			%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
@@ -208,6 +214,10 @@ func _on_wait_timer_timeout() -> void:
 		action = Action.WAIT
 		wait()
 	elif action == Action.EMBARK:
-		agent.target_position = Vector2(Globals.width, Globals.height)
+		agent.path_max_distance = 0
+		agent.target_position = Globals.objectives[
+			Globals.Objective.EXIT
+		].global_position
+		set_collision_mask_value(2, false)
 	else:
-		agent.target_position = Globals.get_random_position()
+		agent.target_position = Globals.get_random_position(%CollisionShape2D)
