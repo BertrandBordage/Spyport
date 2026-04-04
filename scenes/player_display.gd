@@ -4,6 +4,7 @@ extends Node2D
 
 @export var player_index: Character.PlayerIndex = Character.PlayerIndex.ONE
 var character: Character
+const SHAKING_DISTANCE := 150.0
 
 
 func _ready() -> void:
@@ -37,3 +38,30 @@ func _on_player_joined(_character: Character) -> void:
 func _on_character_died(_character: Character, _killer: Character) -> void:
 	if _character == character:
 		%Sprite.animation = "dead"
+
+
+func set_shaking(value: float) -> void:
+	%Sprite.material.set_shader_parameter("shaking", value)
+
+
+func _physics_process(_delta: float) -> void:
+	if not is_instance_valid(character) or character.is_dead:
+		set_shaking(0)
+		return
+
+	var closest_distance: float = INF
+	for other in Globals.players_characters.values():
+		if other == character or other.is_dead:
+			continue
+
+		var distance := character.global_position.distance_to(other.global_position)
+		if distance < closest_distance:
+			closest_distance = distance
+	if not is_inf(closest_distance):
+		set_shaking(
+			clampf(
+				(SHAKING_DISTANCE - closest_distance) / SHAKING_DISTANCE,
+				0.0,
+				1.0,
+			)
+		)

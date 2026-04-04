@@ -5,6 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://bqlgsaisqfcc" path="res://scenes/player_display.tscn" id="2_skppy"]
 
 [node name="TopWallVisuals" type="ColorRect" unique_id=596331983]
+z_index = -1
 offset_right = 1280.0
 offset_bottom = 90.0
 color = Color(0.47843137, 0.47843137, 0.6, 1)
