@@ -1,0 +1,102 @@
+[gd_scene format=3 uid="uid://cgmdybik26fwm"]
+
+[ext_resource type="PackedScene" uid="uid://x6ihumprisyf" path="res://scenes/obstacles/barrier_4_horizontal.tscn" id="1_3c45w"]
+[ext_resource type="PackedScene" uid="uid://jqo1hl4ga4pj" path="res://scenes/obstacles/barrier_4_vertical.tscn" id="2_k3s3p"]
+[ext_resource type="PackedScene" uid="uid://dsosouuj66ev1" path="res://scenes/obstacles/bench_horizontal.tscn" id="3_ebir7"]
+[ext_resource type="PackedScene" uid="uid://c7vrt5sxlh844" path="res://scenes/obstacles/benches_vertical.tscn" id="4_8du5k"]
+
+[node name="Obstacles" type="Node2D" unique_id=1237435539]
+y_sort_enabled = true
+
+[node name="Barriers" type="Node2D" parent="." unique_id=1854802788]
+y_sort_enabled = true
+
+[node name="Barrier4Horizontal" parent="Barriers" unique_id=333045975 instance=ExtResource("1_3c45w")]
+position = Vector2(1226, 608)
+
+[node name="Barrier4Horizontal2" parent="Barriers" unique_id=1661811287 instance=ExtResource("1_3c45w")]
+position = Vector2(1126, 608)
+
+[node name="Barrier4Horizontal3" parent="Barriers" unique_id=62814196 instance=ExtResource("1_3c45w")]
+position = Vector2(1026, 608)
+
+[node name="Barrier4Horizontal4" parent="Barriers" unique_id=1703912420 instance=ExtResource("1_3c45w")]
+position = Vector2(926, 608)
+
+[node name="Barrier4Horizontal5" parent="Barriers" unique_id=1021103839 instance=ExtResource("1_3c45w")]
+position = Vector2(1126, 464)
+
+[node name="Barrier4Horizontal6" parent="Barriers" unique_id=904839291 instance=ExtResource("1_3c45w")]
+position = Vector2(1026, 464)
+
+[node name="Barrier4Horizontal7" parent="Barriers" unique_id=990106422 instance=ExtResource("1_3c45w")]
+position = Vector2(926, 464)
+
+[node name="Barrier4Horizontal8" parent="Barriers" unique_id=100974793 instance=ExtResource("1_3c45w")]
+position = Vector2(826, 464)
+
+[node name="Barrier4Vertical" parent="Barriers" unique_id=1739968793 instance=ExtResource("2_k3s3p")]
+position = Vector2(775, 526)
+
+[node name="Barrier4Vertical2" parent="Barriers" unique_id=454300610 instance=ExtResource("2_k3s3p")]
+position = Vector2(775, 654)
+
+[node name="Benches" type="Node2D" parent="." unique_id=1988430754]
+y_sort_enabled = true
+
+[node name="BenchHorizontal" parent="Benches" unique_id=222507016 instance=ExtResource("3_ebir7")]
+position = Vector2(94, 93)
+
+[node name="BenchHorizontal2" parent="Benches" unique_id=492958416 instance=ExtResource("3_ebir7")]
+position = Vector2(146, 93)
+
+[node name="BenchHorizontal3" parent="Benches" unique_id=11524975 instance=ExtResource("3_ebir7")]
+position = Vector2(198, 93)
+
+[node name="BenchesVertical3" parent="Benches" unique_id=941117527 instance=ExtResource("4_8du5k")]
+position = Vector2(300, 443)
+
+[node name="BenchesVertical2" parent="Benches" unique_id=661081863 instance=ExtResource("4_8du5k")]
+position = Vector2(300, 494)
+
+[node name="BenchesVertical" parent="Benches" unique_id=232873865 instance=ExtResource("4_8du5k")]
+position = Vector2(300, 545)
+
+[node name="BenchesVertical4" parent="Benches" unique_id=867053141 instance=ExtResource("4_8du5k")]
+position = Vector2(300, 596)
+
+[node name="BenchesVertical8" parent="Benches" unique_id=454679334 instance=ExtResource("4_8du5k")]
+position = Vector2(243, 442)
+
+[node name="BenchesVertical7" parent="Benches" unique_id=612049859 instance=ExtResource("4_8du5k")]
+position = Vector2(243, 494)
+
+[node name="BenchesVertical6" parent="Benches" unique_id=1711196335 instance=ExtResource("4_8du5k")]
+position = Vector2(243, 545)
+
+[node name="BenchesVertical5" parent="Benches" unique_id=693435944 instance=ExtResource("4_8du5k")]
+position = Vector2(243, 596)
+
+[node name="BenchesVertical9" parent="Benches" unique_id=1344939948 instance=ExtResource("4_8du5k")]
+position = Vector2(415, 443)
+
+[node name="BenchesVertical10" parent="Benches" unique_id=1284700203 instance=ExtResource("4_8du5k")]
+position = Vector2(415, 494)
+
+[node name="BenchesVertical11" parent="Benches" unique_id=1030896056 instance=ExtResource("4_8du5k")]
+position = Vector2(415, 545)
+
+[node name="BenchesVertical12" parent="Benches" unique_id=278111029 instance=ExtResource("4_8du5k")]
+position = Vector2(415, 596)
+
+[node name="BenchesVertical13" parent="Benches" unique_id=176104752 instance=ExtResource("4_8du5k")]
+position = Vector2(358, 442)
+
+[node name="BenchesVertical14" parent="Benches" unique_id=1650906820 instance=ExtResource("4_8du5k")]
+position = Vector2(358, 494)
+
+[node name="BenchesVertical15" parent="Benches" unique_id=171127477 instance=ExtResource("4_8du5k")]
+position = Vector2(358, 545)
+
+[node name="BenchesVertical16" parent="Benches" unique_id=1019076582 instance=ExtResource("4_8du5k")]
+position = Vector2(358, 596)
