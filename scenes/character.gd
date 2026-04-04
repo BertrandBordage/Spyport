@@ -71,6 +71,7 @@ var is_dead := false:
 		if is_dead:
 			%WaitTimer.stop()
 			%CollisionShape2D.disabled = true
+			agent.avoidance_enabled = false
 			%Blood.visible = is_dead
 			%Blood.scale = Vector2.ZERO
 			var tween := create_tween()
@@ -189,6 +190,8 @@ func get_collision_shape() -> CollisionShape2D:
 
 
 func on_attack_action() -> void:
+	if is_dead:
+		return
 	for body in %AttackArea.get_overlapping_bodies():
 		if body is Character and body != self:
 			body.is_dead = true
