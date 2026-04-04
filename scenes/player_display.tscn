@@ -4,6 +4,11 @@
 [ext_resource type="Script" uid="uid://db1732r1tt07u" path="res://scenes/player_display.gd" id="1_yx644"]
 [ext_resource type="Texture2D" uid="uid://cklyt31pr3pny" path="res://assets/ui/player1.png" id="2_ibls5"]
 [ext_resource type="Texture2D" uid="uid://dbthj4l3osgqn" path="res://assets/ui/silouette.png" id="3_5xqdv"]
+[ext_resource type="Shader" uid="uid://og2c5jjuwucp" path="res://scenes/player_display.gdshader" id="4_5xqdv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wehkc"]
+shader = ExtResource("4_5xqdv")
+shader_parameter/shaking = 0.0
 
 [node name="PlayerDisplay" type="Node2D" unique_id=507952569]
 script = ExtResource("1_yx644")
@@ -22,5 +27,6 @@ texture = ExtResource("3_5xqdv")
 [node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=739373389]
 unique_name_in_owner = true
 visible = false
-position = Vector2(20, 18)
+material = SubResource("ShaderMaterial_wehkc")
+position = Vector2(17, 18)
 sprite_frames = ExtResource("1_ygo6k")

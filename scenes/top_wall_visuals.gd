@@ -20,7 +20,7 @@ func _on_player_joined(character: Character) -> void:
 	players_labels[character.player_index].visible = true
 
 func _on_character_died(character: Character, killer: Character) -> void:
-	Globals.players_scores[killer.player_index] += 1 if character.is_bot else 5
+	Globals.players_scores[killer.player_index] += 1 if character.is_bot else 10
 	players_labels[killer.player_index].text = "Player %d score: %d" % [
 		killer.player_index,
 		Globals.players_scores[killer.player_index]
