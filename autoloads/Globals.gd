@@ -1,5 +1,8 @@
 extends Node
 
+signal player_joined(character: Character)
+signal player_died(character: Character)
+
 var width := DisplayServer.window_get_size().x
 var height := DisplayServer.window_get_size().y
 var character_types: Array[CharacterType] = [

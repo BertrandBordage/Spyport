@@ -4,14 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://jqo1hl4ga4pj" path="res://scenes/obstacles/barrier_4_vertical.tscn" id="3_lnu2h"]
 [ext_resource type="Texture2D" uid="uid://wp5xdbert87b" path="res://assets/ui/television.png" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://bqlgsaisqfcc" path="res://scenes/player_display.tscn" id="4_0tnpc"]
 [ext_resource type="Texture2D" uid="uid://cqty55b86shh3" path="res://assets/decor/ground-arrow-corner.png" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://col5ers8m52yk" path="res://assets/decor/ground-arrow.png" id="5_p57ef"]
 [ext_resource type="PackedScene" uid="uid://dsosouuj66ev1" path="res://scenes/obstacles/bench_horizontal.tscn" id="6_u5sy4"]
 [ext_resource type="PackedScene" uid="uid://c7vrt5sxlh844" path="res://scenes/obstacles/benches_vertical.tscn" id="7_gee14"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
-vertices = PackedVector2Array(857, 624, 1264, 624, 1264, 704, 794, 704, 794, 480, 857, 588, 1194, 480, 1264, 588, 1264, 44, 1194, 444, 16, 44, 757, 444, 16, 704, 757, 704)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(0, 3, 4, 5), PackedInt32Array(5, 4, 6, 7), PackedInt32Array(8, 7, 6, 9), PackedInt32Array(10, 8, 9, 11), PackedInt32Array(12, 10, 11, 13)])
+vertices = PackedVector2Array(446, 641, 757, 704, 16, 704, 212, 641, 212, 401, 16, 106, 50.5, 118, 757, 444, 446, 402, 241.5, 118, 241.5, 106, 1264, 106, 1194, 444, 857, 624, 1264, 624, 1264, 704, 794, 704, 794, 480, 857, 588, 1194, 480, 1264, 588, 389, 402, 389, 401, 327, 401, 327, 402, 274, 402, 274, 401, 50.5, 106)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 3, 2, 5, 6), PackedInt32Array(7, 1, 0, 8), PackedInt32Array(9, 10, 11, 12, 7, 8), PackedInt32Array(13, 14, 15, 16), PackedInt32Array(13, 16, 17, 18), PackedInt32Array(18, 17, 19, 20), PackedInt32Array(11, 20, 19, 12), PackedInt32Array(8, 21, 22), PackedInt32Array(9, 8, 22), PackedInt32Array(9, 22, 23), PackedInt32Array(23, 24, 25, 26), PackedInt32Array(9, 23, 26), PackedInt32Array(9, 26, 4, 6), PackedInt32Array(27, 6, 5)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-26, -30, 1328, -30, 1320, 738, -34, 728)])
 agent_radius = 16.0
 
@@ -99,6 +100,7 @@ offset_bottom = 90.0
 color = Color(0.47843137, 0.47843137, 0.6, 1)
 
 [node name="TextDisplay" type="PanelContainer" parent="TopWallVisuals" unique_id=366213764]
+clip_contents = true
 custom_minimum_size = Vector2(426, 67)
 layout_mode = 0
 offset_left = 427.0
@@ -107,12 +109,30 @@ offset_right = 853.0
 offset_bottom = 78.0
 
 [node name="Text" type="Label" parent="TopWallVisuals/TextDisplay" unique_id=774688893]
+custom_minimum_size = Vector2(100, 16)
 layout_mode = 2
-text = "Lorem Ipsum"
+text = "Press A on 2-4 gamepads to start playing with your friends!"
+horizontal_alignment = 1
+autowrap_mode = 1
 
 [node name="Television" type="Sprite2D" parent="TopWallVisuals" unique_id=13655788]
 position = Vector2(1010, 44)
 texture = ExtResource("3_p57ef")
+
+[node name="PlayerDisplay" parent="TopWallVisuals" unique_id=507952569 instance=ExtResource("4_0tnpc")]
+position = Vector2(23, 29)
+
+[node name="PlayerDisplay2" parent="TopWallVisuals" unique_id=1158240206 instance=ExtResource("4_0tnpc")]
+position = Vector2(120, 29)
+player_index = 1
+
+[node name="PlayerDisplay3" parent="TopWallVisuals" unique_id=1553863179 instance=ExtResource("4_0tnpc")]
+position = Vector2(220, 29)
+player_index = 2
+
+[node name="PlayerDisplay4" parent="TopWallVisuals" unique_id=756571719 instance=ExtResource("4_0tnpc")]
+position = Vector2(320, 29)
+player_index = 3
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=1292472512]
 y_sort_enabled = true

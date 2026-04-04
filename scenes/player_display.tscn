@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://bqlgsaisqfcc"]
+
+[ext_resource type="SpriteFrames" uid="uid://ngya2tikcti3" path="res://assets/characters/businessman-frames.tres" id="1_ygo6k"]
+[ext_resource type="Script" uid="uid://db1732r1tt07u" path="res://scenes/player_display.gd" id="1_yx644"]
+
+[node name="PlayerDisplay" type="Node2D" unique_id=507952569]
+script = ExtResource("1_yx644")
+
+[node name="Label" type="Label" parent="." unique_id=681589996]
+unique_name_in_owner = true
+offset_right = 38.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 32
+text = "P1"
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=739373389]
+unique_name_in_owner = true
+visible = false
+position = Vector2(58, 18)
+sprite_frames = ExtResource("1_ygo6k")
+
+[node name="EmptyLabel" type="Label" parent="." unique_id=100865795]
+unique_name_in_owner = true
+offset_left = 49.0
+offset_right = 68.0
+offset_bottom = 39.0
+theme_override_font_sizes/font_size = 32
+text = "?"

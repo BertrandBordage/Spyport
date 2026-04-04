@@ -33,6 +33,13 @@ func _ready() -> void:
 		spawn_child_in_empty_space(trolley, collision_shape)
 
 
+static func is_available_character(node: Node):
+	var taken_character_types: Array[CharacterType] = []
+	for character in Globals.players_characters.values():
+		taken_character_types.append(character.character_type)
+	return node is Character and node.character_type not in taken_character_types
+
+
 func _unhandled_input(event: InputEvent) -> void:
 	for player_index in range(4):
 		if player_index in Globals.players_characters:
@@ -41,7 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
 		):
 			var character: Character = get_children().filter(
-				func (child): return child is Character
+				is_available_character
 			).pick_random()
 			character.player_index = player_index as Character.PlayerIndex
 			Globals.players_characters[character.player_index] = character
+			Globals.player_joined.emit(character)

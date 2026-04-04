@@ -77,6 +77,8 @@ var is_dead := false:
 			tween.tween_property(
 				%Blood, 'scale', Vector2(1.5, 1.5), 5.0,
 			).set_ease(Tween.EASE_OUT)
+			if not is_bot:
+				Globals.player_died.emit(self)
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
