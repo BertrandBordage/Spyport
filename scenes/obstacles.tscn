@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://v2xt1s2p885k" path="res://assets/obstacles/check_device_horizontal_0.png" id="18_5ubjg"]
 [ext_resource type="Texture2D" uid="uid://c6so60r26iomf" path="res://assets/obstacles/check_device_horizontal_1.png" id="19_6f3pd"]
 [ext_resource type="Texture2D" uid="uid://2ids7p8b6em1" path="res://assets/obstacles/check_device_horizontal_2.png" id="20_7pfms"]
+[ext_resource type="Texture2D" uid="uid://1bg4ls8qywk5" path="res://assets/obstacles/statue.png" id="23_lh1in"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3nm1r"]
 size = Vector2(64, 55)
@@ -31,6 +32,9 @@ size = Vector2(32, 34)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dj0xs"]
 size = Vector2(104, 12)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m6bv"]
+height = 64.0
 
 [node name="Obstacles" type="Node2D" unique_id=1237435539]
 y_sort_enabled = true
@@ -467,3 +471,14 @@ texture = ExtResource("18_5ubjg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckinDevices/CheckinDevice6H3" unique_id=690542080]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_dj0xs")
+
+[node name="Statue" type="StaticBody2D" parent="." unique_id=649832304]
+position = Vector2(414, 220)
+
+[node name="Sprite2D" type="Sprite2D" parent="Statue" unique_id=748475044]
+position = Vector2(0, -17)
+texture = ExtResource("23_lh1in")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Statue" unique_id=2052138906]
+rotation = 1.5707964
+shape = SubResource("CapsuleShape2D_7m6bv")

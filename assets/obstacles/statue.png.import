@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://1bg4ls8qywk5"
-path="res://.godot/imported/statue_marmotte.png-6b49432925253d3cc6c50ce52282734c.ctex"
+path="res://.godot/imported/statue.png-c7c48adcbcccbf2be7729c1c4da22c22.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/statue_marmotte.png"
-dest_files=["res://.godot/imported/statue_marmotte.png-6b49432925253d3cc6c50ce52282734c.ctex"]
+source_file="res://assets/obstacles/statue.png"
+dest_files=["res://.godot/imported/statue.png-c7c48adcbcccbf2be7729c1c4da22c22.ctex"]
 
 [params]
 
