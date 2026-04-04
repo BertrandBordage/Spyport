@@ -26,6 +26,10 @@ window/size/viewport_height=720
 window/size/mode=3
 window/stretch/mode="canvas_items"
 
+[gui]
+
+theme/custom="uid://cxra0k85tug2"
+
 [input]
 
 player_0_up={
