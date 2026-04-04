@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://by6jgf0g0lddn"]
+[gd_scene format=3 uid="uid://2d24h1w35fu6"]
 
 [ext_resource type="Texture2D" uid="uid://col5ers8m52yk" path="res://assets/decor/ground-arrow.png" id="1_6bagq"]
 [ext_resource type="PackedScene" uid="uid://x6ihumprisyf" path="res://scenes/obstacles/barrier_4_horizontal.tscn" id="1_8miae"]
@@ -16,11 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://b3hud7ypo5wbb" path="res://assets/obstacles/wall_horizontal_3.png" id="12_klq0t"]
 [ext_resource type="Texture2D" uid="uid://c3g81jq1sa801" path="res://assets/obstacles/wall_horizontal_0.png" id="13_6bagq"]
 [ext_resource type="Texture2D" uid="uid://c880bl57ngiu4" path="res://assets/obstacles/wall_horizontal_2.png" id="14_5ubjg"]
-[ext_resource type="Texture2D" uid="uid://wp5xdbert87b" path="res://assets/ui/television.png" id="15_6f3pd"]
 [ext_resource type="Texture2D" uid="uid://6sjcxd5duol2" path="res://assets/obstacles/wall_horizontal_1.png" id="15_gbtjr"]
-[ext_resource type="PackedScene" uid="uid://bqlgsaisqfcc" path="res://scenes/player_display.tscn" id="16_7pfms"]
-[ext_resource type="PackedScene" uid="uid://bwij1wwj8t234" path="res://scenes/obstacles/flower_pot.tscn" id="16_klq0t"]
-[ext_resource type="PackedScene" uid="uid://c67sk2aghn6pa" path="res://scenes/obstacles/flower_pot_big.tscn" id="17_6bagq"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/flower_pot.tscn" id="16_klq0t"]
+[ext_resource type="PackedScene" path="res://scenes/obstacles/flower_pot_big.tscn" id="17_6bagq"]
 [ext_resource type="Texture2D" uid="uid://v2xt1s2p885k" path="res://assets/obstacles/check_device_horizontal_0.png" id="18_5ubjg"]
 [ext_resource type="Texture2D" uid="uid://c6so60r26iomf" path="res://assets/obstacles/check_device_horizontal_1.png" id="19_6f3pd"]
 [ext_resource type="Texture2D" uid="uid://2ids7p8b6em1" path="res://assets/obstacles/check_device_horizontal_2.png" id="20_7pfms"]
@@ -445,47 +443,3 @@ texture = ExtResource("18_5ubjg")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CheckinDevices/CheckinDevice6H3" unique_id=690542080]
 position = Vector2(46, 0)
 shape = SubResource("RectangleShape2D_dj0xs")
-
-[node name="ToDelete" type="ColorRect" parent="." unique_id=1462048301]
-offset_right = 1280.0
-offset_bottom = 90.0
-color = Color(0.47843137, 0.47843137, 0.6, 1)
-
-[node name="TextDisplay" type="PanelContainer" parent="ToDelete" unique_id=2016112320]
-clip_contents = true
-custom_minimum_size = Vector2(426, 67)
-layout_mode = 0
-offset_left = 427.0
-offset_top = 6.0
-offset_right = 853.0
-offset_bottom = 81.0
-
-[node name="Text" type="Label" parent="ToDelete/TextDisplay" unique_id=1207581267]
-custom_minimum_size = Vector2(100, 16)
-layout_mode = 2
-text = "Press A on 2-4 gamepads to start playing with your friends!"
-horizontal_alignment = 1
-autowrap_mode = 1
-
-[node name="Television" type="Sprite2D" parent="ToDelete" unique_id=503033856]
-position = Vector2(1010, 44)
-texture = ExtResource("15_6f3pd")
-
-[node name="PlayerDisplay" parent="ToDelete" unique_id=507952569 instance=ExtResource("16_7pfms")]
-position = Vector2(88, 10)
-scale = Vector2(1.5, 1.5)
-
-[node name="PlayerDisplay2" parent="ToDelete" unique_id=1952464312 instance=ExtResource("16_7pfms")]
-position = Vector2(150, 10)
-scale = Vector2(1.5, 1.5)
-player_index = 1
-
-[node name="PlayerDisplay3" parent="ToDelete" unique_id=505833497 instance=ExtResource("16_7pfms")]
-position = Vector2(212, 10)
-scale = Vector2(1.5, 1.5)
-player_index = 2
-
-[node name="PlayerDisplay4" parent="ToDelete" unique_id=519891857 instance=ExtResource("16_7pfms")]
-position = Vector2(274, 10)
-scale = Vector2(1.5, 1.5)
-player_index = 3

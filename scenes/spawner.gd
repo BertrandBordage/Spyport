@@ -25,7 +25,12 @@ static func is_available_character(node: Node):
 	var taken_character_types: Array[CharacterType] = []
 	for character in Globals.players_characters.values():
 		taken_character_types.append(character.character_type)
-	return is_instance_valid(node) and node is Character and node.character_type not in taken_character_types
+	return (
+		is_instance_valid(node)
+		and node is Character
+		and node.character_type not in taken_character_types
+		and node.action != Character.Action.EMBARK
+	)
 
 
 func _unhandled_input(event: InputEvent) -> void:
