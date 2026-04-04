@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://dsosouuj66ev1"]
+
+[ext_resource type="Texture2D" uid="uid://dku7lsvq351yr" path="res://assets/obstacles/bench-horizontal.png" id="1_ox6sv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bf6go"]
+size = Vector2(55, 12)
+
+[node name="BenchHorizontal" type="StaticBody2D" unique_id=222507016]
+
+[node name="BenchHorizontal" type="Sprite2D" parent="." unique_id=1932654443]
+texture = ExtResource("1_ox6sv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=758567357]
+position = Vector2(0, 3)
+shape = SubResource("RectangleShape2D_bf6go")

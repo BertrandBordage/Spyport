@@ -6,6 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://wp5xdbert87b" path="res://assets/ui/television.png" id="3_p57ef"]
 [ext_resource type="Texture2D" uid="uid://cqty55b86shh3" path="res://assets/decor/ground-arrow-corner.png" id="4_iywne"]
 [ext_resource type="Texture2D" uid="uid://col5ers8m52yk" path="res://assets/decor/ground-arrow.png" id="5_p57ef"]
+[ext_resource type="PackedScene" uid="uid://dsosouuj66ev1" path="res://scenes/obstacles/bench_horizontal.tscn" id="6_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://c7vrt5sxlh844" path="res://scenes/obstacles/benches_vertical.tscn" id="7_gee14"]
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_yqjtg"]
 vertices = PackedVector2Array(857, 624, 1264, 624, 1264, 704, 794, 704, 794, 480, 857, 588, 1194, 480, 1264, 588, 1264, 44, 1194, 444, 16, 44, 757, 444, 16, 704, 757, 704)
@@ -112,37 +114,100 @@ text = "Lorem Ipsum"
 position = Vector2(1010, 44)
 texture = ExtResource("3_p57ef")
 
-[node name="Barriers" type="Node2D" parent="." unique_id=1279141564]
+[node name="Obstacles" type="Node2D" parent="." unique_id=1292472512]
 y_sort_enabled = true
 
-[node name="Barrier4Horizontal" parent="Barriers" unique_id=333045975 instance=ExtResource("2_lnu2h")]
+[node name="Barriers" type="Node2D" parent="Obstacles" unique_id=1279141564]
+y_sort_enabled = true
+
+[node name="Barrier4Horizontal" parent="Obstacles/Barriers" unique_id=333045975 instance=ExtResource("2_lnu2h")]
 position = Vector2(1226, 608)
 
-[node name="Barrier4Horizontal2" parent="Barriers" unique_id=394034697 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal2" parent="Obstacles/Barriers" unique_id=394034697 instance=ExtResource("2_lnu2h")]
 position = Vector2(1126, 608)
 
-[node name="Barrier4Horizontal3" parent="Barriers" unique_id=1942318833 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal3" parent="Obstacles/Barriers" unique_id=1942318833 instance=ExtResource("2_lnu2h")]
 position = Vector2(1026, 608)
 
-[node name="Barrier4Horizontal4" parent="Barriers" unique_id=24120928 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal4" parent="Obstacles/Barriers" unique_id=24120928 instance=ExtResource("2_lnu2h")]
 position = Vector2(926, 608)
 
-[node name="Barrier4Horizontal5" parent="Barriers" unique_id=1134089405 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal5" parent="Obstacles/Barriers" unique_id=1134089405 instance=ExtResource("2_lnu2h")]
 position = Vector2(1126, 464)
 
-[node name="Barrier4Horizontal6" parent="Barriers" unique_id=1949606124 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal6" parent="Obstacles/Barriers" unique_id=1949606124 instance=ExtResource("2_lnu2h")]
 position = Vector2(1026, 464)
 
-[node name="Barrier4Horizontal7" parent="Barriers" unique_id=5228672 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal7" parent="Obstacles/Barriers" unique_id=5228672 instance=ExtResource("2_lnu2h")]
 position = Vector2(926, 464)
 
-[node name="Barrier4Horizontal8" parent="Barriers" unique_id=1225441923 instance=ExtResource("2_lnu2h")]
+[node name="Barrier4Horizontal8" parent="Obstacles/Barriers" unique_id=1225441923 instance=ExtResource("2_lnu2h")]
 position = Vector2(826, 464)
 
-[node name="Barrier4Vertical" parent="Barriers" unique_id=1739968793 instance=ExtResource("3_lnu2h")]
+[node name="Barrier4Vertical" parent="Obstacles/Barriers" unique_id=1739968793 instance=ExtResource("3_lnu2h")]
 position = Vector2(775, 526)
 
-[node name="Barrier4Vertical2" parent="Barriers" unique_id=2119947042 instance=ExtResource("3_lnu2h")]
+[node name="Barrier4Vertical2" parent="Obstacles/Barriers" unique_id=2119947042 instance=ExtResource("3_lnu2h")]
 position = Vector2(775, 654)
+
+[node name="Benches" type="Node2D" parent="Obstacles" unique_id=766667983]
+y_sort_enabled = true
+
+[node name="BenchHorizontal" parent="Obstacles/Benches" unique_id=222507016 instance=ExtResource("6_u5sy4")]
+position = Vector2(94, 93)
+
+[node name="BenchHorizontal2" parent="Obstacles/Benches" unique_id=1840967565 instance=ExtResource("6_u5sy4")]
+position = Vector2(146, 93)
+
+[node name="BenchHorizontal3" parent="Obstacles/Benches" unique_id=152197081 instance=ExtResource("6_u5sy4")]
+position = Vector2(198, 93)
+
+[node name="BenchesVertical3" parent="Obstacles/Benches" unique_id=941117527 instance=ExtResource("7_gee14")]
+position = Vector2(300, 443)
+
+[node name="BenchesVertical2" parent="Obstacles/Benches" unique_id=1994980038 instance=ExtResource("7_gee14")]
+position = Vector2(300, 494)
+
+[node name="BenchesVertical" parent="Obstacles/Benches" unique_id=914264014 instance=ExtResource("7_gee14")]
+position = Vector2(300, 545)
+
+[node name="BenchesVertical4" parent="Obstacles/Benches" unique_id=826727213 instance=ExtResource("7_gee14")]
+position = Vector2(300, 596)
+
+[node name="BenchesVertical8" parent="Obstacles/Benches" unique_id=702824293 instance=ExtResource("7_gee14")]
+position = Vector2(243, 442)
+
+[node name="BenchesVertical7" parent="Obstacles/Benches" unique_id=596551553 instance=ExtResource("7_gee14")]
+position = Vector2(243, 494)
+
+[node name="BenchesVertical6" parent="Obstacles/Benches" unique_id=59504610 instance=ExtResource("7_gee14")]
+position = Vector2(243, 545)
+
+[node name="BenchesVertical5" parent="Obstacles/Benches" unique_id=253620239 instance=ExtResource("7_gee14")]
+position = Vector2(243, 596)
+
+[node name="BenchesVertical9" parent="Obstacles/Benches" unique_id=142883923 instance=ExtResource("7_gee14")]
+position = Vector2(415, 443)
+
+[node name="BenchesVertical10" parent="Obstacles/Benches" unique_id=1403399311 instance=ExtResource("7_gee14")]
+position = Vector2(415, 494)
+
+[node name="BenchesVertical11" parent="Obstacles/Benches" unique_id=993490321 instance=ExtResource("7_gee14")]
+position = Vector2(415, 545)
+
+[node name="BenchesVertical12" parent="Obstacles/Benches" unique_id=1862152219 instance=ExtResource("7_gee14")]
+position = Vector2(415, 596)
+
+[node name="BenchesVertical13" parent="Obstacles/Benches" unique_id=254014955 instance=ExtResource("7_gee14")]
+position = Vector2(358, 442)
+
+[node name="BenchesVertical14" parent="Obstacles/Benches" unique_id=1465385018 instance=ExtResource("7_gee14")]
+position = Vector2(358, 494)
+
+[node name="BenchesVertical15" parent="Obstacles/Benches" unique_id=1951396501 instance=ExtResource("7_gee14")]
+position = Vector2(358, 545)
+
+[node name="BenchesVertical16" parent="Obstacles/Benches" unique_id=1350824781 instance=ExtResource("7_gee14")]
+position = Vector2(358, 596)
 
 [node name="Spawner" parent="." unique_id=1843805809 instance=ExtResource("2_yqjtg")]

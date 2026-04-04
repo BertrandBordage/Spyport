@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c7vrt5sxlh844"]
+
+[ext_resource type="PackedScene" uid="uid://nxvfqtfco8nr" path="res://scenes/obstacles/bench_vertical.tscn" id="1_hp1e8"]
+
+[node name="BenchesVertical" type="Node2D" unique_id=941117527]
+y_sort_enabled = true
+
+[node name="BenchVertical" parent="." unique_id=2017869559 instance=ExtResource("1_hp1e8")]
+position = Vector2(8, -24)
+
+[node name="BenchVertical2" parent="." unique_id=1218566818 instance=ExtResource("1_hp1e8")]
+position = Vector2(-8, -24)
+scale = Vector2(-1, 1)
