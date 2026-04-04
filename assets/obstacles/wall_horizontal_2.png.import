@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c880bl57ngiu4"
-path="res://.godot/imported/wall_horizontal_2.png-5751bfd5239b5e519b5a5789dc556752.ctex"
+path="res://.godot/imported/wall_horizontal_2.png-3ba9c9b7b0fdc7ddc98daf26e947fe13.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/wall_horizontal_2.png"
-dest_files=["res://.godot/imported/wall_horizontal_2.png-5751bfd5239b5e519b5a5789dc556752.ctex"]
+source_file="res://assets/obstacles/wall_horizontal_2.png"
+dest_files=["res://.godot/imported/wall_horizontal_2.png-3ba9c9b7b0fdc7ddc98daf26e947fe13.ctex"]
 
 [params]
 

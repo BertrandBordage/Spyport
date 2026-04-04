@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://bwij1wwj8t234"]
+
+[ext_resource type="Texture2D" uid="uid://dhnoibbdtxkxq" path="res://assets/obstacles/flower_pot_1.png" id="1_uir7f"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_aman4"]
+size = Vector2(16, 8)
+
+[node name="FlowerPot" type="StaticBody2D" unique_id=2139826770]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=998857102]
+position = Vector2(-2, -14)
+texture = ExtResource("1_uir7f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1682784391]
+shape = SubResource("RectangleShape2D_aman4")

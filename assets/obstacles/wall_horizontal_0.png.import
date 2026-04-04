@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://8yaqfal4lyeu"
-path="res://.godot/imported/wall_pillar.png-797caa2dddf9b3121f0b897e00e63633.ctex"
+uid="uid://c3g81jq1sa801"
+path="res://.godot/imported/wall_horizontal_0.png-fbb0f119c1d3d7e8d39097fa5eb8e986.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/wall_pillar.png"
-dest_files=["res://.godot/imported/wall_pillar.png-797caa2dddf9b3121f0b897e00e63633.ctex"]
+source_file="res://assets/obstacles/wall_horizontal_0.png"
+dest_files=["res://.godot/imported/wall_horizontal_0.png-fbb0f119c1d3d7e8d39097fa5eb8e986.ctex"]
 
 [params]
 

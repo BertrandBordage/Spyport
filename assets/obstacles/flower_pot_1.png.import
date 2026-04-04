@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbt4yeia75gbx"
-path="res://.godot/imported/checkin_0.png-a53ac6d1baa0d3f77c2a125bc9dcce36.ctex"
+uid="uid://dhnoibbdtxkxq"
+path="res://.godot/imported/flower_pot_1.png-f4ecfe4e186927628cd10f1e809b5a27.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/checkin_0.png"
-dest_files=["res://.godot/imported/checkin_0.png-a53ac6d1baa0d3f77c2a125bc9dcce36.ctex"]
+source_file="res://assets/obstacles/flower_pot_1.png"
+dest_files=["res://.godot/imported/flower_pot_1.png-f4ecfe4e186927628cd10f1e809b5a27.ctex"]
 
 [params]
 
