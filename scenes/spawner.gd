@@ -21,19 +21,27 @@ func spawn_child_in_empty_space(
 
 
 func _ready() -> void:
-	for i in range(4):
+	for _i in range(300):
 		var character: Character = character_scene.instantiate()
-		character.player_index = i as Character.PlayerIndex
+		character.player_index = Character.PlayerIndex.BOT
 		var collision_shape := character.get_collision_shape()
 		spawn_child_in_empty_space(character, collision_shape)
-	
-	for _i in range(300):
-		var bot: Character = character_scene.instantiate()
-		bot.player_index = Character.PlayerIndex.BOT
-		var collision_shape := bot.get_collision_shape()
-		spawn_child_in_empty_space(bot, collision_shape)
 
 	for i in range(20):
 		var trolley: Trolley = trolley_scene.instantiate()
 		var collision_shape := trolley.get_collision_shape()
 		spawn_child_in_empty_space(trolley, collision_shape)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	for player_index in range(4):
+		if player_index in Globals.players_characters:
+			continue
+		if event.is_action_pressed(
+			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
+		):
+			var character: Character = get_children().filter(
+				func (child): return child is Character
+			).pick_random()
+			character.player_index = player_index as Character.PlayerIndex
+			Globals.players_characters[character.player_index] = character

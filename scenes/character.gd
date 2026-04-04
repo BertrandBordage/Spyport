@@ -52,7 +52,10 @@ var bot_actions_probabilities = [
 	#Action.EMBARK,
 ]
 
-@export var player_index: PlayerIndex = PlayerIndex.ONE
+@export var player_index: PlayerIndex = PlayerIndex.ONE:
+	set(value):
+		player_index = value
+		player_mapping = ACTIONS_MAPPING[player_index]
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
@@ -155,11 +158,11 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	)
 	apply_generic_velocity()
 
-func _unhandled_input(_event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if is_bot:
 		return
 
-	if action != Action.ATTACK and Input.is_action_just_pressed(player_mapping[Action.ATTACK]):
+	if action != Action.ATTACK and event.is_action_pressed(player_mapping[Action.ATTACK]):
 		action = Action.ATTACK
 		%Sprite.play("attack")
 		%AttackCollisionShape.disabled = false
