@@ -13,6 +13,7 @@ radius = 2.0
 height = 16.0
 
 [node name="Character" type="CharacterBody2D" unique_id=591049096]
+collision_mask = 3
 script = ExtResource("1_my7n2")
 
 [node name="Visuals" type="Node2D" parent="." unique_id=1772829469]
@@ -37,7 +38,6 @@ texture = ExtResource("3_0lw5n")
 unique_name_in_owner = true
 position = Vector2(0, -16)
 sprite_frames = ExtResource("4_2cgup")
-animation = &"dead"
 
 [node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
 unique_name_in_owner = true
