@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbthj4l3osgqn"
-path="res://.godot/imported/silouette.png-a5f0901bb205215b6b616eff765426f7.ctex"
+uid="uid://1bg4ls8qywk5"
+path="res://.godot/imported/statue_marmotte.png-6b49432925253d3cc6c50ce52282734c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ui/silouette.png"
-dest_files=["res://.godot/imported/silouette.png-a5f0901bb205215b6b616eff765426f7.ctex"]
+source_file="res://Excluded/Aseprite/statue_marmotte.png"
+dest_files=["res://.godot/imported/statue_marmotte.png-6b49432925253d3cc6c50ce52282734c.ctex"]
 
 [params]
 
