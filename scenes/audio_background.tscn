@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://cq7s66h7mkv52"]
+
+[ext_resource type="AudioStream" uid="uid://b2fvn7n6cry8v" path="res://assets/audio/chatter.wav" id="1_07rli"]
+[ext_resource type="AudioStream" uid="uid://s4ifc52qcuad" path="res://assets/audio/plane.ogg" id="2_07rli"]
+
+[sub_resource type="GDScript" id="GDScript_07rli"]
+script/source = "extends Node
+
+
+func _on_timer_timeout() -> void:
+	$PlanePlayer.play()
+
+
+func _on_plane_player_finished() -> void:
+	$Timer.start()
+"
+
+[node name="AudioBackground" type="Node" unique_id=56959081]
+script = SubResource("GDScript_07rli")
+
+[node name="ChatterPlayer" type="AudioStreamPlayer" parent="." unique_id=749962940]
+stream = ExtResource("1_07rli")
+volume_db = -10.0
+autoplay = true
+
+[node name="PlanePlayer" type="AudioStreamPlayer" parent="." unique_id=1006284496]
+stream = ExtResource("2_07rli")
+volume_db = 5.0
+
+[node name="Timer" type="Timer" parent="." unique_id=272263636]
+wait_time = 60.0
+one_shot = true
+autostart = true
+
+[connection signal="finished" from="PlanePlayer" to="." method="_on_plane_player_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
