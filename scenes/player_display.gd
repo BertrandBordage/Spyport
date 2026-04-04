@@ -8,7 +8,7 @@ var character: Character
 
 func _ready() -> void:
 	Globals.player_joined.connect(_on_player_joined)
-	Globals.player_died.connect(_on_player_died)
+	Globals.character_died.connect(_on_character_died)
 	%Name.texture = {
 		Character.PlayerIndex.ONE: preload("res://assets/ui/player1.png"),
 		Character.PlayerIndex.TWO: preload("res://assets/ui/player2.png"),
@@ -34,6 +34,6 @@ func _on_player_joined(_character: Character) -> void:
 	elif _character.player_index == player_index - 1:
 		blink()
 
-func _on_player_died(_character: Character) -> void:
+func _on_character_died(_character: Character, _killer: Character) -> void:
 	if _character == character:
 		%Sprite.animation = "dead"

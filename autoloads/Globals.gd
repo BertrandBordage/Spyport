@@ -1,7 +1,7 @@
 extends Node
 
 signal player_joined(character: Character)
-signal player_died(character: Character)
+signal character_died(character: Character, killer: Character)
 
 var width := DisplayServer.window_get_size().x
 var height := DisplayServer.window_get_size().y
@@ -17,6 +17,12 @@ var character_types: Array[CharacterType] = [
 	preload("res://resources/characters/tourist.tres"),
 ]
 var players_characters: Dictionary[Character.PlayerIndex, Character] = {}
+var players_scores: Dictionary[Character.PlayerIndex, int] = {
+	Character.PlayerIndex.ONE: 0,
+	Character.PlayerIndex.TWO: 0,
+	Character.PlayerIndex.THREE: 0,
+	Character.PlayerIndex.FOUR: 0,
+}
 enum Objective { EXIT }
 var objectives: Dictionary[Objective, Marker2D] = {}
 var spawner: Node2D

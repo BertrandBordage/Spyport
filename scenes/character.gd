@@ -77,8 +77,6 @@ var is_dead := false:
 			tween.tween_property(
 				%Blood, 'scale', Vector2(1.5, 1.5), 5.0,
 			).set_ease(Tween.EASE_OUT)
-			if not is_bot:
-				Globals.player_died.emit(self)
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
@@ -191,6 +189,7 @@ func on_attack_action() -> void:
 	for body in %AttackArea.get_overlapping_bodies():
 		if body is Character and body != self:
 			body.is_dead = true
+			Globals.character_died.emit(body, self)
 	%AttackCollisionShape.disabled = true
 	var tween := create_tween()
 	tween.tween_property(

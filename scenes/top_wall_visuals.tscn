@@ -1,0 +1,90 @@
+[gd_scene format=3 uid="uid://bljvlrgbuvdla"]
+
+[ext_resource type="Texture2D" uid="uid://wp5xdbert87b" path="res://assets/ui/television.png" id="1_ktpom"]
+[ext_resource type="Script" uid="uid://btddc3s65ixjh" path="res://scenes/top_wall_visuals.gd" id="1_skppy"]
+[ext_resource type="PackedScene" uid="uid://bqlgsaisqfcc" path="res://scenes/player_display.tscn" id="2_skppy"]
+
+[node name="TopWallVisuals" type="ColorRect" unique_id=596331983]
+offset_right = 1280.0
+offset_bottom = 90.0
+color = Color(0.47843137, 0.47843137, 0.6, 1)
+script = ExtResource("1_skppy")
+
+[node name="TextDisplay" type="PanelContainer" parent="." unique_id=1334857716]
+clip_contents = true
+custom_minimum_size = Vector2(426, 67)
+layout_mode = 0
+offset_left = 427.0
+offset_top = 6.0
+offset_right = 853.0
+offset_bottom = 81.0
+
+[node name="Help" type="Label" parent="TextDisplay" unique_id=2018255221]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 16)
+layout_mode = 2
+text = "Press A on 2-4 gamepads to start playing with your friends!"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="ScoresContainer" type="VBoxContainer" parent="TextDisplay" unique_id=553758961]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="TextDisplay/ScoresContainer" unique_id=1961596721]
+layout_mode = 2
+
+[node name="Player1Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer" unique_id=551898881]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 1 score: 0"
+
+[node name="Player2Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer" unique_id=1886363412]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 2 score: 0"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="TextDisplay/ScoresContainer" unique_id=1537138715]
+layout_mode = 2
+
+[node name="Player3Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer2" unique_id=1493185172]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 1 score: 0"
+
+[node name="Player4Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer2" unique_id=853346494]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Player 2 score: 0"
+
+[node name="Television" type="Sprite2D" parent="." unique_id=1509703335]
+position = Vector2(1010, 44)
+texture = ExtResource("1_ktpom")
+
+[node name="PlayerDisplay" parent="." unique_id=507952569 instance=ExtResource("2_skppy")]
+position = Vector2(88, 10)
+scale = Vector2(1.5, 1.5)
+
+[node name="PlayerDisplay2" parent="." unique_id=1968037316 instance=ExtResource("2_skppy")]
+position = Vector2(150, 10)
+scale = Vector2(1.5, 1.5)
+player_index = 1
+
+[node name="PlayerDisplay3" parent="." unique_id=1194715596 instance=ExtResource("2_skppy")]
+position = Vector2(212, 10)
+scale = Vector2(1.5, 1.5)
+player_index = 2
+
+[node name="PlayerDisplay4" parent="." unique_id=2128225369 instance=ExtResource("2_skppy")]
+position = Vector2(274, 10)
+scale = Vector2(1.5, 1.5)
+player_index = 3
