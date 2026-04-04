@@ -104,9 +104,9 @@ clip_contents = true
 custom_minimum_size = Vector2(426, 67)
 layout_mode = 0
 offset_left = 427.0
-offset_top = 11.0
+offset_top = 6.0
 offset_right = 853.0
-offset_bottom = 78.0
+offset_bottom = 81.0
 
 [node name="Text" type="Label" parent="TopWallVisuals/TextDisplay" unique_id=774688893]
 custom_minimum_size = Vector2(100, 16)
@@ -120,18 +120,22 @@ position = Vector2(1010, 44)
 texture = ExtResource("3_p57ef")
 
 [node name="PlayerDisplay" parent="TopWallVisuals" unique_id=507952569 instance=ExtResource("4_0tnpc")]
-position = Vector2(23, 29)
+position = Vector2(88, 10)
+scale = Vector2(1.5, 1.5)
 
-[node name="PlayerDisplay2" parent="TopWallVisuals" unique_id=1158240206 instance=ExtResource("4_0tnpc")]
-position = Vector2(120, 29)
+[node name="PlayerDisplay2" parent="TopWallVisuals" unique_id=1213176761 instance=ExtResource("4_0tnpc")]
+position = Vector2(150, 10)
+scale = Vector2(1.5, 1.5)
 player_index = 1
 
-[node name="PlayerDisplay3" parent="TopWallVisuals" unique_id=1553863179 instance=ExtResource("4_0tnpc")]
-position = Vector2(220, 29)
+[node name="PlayerDisplay3" parent="TopWallVisuals" unique_id=1086647237 instance=ExtResource("4_0tnpc")]
+position = Vector2(212, 10)
+scale = Vector2(1.5, 1.5)
 player_index = 2
 
-[node name="PlayerDisplay4" parent="TopWallVisuals" unique_id=756571719 instance=ExtResource("4_0tnpc")]
-position = Vector2(320, 29)
+[node name="PlayerDisplay4" parent="TopWallVisuals" unique_id=1960032370 instance=ExtResource("4_0tnpc")]
+position = Vector2(274, 10)
+scale = Vector2(1.5, 1.5)
 player_index = 3
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=1292472512]
