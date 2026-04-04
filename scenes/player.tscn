@@ -21,7 +21,7 @@ y_sort_enabled = true
 
 [node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=1900858868]
 unique_name_in_owner = true
-z_index = -1
+z_index = -2
 z_as_relative = false
 texture = ExtResource("2_qhqgy")
 region_rect = Rect2(0, 0, 32, 32)
@@ -29,7 +29,7 @@ region_rect = Rect2(0, 0, 32, 32)
 [node name="Blood" type="Sprite2D" parent="Visuals" unique_id=321229857]
 unique_name_in_owner = true
 visible = false
-z_index = -1
+z_index = -2
 position = Vector2(0, -6)
 texture = ExtResource("3_dqkch")
 
@@ -37,6 +37,7 @@ texture = ExtResource("3_dqkch")
 unique_name_in_owner = true
 position = Vector2(0, -16)
 sprite_frames = ExtResource("4_qlg0r")
+animation = &"dead"
 
 [node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
 unique_name_in_owner = true
@@ -53,5 +54,6 @@ rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
+unique_name_in_owner = true
 avoidance_enabled = true
 neighbor_distance = 100.0

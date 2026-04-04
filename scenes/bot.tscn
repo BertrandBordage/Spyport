@@ -17,14 +17,14 @@ unique_name_in_owner = true
 
 [node name="Shadow" type="Sprite2D" parent="Visuals" unique_id=659988595]
 unique_name_in_owner = true
-z_index = -1
+z_index = -2
 z_as_relative = false
 texture = ExtResource("2_hhacj")
 
 [node name="Blood" type="Sprite2D" parent="Visuals" unique_id=507035701]
 unique_name_in_owner = true
 visible = false
-z_index = -1
+z_index = -2
 position = Vector2(0, -8)
 texture = ExtResource("3_hon3i")
 

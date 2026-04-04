@@ -1,7 +1,7 @@
 class_name Bot
 extends CharacterBody2D
 
-enum Action { WAIT, WALK, TURN, EMBARK }
+enum Action { WAIT, WALK, TURN, EMBARK, ATTACK }
 
 var actions_probabilities = [
 	Action.WAIT,
@@ -25,6 +25,9 @@ var is_dead := false:
 		is_dead = value
 		%Sprite.play("dead")
 		%Shadow.visible = not is_dead
+		%Sprite.z_index = (
+			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
+		)
 		if is_dead:
 			%WaitTimer.stop()
 			%CollisionShape2D.disabled = true
@@ -41,6 +44,19 @@ func _ready() -> void:
 	%Sprite.sprite_frames = character_type.sprite_frames
 	%Visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	_on_wait_timer_timeout()
+
+
+func move_slide_and_collide() -> void:
+	move_and_slide()
+	for i in get_slide_collision_count():
+		var collision := get_slide_collision(i)
+		var collider := collision.get_collider()
+		if collider is RigidBody2D:
+			collider.apply_central_impulse(
+				collision.get_normal() * character_type.PUSH_STRENGTH
+				# Proportional to the player velocity when touching.
+				* collision.get_travel().dot(collision.get_normal())
+			)
 
 
 func wait() -> void:
@@ -81,16 +97,16 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	)
 	if velocity.length() > 0 and abs(velocity.x) > 0.5:
 		%Sprite.play('walk')
-		%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
+		%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
-	move_and_slide()
+	move_slide_and_collide()
 
 
 func get_collision_shape() -> CollisionShape2D:
-	return $CollisionShape2D
+	return %CollisionShape2D
 
 
 func _on_wait_timer_timeout() -> void:

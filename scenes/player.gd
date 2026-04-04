@@ -1,6 +1,7 @@
 class_name Player
 extends CharacterBody2D
 
+enum Action { WAIT, WALK, TURN, EMBARK, ATTACK }
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3 }
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
@@ -10,41 +11,44 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 		Direction.DOWN: "player_0_down",
 		Direction.LEFT: "player_0_left",
 		Direction.RIGHT: "player_0_right",
-		"attack": "player_0_attack",
+		Action.ATTACK: "player_0_attack",
 	},
 	PlayerIndex.TWO: {
 		Direction.UP: "player_1_up",
 		Direction.DOWN: "player_1_down",
 		Direction.LEFT: "player_1_left",
 		Direction.RIGHT: "player_1_right",
-		"attack": "player_1_attack",
+		Action.ATTACK: "player_1_attack",
 	},
 	PlayerIndex.THREE: {
 		Direction.UP: "player_2_up",
 		Direction.DOWN: "player_2_down",
 		Direction.LEFT: "player_2_left",
 		Direction.RIGHT: "player_2_right",
-		"attack": "player_2_attack",
+		Action.ATTACK: "player_2_attack",
 	},
 	PlayerIndex.FOUR: {
 		Direction.UP: "player_3_up",
 		Direction.DOWN: "player_3_down",
 		Direction.LEFT: "player_3_left",
 		Direction.RIGHT: "player_3_right",
-		"attack": "player_3_attack",
+		Action.ATTACK: "player_3_attack",
 	},
 }
 
 @export var player_index: PlayerIndex = PlayerIndex.ONE
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
-var is_attacking := false
+@onready var agent: NavigationAgent2D = %NavigationAgent2D
+var action := Action.WAIT
 var is_dead := false:
 	set(value):
 		is_dead = value
 		%Sprite.play("dead")
 		%Shadow.visible = not is_dead
-		%Blood.visible = is_dead
+		%Sprite.z_index = (
+			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
+		)
 		if is_dead:
 			%CollisionShape2D.disabled = true
 			%Blood.visible = is_dead
@@ -55,6 +59,7 @@ var is_dead := false:
 			).set_ease(Tween.EASE_OUT)
 
 func _ready() -> void:
+	agent.max_speed = character_type.SPEED
 	%Sprite.sprite_frames = character_type.sprite_frames
 	%Visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 
@@ -73,7 +78,7 @@ func move_slide_and_collide() -> void:
 func _physics_process(_delta: float) -> void:
 	if is_dead:
 		return
-	if is_attacking:
+	if action == Action.ATTACK:
 		move_slide_and_collide()
 		return
 
@@ -87,14 +92,14 @@ func _physics_process(_delta: float) -> void:
 		%Sprite.play('walk')
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 		%Visuals.scale.x = -1.0 if velocity.x < 0 else 1.0
-		move_slide_and_collide()
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
+	move_slide_and_collide()
 
 func _unhandled_input(_event: InputEvent) -> void:
-	if not is_attacking and Input.is_action_just_pressed(player_mapping["attack"]):
-		is_attacking = true
+	if action != Action.ATTACK and Input.is_action_just_pressed(player_mapping[Action.ATTACK]):
+		action = Action.ATTACK
 		%Sprite.play("attack")
 		var tween := create_tween()
 		tween.tween_property(
@@ -122,4 +127,4 @@ func on_attack_action() -> void:
 	tween.tween_callback(on_attack_end)
 
 func on_attack_end() -> void:
-	is_attacking = false
+	action = Action.WAIT
