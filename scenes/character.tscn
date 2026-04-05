@@ -15,7 +15,7 @@
 [ext_resource type="AudioStream" uid="uid://c80ghc8aakit0" path="res://assets/audio/step_4.mp3" id="13_x8k1v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(8, 25)
+size = Vector2(16, 25)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
@@ -78,7 +78,7 @@ monitorable = false
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
 unique_name_in_owner = true
-position = Vector2(13, -1.5)
+position = Vector2(17, -1.5)
 shape = SubResource("RectangleShape2D_dqkch")
 disabled = true
 
