@@ -38,7 +38,10 @@ func _on_player_joined(_character: Character) -> void:
 
 func _on_character_died(_character: Character, _killer: Character) -> void:
 	if _character == character:
+		set_shaking(0.0)
 		%Sprite.animation = "dead"
+	if _killer == character:
+		set_shaking(0.0)
 
 
 func set_shaking(value: float) -> void:
@@ -50,7 +53,6 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if character.is_dead:
-		set_shaking(0.0)
 		return
 
 	var closest_distance: float = INF
