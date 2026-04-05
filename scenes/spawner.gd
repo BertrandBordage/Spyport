@@ -29,6 +29,7 @@ static func is_available_character(node: Node):
 	return (
 		is_instance_valid(node)
 		and node is Character
+		and not node.is_dead
 		and node.character_type not in taken_character_types
 		and node.action != Character.Action.EMBARK
 	)
