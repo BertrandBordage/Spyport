@@ -13,6 +13,10 @@ config_version=5
 config/name="Spyport"
 run/main_scene="uid://cjt70p7ipop5k"
 config/features=PackedStringArray("4.6", "GL Compatibility")
+boot_splash/bg_color=Color(0.7058824, 0.74509805, 0.7607843, 1)
+boot_splash/stretch_mode=0
+boot_splash/use_filter=false
+boot_splash/image="uid://cmtbnvwlnxeyt"
 config/icon="res://icon.svg"
 
 [autoload]
