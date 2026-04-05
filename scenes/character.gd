@@ -72,8 +72,10 @@ var is_dead := false:
 			%WaitTimer.stop()
 			%CollisionShape2D.disabled = true
 			agent.avoidance_enabled = false
-			%Blood.visible = is_dead
+			%Sprite.rotation = randf_range(-PI/6, PI/6)
 			%Blood.scale = Vector2.ZERO
+			%Blood.rotation = randf_range(-PI/6, PI/6)
+			%Blood.visible = is_dead
 			var tween := create_tween()
 			tween.tween_property(
 				%Blood, 'scale', Vector2(1.5, 1.5), 5.0,
@@ -168,7 +170,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	apply_generic_velocity()
 
 func _unhandled_input(event: InputEvent) -> void:
-	if is_bot:
+	if is_bot or is_dead:
 		return
 
 	if action != Action.ATTACK and event.is_action_pressed(player_mapping[Action.ATTACK]):
