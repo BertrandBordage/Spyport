@@ -232,5 +232,8 @@ func _on_wait_timer_timeout() -> void:
 
 
 func _on_steps_timer_timeout() -> void:
+	if is_dead or is_bot or velocity.length() <= 1.0:
+		return
+
 	%StepsPlayer.play()
 	%StepsTimer.start(0.3 / clampf(velocity.length() / character_type.SPEED, 0.3, 1.0))
