@@ -147,7 +147,7 @@ func _physics_process(_delta: float) -> void:
 
 func apply_generic_velocity() -> void:
 	if velocity.length() > 0.0:
-		%Sprite.play('walk')
+		%Sprite.play('walk' if velocity.length() > 1.0 else 'default')
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 		if abs(velocity.x) > 0.5:
 			%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
