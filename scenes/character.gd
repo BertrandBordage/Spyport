@@ -91,16 +91,17 @@ func _ready() -> void:
 	_on_wait_timer_timeout()
 
 func move_slide_and_collide() -> void:
-	move_and_slide()
 	for i in get_slide_collision_count():
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		if collider is RigidBody2D:
 			collider.apply_central_impulse(
-				collision.get_normal() * character_type.PUSH_STRENGTH
+				-collision.get_normal() * character_type.PUSH_STRENGTH
 				# Proportional to the player velocity when touching.
-				* collision.get_travel().dot(collision.get_normal())
+				* abs(collision.get_travel().dot(collision.get_normal()))
 			)
+	
+	move_and_slide()
 
 func wait() -> void:
 	%WaitTimer.wait_time = randf_range(3.0, 10.0)
