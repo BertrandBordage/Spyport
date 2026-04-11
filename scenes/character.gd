@@ -147,7 +147,6 @@ func set_action_target() -> void:
 	agent.target_position = action_target.global_position
 
 func embark() -> void:
-	agent.path_max_distance = 0
 	set_action_target()
 	set_collision_mask_value(2, false)
 
@@ -184,13 +183,15 @@ func _physics_process(_delta: float) -> void:
 		agent.velocity = Vector2.ZERO
 		if action in [Action.WAIT, Action.PANIC]:
 			return
+
+		if Engine.get_physics_frames() % 60 == path_update_frame:
+			# Updates the pathfinding.
+			agent.target_position = agent.target_position
+
 		if action in [Action.EMBARK, Action.FLEE]:
 			if agent.is_navigation_finished():
 				queue_free()
 				return
-			if Engine.get_physics_frames() % 60 == path_update_frame:
-				# Updates the pathfinding.
-				agent.target_position = action_target.global_position
 		if agent.is_navigation_finished():
 			action = Action.WAIT
 		elif action in [Action.WALK, Action.EMBARK, Action.FLEE]:
