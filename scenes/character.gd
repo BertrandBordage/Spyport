@@ -155,6 +155,7 @@ func panic() -> void:
 	update_dead_alert()
 	%WaitTimer.stop()
 	%Danger.visible = true
+	%PanicPlayer.play()
 	var tween := create_tween()
 	tween.tween_property(%Danger, "scale:y", 1.0, 0.2)
 	await get_tree().create_timer(3.0).timeout

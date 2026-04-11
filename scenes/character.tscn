@@ -14,6 +14,12 @@
 [ext_resource type="AudioStream" uid="uid://2wk2d8vcqr1f" path="res://assets/audio/step_2.mp3" id="11_8yvht"]
 [ext_resource type="AudioStream" uid="uid://qvavn8o4l2k1" path="res://assets/audio/step_3.mp3" id="12_lagn4"]
 [ext_resource type="AudioStream" uid="uid://c80ghc8aakit0" path="res://assets/audio/step_4.mp3" id="13_x8k1v"]
+[ext_resource type="AudioStream" uid="uid://c0dbuv5qw6n6p" path="res://assets/audio/gasp-female-1.ogg" id="15_u0pwc"]
+[ext_resource type="AudioStream" uid="uid://4176ryjvxoqj" path="res://assets/audio/gasp-female-2.ogg" id="16_cicko"]
+[ext_resource type="AudioStream" uid="uid://dvva36hg4enr2" path="res://assets/audio/gasp-male-1.ogg" id="17_bj47h"]
+[ext_resource type="AudioStream" uid="uid://b83g6qwboy0ko" path="res://assets/audio/gasp-male-2.ogg" id="18_4lh0q"]
+[ext_resource type="AudioStream" uid="uid://07pmfdpr70y2" path="res://assets/audio/no-female.ogg" id="19_7qyni"]
+[ext_resource type="AudioStream" uid="uid://nrk1dq0bo0d3" path="res://assets/audio/no-male.ogg" id="20_sougf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
 size = Vector2(16, 25)
@@ -48,6 +54,21 @@ stream_0/stream = ExtResource("10_50cep")
 stream_1/stream = ExtResource("11_8yvht")
 stream_2/stream = ExtResource("12_lagn4")
 stream_3/stream = ExtResource("13_x8k1v")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_p478o"]
+random_pitch = 1.122462
+random_volume_offset_db = 5.0
+streams_count = 6
+stream_0/stream = ExtResource("15_u0pwc")
+stream_1/stream = ExtResource("16_cicko")
+stream_1/weight = 0.5
+stream_2/stream = ExtResource("17_bj47h")
+stream_3/stream = ExtResource("18_4lh0q")
+stream_3/weight = 0.5
+stream_4/stream = ExtResource("19_7qyni")
+stream_4/weight = 0.25
+stream_5/stream = ExtResource("20_sougf")
+stream_5/weight = 0.25
 
 [node name="Character" type="CharacterBody2D" unique_id=591049096]
 collision_mask = 3
@@ -131,6 +152,11 @@ stream = SubResource("AudioStreamRandomizer_50cep")
 [node name="StepsPlayer" type="AudioStreamPlayer2D" parent="." unique_id=2049520479]
 unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_ih8y6")
+volume_db = -5.0
+
+[node name="PanicPlayer" type="AudioStreamPlayer2D" parent="." unique_id=38329697]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_p478o")
 volume_db = -5.0
 
 [node name="StepsTimer" type="Timer" parent="." unique_id=656951267]
