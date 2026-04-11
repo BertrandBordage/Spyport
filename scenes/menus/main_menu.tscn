@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://bsdmprnlx86d2"]
+
+[ext_resource type="Texture2D" uid="uid://bowdv2il7d7de" path="res://assets/menuassets/cloud_1.png" id="1_a3hrp"]
+[ext_resource type="Texture2D" uid="uid://cls45m24xt2yp" path="res://assets/menuassets/cloud_2.png" id="2_25m6f"]
+[ext_resource type="Texture2D" uid="uid://beea1xhpemhv0" path="res://assets/menuassets/menu_set_up.png" id="3_nkawv"]
+[ext_resource type="Texture2D" uid="uid://dku7lsvq351yr" path="res://assets/obstacles/bench-horizontal.png" id="4_w32d4"]
+[ext_resource type="Texture2D" uid="uid://c6so60r26iomf" path="res://assets/obstacles/check_device_horizontal_1.png" id="5_287l7"]
+[ext_resource type="Texture2D" uid="uid://2ids7p8b6em1" path="res://assets/obstacles/check_device_horizontal_2.png" id="6_8hoqd"]
+[ext_resource type="Texture2D" uid="uid://v2xt1s2p885k" path="res://assets/obstacles/check_device_horizontal_0.png" id="7_555wk"]
+[ext_resource type="Texture2D" uid="uid://ben1hh4ht4olx" path="res://assets/ui/panel-container-9-patch.png" id="15_ykxr0"]
+[ext_resource type="FontFile" uid="uid://fag0f11ke03l" path="res://assets/ui/Doto-VariableFont_ROND,wght.ttf" id="16_eeloc"]
+[ext_resource type="Texture2D" uid="uid://cggp61cphkxu8" path="res://assets/ui/title.png" id="17_oina4"]
+
+[node name="MainMenu" type="Control" unique_id=1745489575]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackGround" type="Node2D" parent="." unique_id=383848892]
+
+[node name="Sky" type="ColorRect" parent="BackGround" unique_id=1575233467]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1280.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.6666667, 0.8784314, 0.9529412, 1)
+
+[node name="Clouds" type="Node2D" parent="BackGround" unique_id=359923722]
+
+[node name="Cloud1" type="Sprite2D" parent="BackGround/Clouds" unique_id=67026845]
+position = Vector2(749.00006, 16)
+scale = Vector2(5, 5)
+texture = ExtResource("1_a3hrp")
+centered = false
+
+[node name="Cloud2" type="Sprite2D" parent="BackGround/Clouds" unique_id=1592525218]
+position = Vector2(-99.00001, 58.000008)
+scale = Vector2(5, 5)
+texture = ExtResource("2_25m6f")
+centered = false
+
+[node name="Cloud3" type="Sprite2D" parent="BackGround/Clouds" unique_id=823840156]
+position = Vector2(1037.9999, 82)
+scale = Vector2(5, 5)
+texture = ExtResource("1_a3hrp")
+centered = false
+
+[node name="Background" type="Sprite2D" parent="BackGround" unique_id=340752825]
+scale = Vector2(5, 5)
+texture = ExtResource("3_nkawv")
+centered = false
+
+[node name="bench" type="Sprite2D" parent="BackGround" unique_id=1215342072]
+position = Vector2(30, 459.00003)
+scale = Vector2(5, 5)
+texture = ExtResource("4_w32d4")
+centered = false
+
+[node name="CheckDeviceHorizontal1" type="Sprite2D" parent="BackGround" unique_id=1807006772]
+position = Vector2(1154.9998, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("5_287l7")
+centered = false
+
+[node name="CheckDeviceHorizontal2" type="Sprite2D" parent="BackGround" unique_id=1764761710]
+position = Vector2(1085.0002, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("6_8hoqd")
+centered = false
+
+[node name="CheckDeviceHorizontal3" type="Sprite2D" parent="BackGround" unique_id=2118535023]
+position = Vector2(1015.00024, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("7_555wk")
+centered = false
+
+[node name="InfoPannel" type="NinePatchRect" parent="BackGround" unique_id=1570906586]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 460.0
+offset_top = 178.0
+offset_right = 820.0
+offset_bottom = 458.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_ykxr0")
+patch_margin_left = 6
+patch_margin_top = 5
+patch_margin_right = 6
+patch_margin_bottom = 6
+
+[node name="MarginContainer" type="MarginContainer" parent="BackGround/InfoPannel" unique_id=1888696064]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ScoreLabel" type="RichTextLabel" parent="BackGround/InfoPannel/MarginContainer" unique_id=1268692513]
+layout_mode = 2
+theme_override_colors/default_color = Color(0.9019608, 0.8117647, 0.6313726, 1)
+theme_override_fonts/normal_font = ExtResource("16_eeloc")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[center]- SCORE -[/center]
+
+Player 1      023
+Player 2      123
+Player 3      001
+Player 4      ___"
+
+[node name="Press A" type="RichTextLabel" parent="BackGround/InfoPannel/MarginContainer" unique_id=1456479673]
+visible = false
+layout_mode = 2
+theme_override_colors/default_color = Color(0.9019608, 0.8117647, 0.6313726, 1)
+theme_override_fonts/normal_font = ExtResource("16_eeloc")
+theme_override_font_sizes/normal_font_size = 32
+bbcode_enabled = true
+text = "[pulse freq=2.0 color=#ffffff40 ease=-20.0]Press A to Start[/pulse]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="TextureRect" parent="." unique_id=238378172]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -248.0
+offset_top = -324.0
+offset_bottom = -268.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("17_oina4")
