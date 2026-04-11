@@ -21,8 +21,7 @@ var players_scores: Dictionary[Character.PlayerIndex, int] = {
 	Character.PlayerIndex.THREE: 0,
 	Character.PlayerIndex.FOUR: 0,
 }
-enum Objective { EXIT }
-var objectives: Dictionary[Objective, Marker2D] = {}
+var action_targets: Dictionary[Character.Action, Array] = {}
 var spawner: Node2D
 var physics_state: PhysicsDirectSpaceState2D
 var shape_params := PhysicsShapeQueryParameters2D.new()

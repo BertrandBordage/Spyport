@@ -1,7 +1,7 @@
 class_name Character
 extends CharacterBody2D
 
-enum Action { WAIT, WALK, TURN, EMBARK, ATTACK }
+enum Action { WAIT, WALK, TURN, EMBARK, ATTACK, PANICK, FLEE }
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3, BOT = -1 }
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
@@ -56,21 +56,26 @@ var bot_actions_probabilities = [
 	set(value):
 		player_index = value
 		player_mapping = ACTIONS_MAPPING[player_index]
+		update_dead_alert()
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
-var action := Action.WAIT
+var action := Action.WAIT:
+	set(value):
+		action = value
+		_on_action_changed()
+var action_target: ActionTarget
 var is_dead := false:
 	set(value):
 		is_dead = value
-		%Sprite.play("dead")
 		%Shadow.visible = not is_dead
 		%Sprite.z_index = (
 			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
 		)
+		update_dead_alert()
 		if is_dead:
+			%Sprite.play("dead")
 			%WaitTimer.stop()
-			%CollisionShape2D.disabled = true
 			agent.avoidance_enabled = false
 			%Sprite.rotation = randf_range(-PI/6, PI/6)
 			%Blood.scale = Vector2.ZERO
@@ -83,6 +88,8 @@ var is_dead := false:
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
+var has_panicked: bool = false
+var path_update_frame := randi_range(0, 59)
 
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
@@ -103,6 +110,62 @@ func move_slide_and_collide() -> void:
 	
 	move_and_slide()
 
+func update_dead_alert() -> void:
+	set_collision_layer_value(1, not is_dead)
+	set_collision_layer_value(3, is_dead)
+	%DeadAlertCollisionShape.set_deferred("disabled", is_dead or has_panicked or not is_bot)
+
+## We do not use a property setter because they are not recursive,
+## so actions could not trigger actions if this was a setter.
+func _on_action_changed() -> void:
+	action_target = null
+	if action == Action.WALK:
+		agent.target_position = Globals.get_random_position(%CollisionShape2D)
+	elif action == Action.TURN:
+		turn()
+	elif action == Action.EMBARK:
+		embark()
+	elif action == Action.PANICK:
+		panic()
+	elif action == Action.FLEE:
+		flee()
+	elif action == Action.WAIT:
+		wait()
+
+func turn() -> void:
+	%Visuals.scale.x = -%Visuals.scale.x
+	action = Action.WAIT
+
+func _compare_target_distance(target_a: ActionTarget, target_b: ActionTarget) -> float:
+	return global_position.distance_squared_to(target_b.global_position) > global_position.distance_squared_to(target_a.global_position)
+
+func set_action_target() -> void:
+	var candidates := Globals.action_targets[action].duplicate()
+	candidates.sort_custom(_compare_target_distance)
+	action_target = candidates[0]
+	agent.target_position = action_target.global_position
+
+func embark() -> void:
+	agent.path_max_distance = 0
+	set_action_target()
+	set_collision_mask_value(2, false)
+
+func panic() -> void:
+	has_panicked = true
+	update_dead_alert()
+	%WaitTimer.stop()
+	%Danger.visible = true
+	var tween := create_tween()
+	tween.tween_property(%Danger, "scale:y", 1.0, 0.2)
+	await get_tree().create_timer(3.0).timeout
+	action = Action.FLEE
+
+func flee() -> void:
+	%Danger.visible = false
+	%Danger.scale.y = 0.0
+	set_action_target()
+	set_collision_mask_value(2, false)
+
 func wait() -> void:
 	%WaitTimer.wait_time = randf_range(3.0, 10.0)
 	%WaitTimer.start()
@@ -116,18 +179,19 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	if is_bot:
-		if action == Action.EMBARK:
-			# Updates the pathfinding.
-			agent.target_position = agent.target_position
 		agent.velocity = Vector2.ZERO
-		if action == Action.WAIT:
+		if action in [Action.WAIT, Action.PANICK]:
 			return
-		if agent.is_navigation_finished():
-			if action == Action.EMBARK:
+		if action in [Action.EMBARK, Action.FLEE]:
+			if agent.is_navigation_finished():
 				queue_free()
+				return
+			if Engine.get_physics_frames() % 60 == path_update_frame:
+				# Updates the pathfinding.
+				agent.target_position = action_target.global_position
+		if agent.is_navigation_finished():
 			action = Action.WAIT
-			wait()
-		else:
+		elif action in [Action.WALK, Action.EMBARK, Action.FLEE]:
 			agent.velocity = character_type.SPEED * global_position.direction_to(
 				agent.get_next_path_position()
 			) * clampf(
@@ -159,6 +223,11 @@ func apply_generic_velocity() -> void:
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead or not is_bot:
+		return
+
+	if action == Action.PANICK:
+		velocity = Vector2.ZERO
+		apply_generic_velocity()
 		return
 
 	velocity = lerp(
@@ -216,20 +285,6 @@ func _on_wait_timer_timeout() -> void:
 	if not is_bot:
 		return
 	action = bot_actions_probabilities.pick_random()
-	if action == Action.WAIT:
-		wait()
-	elif action == Action.TURN:
-		%Visuals.scale.x = -%Visuals.scale.x
-		action = Action.WAIT
-		wait()
-	elif action == Action.EMBARK:
-		agent.path_max_distance = 0
-		agent.target_position = Globals.objectives[
-			Globals.Objective.EXIT
-		].global_position
-		set_collision_mask_value(2, false)
-	else:
-		agent.target_position = Globals.get_random_position(%CollisionShape2D)
 
 
 func _on_steps_timer_timeout() -> void:
@@ -238,3 +293,11 @@ func _on_steps_timer_timeout() -> void:
 
 	%StepsPlayer.play()
 	%StepsTimer.start(0.3 / clampf(velocity.length() / character_type.SPEED, 0.3, 1.0))
+
+
+func _on_dead_alert_area_body_entered(body: Node2D) -> void:
+	# Check if the body is not hidden by anything.
+	var query := PhysicsRayQueryParameters2D.create(global_position, body.global_position)
+	var result := Globals.physics_state.intersect_ray(query)
+	if result.collider == body:
+		action = Action.PANICK
