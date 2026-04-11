@@ -19,7 +19,7 @@
 size = Vector2(16, 25)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yvht"]
-size = Vector2(128, 128)
+size = Vector2(196, 196)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
@@ -85,6 +85,7 @@ texture = ExtResource("5_8yvht")
 
 [node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
 unique_name_in_owner = true
+collision_layer = 0
 monitorable = false
 
 [node name="AttackCollisionShape" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
@@ -100,7 +101,7 @@ monitorable = false
 
 [node name="DeadAlertCollisionShape" type="CollisionShape2D" parent="Visuals/DeadAlertArea" unique_id=1548483394]
 unique_name_in_owner = true
-position = Vector2(64, -23)
+position = Vector2(98, -23)
 shape = SubResource("RectangleShape2D_8yvht")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
