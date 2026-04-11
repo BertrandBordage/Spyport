@@ -22,7 +22,7 @@ var players_scores: Dictionary[Character.PlayerIndex, int] = {
 	Character.PlayerIndex.FOUR: 0,
 }
 var action_targets: Dictionary[Character.Action, Array] = {}
-var spawner: Node2D
+var spawner: Spawner
 var physics_state: PhysicsDirectSpaceState2D
 var shape_params := PhysicsShapeQueryParameters2D.new()
 

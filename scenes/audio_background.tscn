@@ -7,12 +7,16 @@
 script/source = "extends Node
 
 
-func _on_timer_timeout() -> void:
+func _on_plane_timer_timeout() -> void:
 	$PlanePlayer.play()
 
 
 func _on_plane_player_finished() -> void:
-	$Timer.start()
+	$PlaneTimer.start()
+
+
+func _on_chatter_timer_timeout() -> void:
+	$ChatterPlayer.volume_linear = Globals.spawner.get_crowded_ratio()
 "
 
 [node name="AudioBackground" type="Node" unique_id=56959081]
@@ -27,10 +31,14 @@ autoplay = true
 stream = ExtResource("2_07rli")
 volume_db = 5.0
 
-[node name="Timer" type="Timer" parent="." unique_id=272263636]
+[node name="PlaneTimer" type="Timer" parent="." unique_id=272263636]
 wait_time = 60.0
 one_shot = true
 autostart = true
 
+[node name="ChatterTimer" type="Timer" parent="." unique_id=606496324]
+autostart = true
+
 [connection signal="finished" from="PlanePlayer" to="." method="_on_plane_player_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="PlaneTimer" to="." method="_on_plane_timer_timeout"]
+[connection signal="timeout" from="ChatterTimer" to="." method="_on_chatter_timer_timeout"]
