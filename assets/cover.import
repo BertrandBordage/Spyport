@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://0b8i6mp40rbk"
-path="res://.godot/imported/capsule_large_v2.png-318d5a568e2ded0fd2539db811285258.ctex"
+path="res://.godot/imported/capsule_large_v2.png-7e899e90713f57d85007bfec5bf41ce6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Excluded/Aseprite/capsule_large_v2.png"
-dest_files=["res://.godot/imported/capsule_large_v2.png-318d5a568e2ded0fd2539db811285258.ctex"]
+source_file="res://assets/capsule_large_v2.png"
+dest_files=["res://.godot/imported/capsule_large_v2.png-7e899e90713f57d85007bfec5bf41ce6.ctex"]
 
 [params]
 
