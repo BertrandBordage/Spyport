@@ -76,6 +76,7 @@ var is_dead := false:
 		if is_dead:
 			%Sprite.play("dead")
 			%WaitTimer.stop()
+			%Danger.visible = false
 			agent.avoidance_enabled = false
 			%Sprite.rotation = randf_range(-PI/6, PI/6)
 			%Blood.scale = Vector2.ZERO
