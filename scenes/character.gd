@@ -1,7 +1,7 @@
 class_name Character
 extends CharacterBody2D
 
-enum Action { WAIT, WALK, TURN, EMBARK, ATTACK, PANICK, FLEE }
+enum Action { WAIT, WALK, TURN, EMBARK, ATTACK, PANIC, FLEE }
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3, BOT = -1 }
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
@@ -125,7 +125,7 @@ func _on_action_changed() -> void:
 		turn()
 	elif action == Action.EMBARK:
 		embark()
-	elif action == Action.PANICK:
+	elif action == Action.PANIC:
 		panic()
 	elif action == Action.FLEE:
 		flee()
@@ -180,7 +180,7 @@ func _physics_process(_delta: float) -> void:
 
 	if is_bot:
 		agent.velocity = Vector2.ZERO
-		if action in [Action.WAIT, Action.PANICK]:
+		if action in [Action.WAIT, Action.PANIC]:
 			return
 		if action in [Action.EMBARK, Action.FLEE]:
 			if agent.is_navigation_finished():
@@ -225,7 +225,7 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead or not is_bot:
 		return
 
-	if action == Action.PANICK:
+	if action == Action.PANIC:
 		velocity = Vector2.ZERO
 		apply_generic_velocity()
 		return
@@ -300,4 +300,4 @@ func _on_dead_alert_area_body_entered(body: Node2D) -> void:
 	var query := PhysicsRayQueryParameters2D.create(global_position, body.global_position)
 	var result := Globals.physics_state.intersect_ray(query)
 	if result.collider == body:
-		action = Action.PANICK
+		action = Action.PANIC
