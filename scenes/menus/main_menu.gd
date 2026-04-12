@@ -26,23 +26,15 @@ var can_skip := false
 func _ready() -> void :
 	# Show AIRPORT and TITLE
 	await get_tree().create_timer(1).timeout
-	await move_airport()
+	await pan_camera()
 	await get_tree().create_timer(1).timeout
 	fade_title()
 	await get_tree().create_timer(1).timeout
-	# Ready to press A
 	show_panel()
 	can_skip = true
 	
-	# ---
-	
 	# Show score
 	#show_panel(score)
-	
-	# Get OUT
-	#await fade_title(0)
-	#move_airport(-720)
-	# load scene ?
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -55,14 +47,14 @@ func _unhandled_input(event: InputEvent) -> void:
 		get_tree().root.add_child(game_scene.instantiate())
 
 
-func move_airport(y_value : int = 0):
+func pan_camera():
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position:y", y_value, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(camera, "global_position:y", 0.0, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
-func fade_title(alpha_value : float = 255) :
+func fade_title() -> void:
 	var tween = create_tween()
-	tween.tween_property(title, "modulate:a", alpha_value , 2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(title, "modulate:a", 1.0 , 2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
 ## If Array is empty, it will show START_BBCODE_TEXT
