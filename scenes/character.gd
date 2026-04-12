@@ -223,10 +223,10 @@ func apply_generic_velocity() -> void:
 		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 		if abs(velocity.x) > 0.5:
 			%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+		move_slide_and_collide()
 	else:
 		%Sprite.play('default')
 		%Sprite.speed_scale = 1.0
-	move_slide_and_collide()
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead or not is_bot:
