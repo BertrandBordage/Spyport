@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://2ids7p8b6em1" path="res://assets/obstacles/check_device_horizontal_2.png" id="6_8hoqd"]
 [ext_resource type="Texture2D" uid="uid://v2xt1s2p885k" path="res://assets/obstacles/check_device_horizontal_0.png" id="7_555wk"]
 [ext_resource type="AudioStream" uid="uid://brd63ceum1f17" path="res://assets/audio/Spy Glass.mp3" id="12_88kup"]
+[ext_resource type="Texture2D" uid="uid://cmtbnvwlnxeyt" path="res://assets/godot-logo.png" id="13_bh4e2"]
 [ext_resource type="Texture2D" uid="uid://ben1hh4ht4olx" path="res://assets/ui/panel-container-9-patch.png" id="15_ykxr0"]
 [ext_resource type="FontFile" uid="uid://fag0f11ke03l" path="res://assets/ui/Doto-VariableFont_ROND,wght.ttf" id="16_eeloc"]
 [ext_resource type="Texture2D" uid="uid://cggp61cphkxu8" path="res://assets/ui/title.png" id="17_oina4"]
@@ -177,5 +178,16 @@ autoplay = true
 
 [node name="SpawnTimer" type="Timer" parent="." unique_id=402421042]
 autostart = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=948022388]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 720.0
+offset_bottom = 720.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("13_bh4e2")
 
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

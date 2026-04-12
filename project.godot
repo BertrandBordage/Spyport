@@ -11,10 +11,10 @@ config_version=5
 [application]
 
 config/name="SpyPort"
-run/main_scene="uid://cjt70p7ipop5k"
+run/main_scene="uid://bsdmprnlx86d2"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 boot_splash/bg_color=Color(0.7058824, 0.74509805, 0.7607843, 1)
-boot_splash/stretch_mode=0
+boot_splash/stretch_mode=2
 boot_splash/use_filter=false
 boot_splash/image="uid://cmtbnvwlnxeyt"
 config/icon="uid://x16osug2ixns"
