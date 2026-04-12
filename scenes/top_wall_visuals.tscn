@@ -25,8 +25,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 16)
 layout_mode = 2
 bbcode_enabled = true
-text = "[pulse freq=2.0 ease=-20.0]Press A on 2-4 gamepads to start playing with your friends![/pulse]"
-autowrap_mode = 1
+text = "[pulse freq=2.0 ease=-20.0]Press A on 2 to 4 gamepads to start playing with your friends![/pulse]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
