@@ -6,6 +6,7 @@
 size = Vector2(16, 8)
 
 [node name="FlowerPot" type="StaticBody2D" unique_id=2139826770]
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=998857102]
 position = Vector2(-2, -14)

@@ -6,6 +6,7 @@
 size = Vector2(12, 54)
 
 [node name="BenchVertical" type="StaticBody2D" unique_id=2017869559]
+collision_layer = 8
 
 [node name="BenchVertical" type="Sprite2D" parent="." unique_id=843100396]
 position = Vector2(0, 24)

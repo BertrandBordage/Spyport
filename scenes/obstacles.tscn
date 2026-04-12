@@ -199,6 +199,7 @@ y_sort_enabled = true
 
 [node name="CheckIn" type="StaticBody2D" parent="Checkins" unique_id=1437009745]
 position = Vector2(778, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn" unique_id=1926310119]
 texture = ExtResource("5_engs1")
@@ -213,6 +214,7 @@ shape = SubResource("RectangleShape2D_3nm1r")
 
 [node name="CheckIn2" type="StaticBody2D" parent="Checkins" unique_id=482808027]
 position = Vector2(841, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn2" unique_id=682617188]
 texture = ExtResource("5_engs1")
@@ -227,6 +229,7 @@ shape = SubResource("RectangleShape2D_3nm1r")
 
 [node name="CheckIn3" type="StaticBody2D" parent="Checkins" unique_id=503943186]
 position = Vector2(904, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn3" unique_id=760801705]
 texture = ExtResource("8_ewoah")
@@ -241,6 +244,7 @@ shape = SubResource("RectangleShape2D_3nm1r")
 
 [node name="CheckIn4" type="StaticBody2D" parent="Checkins" unique_id=1935418779]
 position = Vector2(967, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn4" unique_id=1239741104]
 texture = ExtResource("5_engs1")
@@ -255,6 +259,7 @@ shape = SubResource("RectangleShape2D_3nm1r")
 
 [node name="CheckIn5" type="StaticBody2D" parent="Checkins" unique_id=6154393]
 position = Vector2(1030, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn5" unique_id=888581850]
 texture = ExtResource("10_c146i")
@@ -269,6 +274,7 @@ shape = SubResource("RectangleShape2D_3nm1r")
 
 [node name="CheckIn6" type="StaticBody2D" parent="Checkins" unique_id=1616079060]
 position = Vector2(1094, 455)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Checkins/CheckIn6" unique_id=115884357]
 texture = ExtResource("5_engs1")
@@ -286,6 +292,7 @@ y_sort_enabled = true
 
 [node name="Wall" type="StaticBody2D" parent="Walls" unique_id=98795100]
 position = Vector2(1141, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall" unique_id=56945766]
 texture = ExtResource("12_klq0t")
@@ -296,6 +303,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall2" type="StaticBody2D" parent="Walls" unique_id=1429041587]
 position = Vector2(1172, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall2" unique_id=1647965750]
 texture = ExtResource("13_6bagq")
@@ -306,6 +314,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall3" type="StaticBody2D" parent="Walls" unique_id=833365735]
 position = Vector2(1203, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall3" unique_id=1238113403]
 texture = ExtResource("14_5ubjg")
@@ -316,6 +325,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall7" type="StaticBody2D" parent="Walls" unique_id=1583847107]
 position = Vector2(514, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall7" unique_id=602202366]
 texture = ExtResource("12_klq0t")
@@ -326,6 +336,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall8" type="StaticBody2D" parent="Walls" unique_id=809631707]
 position = Vector2(545, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall8" unique_id=1018676942]
 texture = ExtResource("13_6bagq")
@@ -336,6 +347,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall13" type="StaticBody2D" parent="Walls" unique_id=563123629]
 position = Vector2(452, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall13" unique_id=1590255941]
 texture = ExtResource("15_gbtjr")
@@ -346,6 +358,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall14" type="StaticBody2D" parent="Walls" unique_id=2104274364]
 position = Vector2(483, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall14" unique_id=846176146]
 texture = ExtResource("13_6bagq")
@@ -356,6 +369,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall15" type="StaticBody2D" parent="Walls" unique_id=1676123557]
 position = Vector2(421, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall15" unique_id=364180398]
 texture = ExtResource("13_6bagq")
@@ -366,6 +380,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall9" type="StaticBody2D" parent="Walls" unique_id=2018509824]
 position = Vector2(638, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall9" unique_id=1515665908]
 texture = ExtResource("14_5ubjg")
@@ -376,6 +391,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall10" type="StaticBody2D" parent="Walls" unique_id=1846545115]
 position = Vector2(669, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall10" unique_id=1290642372]
 texture = ExtResource("13_6bagq")
@@ -386,6 +402,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall11" type="StaticBody2D" parent="Walls" unique_id=1035144471]
 position = Vector2(700, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall11" unique_id=2109504700]
 texture = ExtResource("13_6bagq")
@@ -396,6 +413,7 @@ shape = SubResource("RectangleShape2D_c82ao")
 
 [node name="Wall12" type="StaticBody2D" parent="Walls" unique_id=1830534751]
 position = Vector2(731, 435)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Walls/Wall12" unique_id=1156992577]
 texture = ExtResource("13_6bagq")
@@ -430,6 +448,7 @@ y_sort_enabled = true
 
 [node name="CheckinDevice6H2" type="StaticBody2D" parent="CheckinDevices" unique_id=655148868]
 position = Vector2(385, 562)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="CheckinDevices/CheckinDevice6H2" unique_id=1239463453]
 position = Vector2(0, -8)
@@ -461,6 +480,7 @@ shape = SubResource("RectangleShape2D_dj0xs")
 
 [node name="CheckinDevice6H3" type="StaticBody2D" parent="CheckinDevices" unique_id=773029588]
 position = Vector2(385, 639)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="CheckinDevices/CheckinDevice6H3" unique_id=497714286]
 position = Vector2(0, -8)
@@ -492,6 +512,7 @@ shape = SubResource("RectangleShape2D_dj0xs")
 
 [node name="Statue" type="StaticBody2D" parent="." unique_id=649832304]
 position = Vector2(414, 220)
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="Statue" unique_id=748475044]
 position = Vector2(0, -17)

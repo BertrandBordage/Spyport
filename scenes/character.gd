@@ -309,10 +309,10 @@ func _on_steps_timer_timeout() -> void:
 func _on_dead_alert_area_body_entered(body: Node2D) -> void:
 	# Check if the body is not hidden by anything.
 	var query := PhysicsRayQueryParameters2D.create(
-		global_position, body.global_position,
+		global_position, body.global_position, 0b1100
 	)
 	var result := Globals.physics_state.intersect_ray(query)
-	if result.collider == body:
+	if "collider" in result and result.collider == body:
 		action = Action.PANIC
 
 

@@ -149,8 +149,10 @@ player_3_attack={
 
 [layer_names]
 
+2d_physics/layer_1="Characters"
 2d_physics/layer_2="Blocked by exit"
-2d_physics/layer_3="Dead"
+2d_physics/layer_3="Dead bodies"
+2d_physics/layer_4="Obstacles"
 2d_physics/layer_24="Exclusion zone"
 
 [physics]

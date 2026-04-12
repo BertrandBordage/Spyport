@@ -6,6 +6,7 @@
 size = Vector2(55, 12)
 
 [node name="BenchHorizontal" type="StaticBody2D" unique_id=222507016]
+collision_layer = 8
 
 [node name="BenchHorizontal" type="Sprite2D" parent="." unique_id=1932654443]
 texture = ExtResource("1_ox6sv")

@@ -6,6 +6,7 @@
 size = Vector2(5, 36)
 
 [node name="BarrierVertical" type="StaticBody2D" unique_id=269455446]
+collision_layer = 8
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=459478399]
 position = Vector2(0.5, -6)
