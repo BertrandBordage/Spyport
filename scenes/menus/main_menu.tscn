@@ -79,7 +79,8 @@ color = Color(0.6313726, 0.6509804, 0.68235296, 1)
 z_index = 5
 y_sort_enabled = true
 
-[node name="InfoPannel" type="NinePatchRect" parent="BackGround" unique_id=1570906586]
+[node name="InfoPanel" type="NinePatchRect" parent="BackGround" unique_id=1570906586]
+unique_name_in_owner = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -97,7 +98,7 @@ patch_margin_top = 5
 patch_margin_right = 6
 patch_margin_bottom = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="BackGround/InfoPannel" unique_id=1888696064]
+[node name="MarginContainer" type="MarginContainer" parent="BackGround/InfoPanel" unique_id=1888696064]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,7 +110,8 @@ theme_override_constants/margin_top = 16
 theme_override_constants/margin_right = 16
 theme_override_constants/margin_bottom = 16
 
-[node name="RichTextLabel" type="RichTextLabel" parent="BackGround/InfoPannel/MarginContainer" unique_id=1268692513]
+[node name="Text" type="RichTextLabel" parent="BackGround/InfoPanel/MarginContainer" unique_id=1268692513]
+unique_name_in_owner = true
 layout_mode = 2
 theme_override_colors/default_color = Color(0.9019608, 0.8117647, 0.6313726, 1)
 theme_override_fonts/normal_font = ExtResource("16_eeloc")

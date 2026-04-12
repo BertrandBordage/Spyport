@@ -16,8 +16,8 @@ var spawn_timer : float = 1.0
 var spawn_bool : bool = false
 
 # SCORES
-@onready var info_panel : NinePatchRect = $BackGround/InfoPannel
-@onready var panel_text : RichTextLabel = $BackGround/InfoPannel/MarginContainer/RichTextLabel
+@onready var info_panel : NinePatchRect = %InfoPanel
+@onready var panel_text : RichTextLabel = %Text
 const START_BBCODE_TEXT : String = "[center][pulse freq=2.0 color=#ffffff40 ease=-20.0]Press A to Start[/pulse][/center]"
 var scores : Array = [13,null,2,35]
 
@@ -31,12 +31,12 @@ func _ready() -> void :
 	fade_title()
 	await get_tree().create_timer(1).timeout
 	# Ready to press A
-	show_pannel()
+	show_panel()
 	
 	# ---
 	
 	# Show score
-	#show_pannel(score)
+	#show_panel(score)
 	
 	# Get OUT
 	#await fade_title(0)
@@ -63,7 +63,7 @@ func fade_title(alpha_value : float = 255) :
 	await tween.finished
 
 ## If Array is empty, it will show START_BBCODE_TEXT
-func show_pannel(score : Array = []) :
+func show_panel(score : Array = []) :
 	panel_text.text = ""
 	if score.size() > 0 : # Show score
 		var tween = get_tree().create_tween()
