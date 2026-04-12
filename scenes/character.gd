@@ -125,6 +125,10 @@ func update_collision() -> void:
 ## so actions could not trigger actions if this was a setter.
 func _on_action_changed() -> void:
 	action_target = null
+	if action == Action.WAIT:
+		wait()
+		return
+	%WaitTimer.stop()
 	if action == Action.WALK:
 		agent.target_position = Globals.get_random_position(%CollisionShape2D)
 	elif action == Action.TURN:
@@ -135,8 +139,6 @@ func _on_action_changed() -> void:
 		panic()
 	elif action == Action.FLEE:
 		flee()
-	elif action == Action.WAIT:
-		wait()
 
 func turn() -> void:
 	%Visuals.scale.x = -%Visuals.scale.x
@@ -158,7 +160,6 @@ func embark() -> void:
 func panic() -> void:
 	has_panicked = true
 	update_collision()
-	%WaitTimer.stop()
 	%Danger.visible = true
 	%PanicPlayer.play()
 	var tween := create_tween()
