@@ -7,7 +7,8 @@ const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
 
 
 func _ready() -> void:
-	Globals.spawner = self
+	Globals.level_state = LevelState.new()
+	Globals.level_state.spawner = self
 	Globals.physics_state = get_world_2d().direct_space_state
 	Globals.character_died.connect(_on_character_died)
 
@@ -34,7 +35,7 @@ func get_crowded_ratio() -> float:
 
 static func is_available_character(node: Node):
 	var taken_character_types: Array[CharacterType] = []
-	for character in Globals.players_characters.values():
+	for character in Globals.level_state.players_characters.values():
 		taken_character_types.append(character.character_type)
 	return (
 		is_instance_valid(node)
@@ -47,19 +48,23 @@ static func is_available_character(node: Node):
 	)
 
 
+func get_available_characters() -> Array[Node]:
+	return get_children().filter(is_available_character)
+
+
 func replace_bot_with_player(player_index: Character.PlayerIndex) -> void:
-	var available_characters := get_children().filter(is_available_character)
+	var available_characters := get_available_characters()
 	if available_characters.size() == 0:
 		return
 	var character: Character = available_characters.pick_random()
 	character.player_index = player_index
-	Globals.players_characters[character.player_index] = character
+	Globals.level_state.players_characters[character.player_index] = character
 	Globals.player_joined.emit(character)
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	for player_index in range(4):
-		if player_index in Globals.players_characters:
+		if player_index in Globals.level_state.players_characters:
 			continue
 		if event.is_action_pressed(
 			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]

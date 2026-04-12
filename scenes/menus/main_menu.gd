@@ -1,3 +1,4 @@
+class_name MainMenu
 extends Control
 
 # MAIN
@@ -42,8 +43,9 @@ func _unhandled_input(event: InputEvent) -> void:
 		tween.tween_property(self, "modulate:v", 0.0, 1.0)
 		tween.tween_property($AudioStreamPlayer, "volume_linear", 0.0, 1.0)
 		await tween.finished
+		var game: Game = game_scene.instantiate()
 		queue_free()
-		get_tree().root.add_child(game_scene.instantiate())
+		get_tree().root.add_child(game)
 
 
 func pan_camera():

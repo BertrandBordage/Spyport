@@ -143,7 +143,7 @@ func _compare_target_distance(target_a: ActionTarget, target_b: ActionTarget) ->
 	return global_position.distance_squared_to(target_b.global_position) > global_position.distance_squared_to(target_a.global_position)
 
 func set_action_target() -> void:
-	var candidates := Globals.action_targets[action].duplicate()
+	var candidates := Globals.level_state.action_targets[action].duplicate()
 	candidates.sort_custom(_compare_target_distance)
 	action_target = candidates[0]
 	agent.target_position = action_target.global_position
@@ -310,3 +310,7 @@ func _on_dead_alert_area_body_entered(body: Node2D) -> void:
 	var result := Globals.physics_state.intersect_ray(query)
 	if result.collider == body:
 		action = Action.PANIC
+
+
+func _exit_tree() -> void:
+	Globals.character_count_changed.emit()

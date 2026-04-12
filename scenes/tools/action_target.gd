@@ -6,6 +6,7 @@ extends Marker2D
 
 
 func _ready() -> void:
-	if action not in Globals.action_targets:
-		Globals.action_targets[action] = []
-	Globals.action_targets[action].append(self)
+	var action_targets := Globals.level_state.action_targets
+	if action not in action_targets:
+		action_targets[action] = []
+	action_targets[action].append(self)

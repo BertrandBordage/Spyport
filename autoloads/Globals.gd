@@ -17,15 +17,7 @@ var character_types: Array[CharacterType] = [
 	preload("res://resources/characters/girl.tres"),
 	preload("res://resources/characters/manager.tres"),
 ]
-var players_characters: Dictionary[Character.PlayerIndex, Character] = {}
-var players_scores: Dictionary[Character.PlayerIndex, int] = {
-	Character.PlayerIndex.ONE: 0,
-	Character.PlayerIndex.TWO: 0,
-	Character.PlayerIndex.THREE: 0,
-	Character.PlayerIndex.FOUR: 0,
-}
-var action_targets: Dictionary[Character.Action, Array] = {}
-var spawner: Spawner
+var level_state: LevelState
 var physics_state: PhysicsDirectSpaceState2D
 var shape_params := PhysicsShapeQueryParameters2D.new()
 
@@ -40,8 +32,16 @@ func _on_character_died(_character: Character, _killer: Character) -> void:
 
 
 func _on_character_count_changed() -> void:
-	if spawner.get_available_characters().size() == 0:
+	if level_state.spawner.get_available_characters().size() == 0:
 		game_over.emit()
+
+
+func is_empty_space(
+	position: Vector2, collision_shape: CollisionShape2D,
+) -> bool:
+	shape_params.shape = collision_shape.shape
+	shape_params.transform = collision_shape.transform.translated(position)
+	return physics_state.intersect_shape(shape_params, 1).size() == 0
 
 
 func get_random_position(collision_shape: CollisionShape2D) -> Vector2:
@@ -52,16 +52,9 @@ func get_random_position(collision_shape: CollisionShape2D) -> Vector2:
 	return Vector2.ZERO
 
 
-func is_empty_space(
-	position: Vector2, collision_shape: CollisionShape2D,
-) -> bool:
-	shape_params.shape = collision_shape.shape
-	shape_params.transform = collision_shape.transform.translated(position)
-	return physics_state.intersect_shape(shape_params, 1).size() == 0
-
 func spawn_child_in_empty_space(
 	instance: PhysicsBody2D, collision_shape: CollisionShape2D,
 ) -> void:
 	shape_params.shape = collision_shape.shape
-	instance.position = Globals.get_random_position(collision_shape)
-	spawner.add_child.call_deferred(instance)
+	instance.position = get_random_position(collision_shape)
+	level_state.spawner.add_child.call_deferred(instance)

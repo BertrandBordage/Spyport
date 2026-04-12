@@ -16,7 +16,7 @@ func _on_plane_player_finished() -> void:
 
 
 func _on_chatter_timer_timeout() -> void:
-	$ChatterPlayer.volume_linear = Globals.spawner.get_crowded_ratio()
+	$ChatterPlayer.volume_linear = Globals.level_state.spawner.get_crowded_ratio()
 "
 
 [node name="AudioBackground" type="Node" unique_id=56959081]

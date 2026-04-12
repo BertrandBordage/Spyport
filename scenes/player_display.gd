@@ -56,7 +56,7 @@ func _physics_process(_delta: float) -> void:
 		return
 
 	var closest_distance: float = INF
-	for other in Globals.players_characters.values():
+	for other in Globals.level_state.players_characters.values():
 		if other == character or other.is_dead:
 			continue
 
