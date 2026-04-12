@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://c6so60r26iomf" path="res://assets/obstacles/check_device_horizontal_1.png" id="5_287l7"]
 [ext_resource type="Texture2D" uid="uid://2ids7p8b6em1" path="res://assets/obstacles/check_device_horizontal_2.png" id="6_8hoqd"]
 [ext_resource type="Texture2D" uid="uid://v2xt1s2p885k" path="res://assets/obstacles/check_device_horizontal_0.png" id="7_555wk"]
+[ext_resource type="AudioStream" uid="uid://brd63ceum1f17" path="res://assets/audio/Spy Glass.mp3" id="12_88kup"]
 [ext_resource type="Texture2D" uid="uid://ben1hh4ht4olx" path="res://assets/ui/panel-container-9-patch.png" id="15_ykxr0"]
 [ext_resource type="FontFile" uid="uid://fag0f11ke03l" path="res://assets/ui/Doto-VariableFont_ROND,wght.ttf" id="16_eeloc"]
 [ext_resource type="Texture2D" uid="uid://cggp61cphkxu8" path="res://assets/ui/title.png" id="17_oina4"]
@@ -36,6 +37,7 @@ grow_vertical = 2
 color = Color(0.6666667, 0.8784314, 0.9529412, 1)
 
 [node name="Clouds" type="Node2D" parent="BackGround" unique_id=359923722]
+z_index = -2
 
 [node name="Cloud1" type="Sprite2D" parent="BackGround/Clouds" unique_id=67026845]
 position = Vector2(749.00006, 16)
@@ -166,3 +168,7 @@ texture = ExtResource("17_oina4")
 unique_name_in_owner = true
 position = Vector2(0, 720)
 anchor_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1465602735]
+stream = ExtResource("12_88kup")
+autoplay = true
