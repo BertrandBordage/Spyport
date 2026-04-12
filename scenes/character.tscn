@@ -124,6 +124,7 @@ monitorable = false
 unique_name_in_owner = true
 position = Vector2(98, -23)
 shape = SubResource("RectangleShape2D_8yvht")
+debug_color = Color(0, 0.5950001, 0.7, 0.019607844)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
