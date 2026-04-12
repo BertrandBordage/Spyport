@@ -23,7 +23,8 @@ func _on_character_died(character: Character, killer: Character) -> void:
 	Globals.players_scores[killer.player_index] += 1 if character.is_bot else 5
 	if not character.is_bot:
 		Globals.players_scores[character.player_index] -= 5
-	players_labels[killer.player_index].text = "Player %d score: %d" % [
-		killer.player_index + 1,
-		Globals.players_scores[killer.player_index]
-	]
+	for player_index in players_labels:
+		players_labels[player_index].text = "Player %d score: %d" % [
+			player_index + 1,
+			Globals.players_scores[player_index]
+		]
