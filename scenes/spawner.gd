@@ -10,7 +10,7 @@ func _ready() -> void:
 	Globals.spawner = self
 	Globals.physics_state = get_world_2d().direct_space_state
 	Globals.character_died.connect(_on_character_died)
-	
+
 	for _i in range(MAX_CHARACTERS):
 		var character: Character = character_scene.instantiate()
 		character.player_index = Character.PlayerIndex.BOT
@@ -41,7 +41,9 @@ static func is_available_character(node: Node):
 		and node is Character
 		and not node.is_dead
 		and node.character_type not in taken_character_types
-		and node.action != Character.Action.EMBARK
+		# TODO: Allow spawning as an embarking/fleeing bot, but only
+		#       if it is fully visible on screen.
+		and node.action not in [Character.Action.EMBARK, Character.Action.FLEE]
 	)
 
 

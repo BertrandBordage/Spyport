@@ -56,7 +56,8 @@ var bot_actions_probabilities = [
 	set(value):
 		player_index = value
 		player_mapping = ACTIONS_MAPPING[player_index]
-		update_dead_alert()
+		action = Action.WAIT
+		update_collision()
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
@@ -72,7 +73,7 @@ var is_dead := false:
 		%Sprite.z_index = (
 			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
 		)
-		update_dead_alert()
+		update_collision()
 		if is_dead:
 			%Sprite.play("dead")
 			%WaitTimer.stop()
@@ -111,9 +112,10 @@ func move_slide_and_collide() -> void:
 	
 	move_and_slide()
 
-func update_dead_alert() -> void:
+func update_collision() -> void:
 	set_collision_layer_value(1, not is_dead)
 	set_collision_layer_value(3, is_dead)
+	set_collision_mask_value(2, action not in [Action.EMBARK, Action.FLEE])
 	%DeadAlertCollisionShape.set_deferred("disabled", is_dead or has_panicked or not is_bot)
 
 ## We do not use a property setter because they are not recursive,
@@ -148,11 +150,11 @@ func set_action_target() -> void:
 
 func embark() -> void:
 	set_action_target()
-	set_collision_mask_value(2, false)
+	update_collision()
 
 func panic() -> void:
 	has_panicked = true
-	update_dead_alert()
+	update_collision()
 	%WaitTimer.stop()
 	%Danger.visible = true
 	%PanicPlayer.play()
@@ -165,7 +167,7 @@ func flee() -> void:
 	%Danger.visible = false
 	%Danger.scale.y = 0.0
 	set_action_target()
-	set_collision_mask_value(2, false)
+	update_collision()
 
 func wait() -> void:
 	%WaitTimer.wait_time = randf_range(3.0, 10.0)
