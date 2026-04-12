@@ -19,7 +19,7 @@ var spawn_timer : float = 1.0
 # SCORES
 @onready var info_panel : NinePatchRect = %InfoPanel
 @onready var panel_text : RichTextLabel = %Text
-const START_BBCODE_TEXT : String = "[center][pulse freq=2.0 color=#ffffff40 ease=-20.0]Press A to Start[/pulse][/center]"
+const START_BBCODE_TEXT : String = "[pulse freq=2.0 color=#ffffff40 ease=-20.0]Press any key[/pulse]"
 var scores : Array = [13,null,2,35]
 
 func _ready() -> void :
