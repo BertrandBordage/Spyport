@@ -117,8 +117,7 @@ func update_collision() -> void:
 	set_collision_layer_value(3, is_dead)
 	set_collision_mask_value(2, action not in [Action.EMBARK, Action.FLEE])
 	%DeadAlertCollisionShape.set_deferred(
-		"disabled",
-		is_dead or has_panicked or action == Action.EMBARK or not is_bot
+		"disabled", is_dead or has_panicked or not is_bot
 	)
 
 ## We do not use a property setter because they are not recursive,
