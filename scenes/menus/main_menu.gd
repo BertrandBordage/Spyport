@@ -7,13 +7,12 @@ extends Control
 @onready var extras : Node2D = $BackGround/Extras
 
 # EXTRAS (figurants)
-var extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
+const extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
 const SPAWN_LEFT : Vector2 = Vector2(-100,600)
 const SPAWN_RIGHT : Vector2 = Vector2(1380,600)
 const SPAWN_MARGIN : float = 100
 const SPAWN_TIMER_RESET = 1.0
 var spawn_timer : float = 1.0
-var spawn_bool : bool = false
 
 # SCORES
 @onready var info_panel : NinePatchRect = %InfoPanel
@@ -22,8 +21,6 @@ const START_BBCODE_TEXT : String = "[center][pulse freq=2.0 color=#ffffff40 ease
 var scores : Array = [13,null,2,35]
 
 func _ready() -> void :
-	# Already get extra before title
-	spawn_bool = true
 	# Show AIRPORT and TITLE
 	await get_tree().create_timer(1).timeout
 	await move_airport()
@@ -45,11 +42,10 @@ func _ready() -> void :
 
 
 func _process(delta):
-	if spawn_bool :
-		spawn_timer = spawn_timer - delta
-		if spawn_timer < 0 :
-			spawn_timer = SPAWN_TIMER_RESET
-			spawn_extra()
+	spawn_timer = spawn_timer - delta
+	if spawn_timer < 0 :
+		spawn_timer = SPAWN_TIMER_RESET
+		spawn_extra()
 
 
 func move_airport(y_value : int = 0):
