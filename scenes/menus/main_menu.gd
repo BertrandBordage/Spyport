@@ -25,11 +25,10 @@ var can_skip := false
 
 func _ready() -> void :
 	# Show AIRPORT and TITLE
-	await get_tree().create_timer(1).timeout
+	await get_tree().create_timer(0.5).timeout
 	await pan_camera()
 	await get_tree().create_timer(1).timeout
 	fade_title()
-	await get_tree().create_timer(1).timeout
 	show_panel()
 	can_skip = true
 	
