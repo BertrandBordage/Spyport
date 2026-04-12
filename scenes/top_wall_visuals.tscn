@@ -20,13 +20,15 @@ offset_top = 6.0
 offset_right = 853.0
 offset_bottom = 81.0
 
-[node name="Help" type="Label" parent="TextDisplay" unique_id=2018255221]
+[node name="Help" type="RichTextLabel" parent="TextDisplay" unique_id=1365625861]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 16)
 layout_mode = 2
-text = "Press A on 2-4 gamepads to start playing with your friends!"
-horizontal_alignment = 1
+bbcode_enabled = true
+text = "[pulse freq=2.0 ease=-20.0]Press A on 2-4 gamepads to start playing with your friends![/pulse]"
 autowrap_mode = 1
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="ScoresContainer" type="VBoxContainer" parent="TextDisplay" unique_id=553758961]
 unique_name_in_owner = true
@@ -36,7 +38,7 @@ layout_mode = 2
 [node name="HBoxContainer" type="HBoxContainer" parent="TextDisplay/ScoresContainer" unique_id=1961596721]
 layout_mode = 2
 
-[node name="Player1Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer" unique_id=551898881]
+[node name="Player1Score" type="Label" parent="TextDisplay/ScoresContainer/HBoxContainer" unique_id=12796312]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
