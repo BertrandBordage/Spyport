@@ -1,6 +1,8 @@
 extends Node
 
+@warning_ignore("unused_signal")
 signal player_joined(character: Character)
+@warning_ignore("unused_signal")
 signal character_died(character: Character, killer: Character)
 
 var width := DisplayServer.window_get_size().x
