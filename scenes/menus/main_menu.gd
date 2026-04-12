@@ -49,12 +49,12 @@ func _process(delta):
 
 
 func move_airport(y_value : int = 0):
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(background, "global_position:y", y_value, 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
 func fade_title(alpha_value : float = 255) :
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(title, "modulate:a", alpha_value , 2).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
@@ -62,7 +62,7 @@ func fade_title(alpha_value : float = 255) :
 func show_panel(score : Array = []) :
 	panel_text.text = ""
 	if score.size() > 0 : # Show score
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(info_panel, "size:y", 280 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		var final_text = "[center]- SCORE -[/center]\n"
@@ -76,7 +76,7 @@ func show_panel(score : Array = []) :
 			final_text += score_str
 		panel_text.text = final_text
 	else : # Show Press A
-		var tween = get_tree().create_tween()
+		var tween = create_tween()
 		tween.tween_property(info_panel, "size:y", 80 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		panel_text.text = START_BBCODE_TEXT
@@ -107,7 +107,7 @@ func spawn_extra() :
 	var time = randf_range(10.0,16.0)
 	if left_direction :
 		distance *= -1
-	var tween = get_tree().create_tween()
+	var tween = create_tween()
 	tween.tween_property(extra_instance, "position:x", distance, time)
 	await tween.finished
 	extra_instance.queue_free()
