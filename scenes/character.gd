@@ -171,6 +171,8 @@ func flee() -> void:
 
 func wait() -> void:
 	%WaitTimer.wait_time = randf_range(3.0, 10.0)
+	if not is_inside_tree():
+		await ready
 	%WaitTimer.start()
 
 func _physics_process(_delta: float) -> void:
