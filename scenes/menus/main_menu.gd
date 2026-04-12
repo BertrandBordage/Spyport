@@ -13,8 +13,6 @@ const extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
 const SPAWN_LEFT : Vector2 = Vector2(-100,600)
 const SPAWN_RIGHT : Vector2 = Vector2(1380,600)
 const SPAWN_MARGIN : float = 100
-const SPAWN_TIMER_RESET = 1.0
-var spawn_timer : float = 1.0
 
 # SCORES
 @onready var info_panel : NinePatchRect = %InfoPanel
@@ -41,13 +39,6 @@ func _ready() -> void :
 	#await fade_title(0)
 	#move_airport(-720)
 	# load scene ?
-
-
-func _process(delta):
-	spawn_timer = spawn_timer - delta
-	if spawn_timer < 0 :
-		spawn_timer = SPAWN_TIMER_RESET
-		spawn_extra()
 
 
 func move_airport(y_value : int = 0):
@@ -113,3 +104,7 @@ func spawn_extra() :
 	tween.tween_property(extra_instance, "position:x", distance, time)
 	await tween.finished
 	extra_instance.queue_free()
+
+
+func _on_spawn_timer_timeout() -> void:
+	spawn_extra()
