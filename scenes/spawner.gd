@@ -1,10 +1,9 @@
 class_name Spawner
 extends Node2D
 
-const MAX_CHARACTERS := 300
 const character_scene := preload("res://scenes/character.tscn")
 const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
-
+var max_characters := randi_range(50, 300)
 
 func _ready() -> void:
 	Globals.level_state = LevelState.new()
@@ -12,7 +11,7 @@ func _ready() -> void:
 	Globals.physics_state = get_world_2d().direct_space_state
 	Globals.character_died.connect(_on_character_died)
 
-	for _i in range(MAX_CHARACTERS):
+	for _i in range(max_characters):
 		var character: Character = character_scene.instantiate()
 		character.player_index = Character.PlayerIndex.BOT
 		var collision_shape := character.get_collision_shape()
@@ -29,7 +28,7 @@ func get_crowded_ratio() -> float:
 		get_children().filter(
 			func (child): return child is Character and not child.is_dead
 		).size()
-		/ float(MAX_CHARACTERS)
+		/ float(max_characters)
 	)
 
 

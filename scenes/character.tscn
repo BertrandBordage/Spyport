@@ -21,15 +21,15 @@
 [ext_resource type="AudioStream" uid="uid://07pmfdpr70y2" path="res://assets/audio/no-female.ogg" id="19_7qyni"]
 [ext_resource type="AudioStream" uid="uid://nrk1dq0bo0d3" path="res://assets/audio/no-male.ogg" id="20_sougf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(16, 25)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8yvht"]
 size = Vector2(196, 196)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
 height = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
+size = Vector2(16, 25)
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_0dpix"]
 random_pitch = 1.3348398
@@ -104,17 +104,6 @@ position = Vector2(0, -41)
 scale = Vector2(1, 1e-05)
 texture = ExtResource("5_8yvht")
 
-[node name="AttackArea" type="Area2D" parent="Visuals" unique_id=1238924595]
-unique_name_in_owner = true
-collision_layer = 0
-monitorable = false
-
-[node name="AttackCollisionShape" type="CollisionShape2D" parent="Visuals/AttackArea" unique_id=53293700]
-unique_name_in_owner = true
-position = Vector2(17, -1.5)
-shape = SubResource("RectangleShape2D_dqkch")
-disabled = true
-
 [node name="DeadAlertArea" type="Area2D" parent="Visuals" unique_id=236439470]
 collision_layer = 8388608
 collision_mask = 8388612
@@ -131,6 +120,17 @@ unique_name_in_owner = true
 position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1238924595]
+unique_name_in_owner = true
+collision_layer = 0
+monitorable = false
+
+[node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackArea" unique_id=53293700]
+unique_name_in_owner = true
+position = Vector2(17, -1.5)
+shape = SubResource("RectangleShape2D_dqkch")
+disabled = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
 unique_name_in_owner = true

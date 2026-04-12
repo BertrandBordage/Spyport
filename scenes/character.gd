@@ -258,11 +258,16 @@ func _unhandled_input(event: InputEvent) -> void:
 		action = Action.ATTACK
 		%Sprite.play("attack")
 		%AttackCollisionShape.disabled = false
+		var attack_direction := (
+			Vector2(signf(%Visuals.scale.x), 0.0) if velocity.length() < 0.2
+			else velocity.normalized()
+		)
+		%AttackArea.rotation = attack_direction.angle()
 		%DashPlayer.play()
 		var tween := create_tween()
 		tween.tween_property(
-			self, "velocity:x",
-			-character_type.ATTACK_CHARGE_SPEED * signf(%Visuals.scale.x),
+			self, "velocity",
+			-character_type.ATTACK_CHARGE_SPEED * attack_direction,
 			0.2,
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		tween.tween_callback(on_attack_action)
@@ -283,8 +288,8 @@ func on_attack_action() -> void:
 	%AttackCollisionShape.disabled = true
 	var tween := create_tween()
 	tween.tween_property(
-		self, "velocity:x",
-		character_type.ATTACK_SPEED * signf(%Visuals.scale.x),
+		self, "velocity",
+		-character_type.ATTACK_SPEED * velocity.normalized(),
 		0.1,
 	).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_callback(on_attack_end)
