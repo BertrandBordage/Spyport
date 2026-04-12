@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://cjt70p7ipop5k"]
 
+[ext_resource type="Script" uid="uid://clmbsw7a7221b" path="res://scenes/game.gd" id="1_p57ef"]
 [ext_resource type="PackedScene" uid="uid://bactyf4wm4i45" path="res://scenes/spawner.tscn" id="2_yqjtg"]
 [ext_resource type="PackedScene" uid="uid://bljvlrgbuvdla" path="res://scenes/top_wall_visuals.tscn" id="3_p57ef"]
 [ext_resource type="PackedScene" uid="uid://cc0r4qicrjmj7" path="res://scenes/tools/action_target.tscn" id="4_iywne"]
@@ -37,6 +38,7 @@ size = Vector2(202, 101.75)
 [node name="Game" type="NavigationRegion2D" unique_id=949902908]
 y_sort_enabled = true
 navigation_polygon = SubResource("NavigationPolygon_yqjtg")
+script = ExtResource("1_p57ef")
 
 [node name="Boundaries" type="StaticBody2D" parent="." unique_id=261153962]
 
@@ -193,3 +195,14 @@ debug_color = Color(0.9933763, 0, 0.2452861, 0.41960785)
 
 [node name="AudioListener2D" type="AudioListener2D" parent="." unique_id=188571592]
 position = Vector2(640, 360)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1686296791]
+
+[node name="Fade" type="ColorRect" parent="CanvasLayer" unique_id=1776205110]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0)
