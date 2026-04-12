@@ -2,8 +2,9 @@ extends Node
 
 @warning_ignore("unused_signal")
 signal player_joined(character: Character)
-@warning_ignore("unused_signal")
 signal character_died(character: Character, killer: Character)
+signal character_count_changed
+signal game_over
 
 var width := DisplayServer.window_get_size().x
 var height := DisplayServer.window_get_size().y
@@ -27,6 +28,20 @@ var action_targets: Dictionary[Character.Action, Array] = {}
 var spawner: Spawner
 var physics_state: PhysicsDirectSpaceState2D
 var shape_params := PhysicsShapeQueryParameters2D.new()
+
+
+func _ready() -> void:
+	character_died.connect(_on_character_died)
+	character_count_changed.connect(_on_character_count_changed)
+
+
+func _on_character_died(_character: Character, _killer: Character) -> void:
+	character_count_changed.emit()
+
+
+func _on_character_count_changed() -> void:
+	if spawner.get_available_characters().size() == 0:
+		game_over.emit()
 
 
 func get_random_position(collision_shape: CollisionShape2D) -> Vector2:
