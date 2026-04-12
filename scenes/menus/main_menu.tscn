@@ -25,6 +25,7 @@ script = ExtResource("1_bre17")
 position = Vector2(0, -720)
 
 [node name="Sky" type="ColorRect" parent="BackGround" unique_id=1575233467]
+z_index = -2
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -55,6 +56,7 @@ texture = ExtResource("1_a3hrp")
 centered = false
 
 [node name="Background" type="Sprite2D" parent="BackGround" unique_id=340752825]
+z_index = -2
 scale = Vector2(5, 5)
 texture = ExtResource("3_nkawv")
 centered = false
@@ -65,23 +67,17 @@ scale = Vector2(5, 5)
 texture = ExtResource("4_w32d4")
 centered = false
 
-[node name="CheckDeviceHorizontal1" type="Sprite2D" parent="BackGround" unique_id=1807006772]
-position = Vector2(1154.9998, 410)
-scale = Vector2(5, 5)
-texture = ExtResource("5_287l7")
-centered = false
+[node name="Shadow" type="ColorRect" parent="BackGround/bench" unique_id=366466877]
+z_index = -1
+offset_left = -1.0
+offset_top = 11.199993
+offset_right = 55.999996
+offset_bottom = 18.999992
+color = Color(0.6313726, 0.6509804, 0.68235296, 1)
 
-[node name="CheckDeviceHorizontal2" type="Sprite2D" parent="BackGround" unique_id=1764761710]
-position = Vector2(1085.0002, 410)
-scale = Vector2(5, 5)
-texture = ExtResource("6_8hoqd")
-centered = false
-
-[node name="CheckDeviceHorizontal3" type="Sprite2D" parent="BackGround" unique_id=2118535023]
-position = Vector2(1015.00024, 410)
-scale = Vector2(5, 5)
-texture = ExtResource("7_555wk")
-centered = false
+[node name="Extras" type="Node2D" parent="BackGround" unique_id=173879285]
+z_index = 5
+y_sort_enabled = true
 
 [node name="InfoPannel" type="NinePatchRect" parent="BackGround" unique_id=1570906586]
 anchors_preset = 8
@@ -119,6 +115,34 @@ theme_override_colors/default_color = Color(0.9019608, 0.8117647, 0.6313726, 1)
 theme_override_fonts/normal_font = ExtResource("16_eeloc")
 theme_override_font_sizes/normal_font_size = 32
 bbcode_enabled = true
+
+[node name="CheckDevice" type="Node2D" parent="BackGround" unique_id=767390063]
+
+[node name="CheckDeviceHorizontal1" type="Sprite2D" parent="BackGround/CheckDevice" unique_id=1807006772]
+position = Vector2(1154.9998, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("5_287l7")
+centered = false
+
+[node name="CheckDeviceHorizontal2" type="Sprite2D" parent="BackGround/CheckDevice" unique_id=1764761710]
+position = Vector2(1085.0002, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("6_8hoqd")
+centered = false
+
+[node name="CheckDeviceHorizontal3" type="Sprite2D" parent="BackGround/CheckDevice" unique_id=2118535023]
+position = Vector2(1015.00024, 410)
+scale = Vector2(5, 5)
+texture = ExtResource("7_555wk")
+centered = false
+
+[node name="Shadow" type="ColorRect" parent="BackGround/CheckDevice" unique_id=1293215229]
+z_index = -1
+offset_left = 1010.0
+offset_top = 515.0
+offset_right = 1220.0
+offset_bottom = 555.0
+color = Color(0.6313726, 0.6509804, 0.68235296, 1)
 
 [node name="Title" type="TextureRect" parent="." unique_id=238378172]
 modulate = Color(1, 1, 1, 0)

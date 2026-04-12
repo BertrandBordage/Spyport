@@ -3,6 +3,17 @@ extends Control
 # MAIN
 @onready var background : Node2D = $BackGround
 @onready var title : TextureRect = $Title
+@onready var clouds : Node2D = $BackGround/Clouds
+@onready var extras : Node2D = $BackGround/Extras
+
+# EXTRAS (figurants)
+var extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
+const SPAWN_LEFT : Vector2 = Vector2(-100,600)
+const SPAWN_RIGHT : Vector2 = Vector2(1380,600)
+const SPAWN_MARGIN : float = 100
+const SPAWN_TIMER_RESET = 1.0
+var spawn_timer : float = 1.0
+var spawn_bool : bool = false
 
 # SCORES
 @onready var info_panel : NinePatchRect = $BackGround/InfoPannel
@@ -11,24 +22,40 @@ const START_BBCODE_TEXT : String = "[center][pulse freq=2.0 color=#ffffff40 ease
 var scores : Array = [13,null,2,35]
 
 func _ready() -> void :
+	# Already get extra before title
+	spawn_bool = true
+	# Show AIRPORT and TITLE
 	await get_tree().create_timer(1).timeout
 	await move_airport()
 	await get_tree().create_timer(1).timeout
 	fade_title()
 	await get_tree().create_timer(1).timeout
-	show_pannel(scores)
-	await get_tree().create_timer(2).timeout
+	# Ready to press A
 	show_pannel()
-	await get_tree().create_timer(2).timeout
-	await fade_title(0)
-	move_airport(-720)
+	
+	# ---
+	
+	# Show score
+	#show_pannel(score)
+	
+	# Get OUT
+	#await fade_title(0)
+	#move_airport(-720)
+	# load scene ?
+
+
+func _process(delta):
+	if spawn_bool :
+		spawn_timer = spawn_timer - delta
+		if spawn_timer < 0 :
+			spawn_timer = SPAWN_TIMER_RESET
+			spawn_extra()
 
 
 func move_airport(y_value : int = 0):
 	var tween = get_tree().create_tween()
 	tween.tween_property(background, "global_position:y", y_value, 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
-	pass
 
 func fade_title(alpha_value : float = 255) :
 	var tween = get_tree().create_tween()
@@ -57,3 +84,34 @@ func show_pannel(score : Array = []) :
 		tween.tween_property(info_panel, "size:y", 80 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		panel_text.text = START_BBCODE_TEXT
+
+func spawn_extra() :
+	# VARIABLES
+	var left_direction = [true,false].pick_random()
+	var extra_position : Vector2 = SPAWN_LEFT
+	if left_direction :
+		extra_position = SPAWN_RIGHT
+	extra_position.y += randf_range(-SPAWN_MARGIN, SPAWN_MARGIN)
+	
+	# SPAWN
+	var extra_instance = extra_scene.instantiate()
+	# ANIMATION
+	var types : PackedStringArray = extra_instance.sprite_frames.get_animation_names()
+	var indexes : int = types.size() # can't do pick_random here
+	var type : String = types[randi_range(0,indexes-1)]
+	await get_tree().create_timer(randf_range(0.0,0.4)).timeout # Decal animation for async
+	extra_instance.play(type)
+	extra_instance.flip_h = left_direction
+	# NODE
+	extras.add_child(extra_instance)
+	extra_instance.global_position = extra_position
+	
+	# MOVE
+	var distance = 1300
+	var time = randf_range(10.0,16.0)
+	if left_direction :
+		distance *= -1
+	var tween = get_tree().create_tween()
+	tween.tween_property(extra_instance, "position:x", distance, time)
+	await tween.finished
+	extra_instance.queue_free()
