@@ -22,7 +22,7 @@ grow_vertical = 2
 script = ExtResource("1_bre17")
 
 [node name="BackGround" type="Node2D" parent="." unique_id=383848892]
-position = Vector2(0, -720)
+unique_name_in_owner = true
 
 [node name="Sky" type="ColorRect" parent="BackGround" unique_id=1575233467]
 z_index = -2
@@ -161,3 +161,8 @@ grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(2, 2)
 texture = ExtResource("17_oina4")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=131408054]
+unique_name_in_owner = true
+position = Vector2(0, 720)
+anchor_mode = 0

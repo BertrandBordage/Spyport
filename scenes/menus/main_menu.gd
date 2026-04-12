@@ -1,10 +1,12 @@
 extends Control
 
 # MAIN
-@onready var background : Node2D = $BackGround
+@onready var background : Node2D = %BackGround
 @onready var title : TextureRect = $Title
 @onready var clouds : Node2D = $BackGround/Clouds
 @onready var extras : Node2D = $BackGround/Extras
+@onready var camera: Camera2D = %Camera2D
+
 
 # EXTRAS (figurants)
 const extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
@@ -50,7 +52,7 @@ func _process(delta):
 
 func move_airport(y_value : int = 0):
 	var tween = create_tween()
-	tween.tween_property(background, "global_position:y", y_value, 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(camera, "global_position:y", y_value, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
 func fade_title(alpha_value : float = 255) :
