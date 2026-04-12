@@ -7,6 +7,8 @@ extends Control
 @onready var extras : Node2D = $BackGround/Extras
 @onready var camera: Camera2D = %Camera2D
 
+const game_scene: PackedScene = preload("res://scenes/game.tscn")
+
 
 # EXTRAS (figurants)
 const extra_scene = preload("res://scenes/menus/extra_for_menu.tscn")
@@ -19,6 +21,7 @@ const SPAWN_MARGIN : float = 100
 @onready var panel_text : RichTextLabel = %Text
 const START_BBCODE_TEXT : String = "[pulse freq=2.0 color=#ffffff40 ease=-20.0]Press any key[/pulse]"
 var scores : Array = [13,null,2,35]
+var can_skip := false
 
 func _ready() -> void :
 	# Show AIRPORT and TITLE
@@ -29,6 +32,7 @@ func _ready() -> void :
 	await get_tree().create_timer(1).timeout
 	# Ready to press A
 	show_panel()
+	can_skip = true
 	
 	# ---
 	
@@ -39,6 +43,16 @@ func _ready() -> void :
 	#await fade_title(0)
 	#move_airport(-720)
 	# load scene ?
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if can_skip and (event is InputEventJoypadButton or event is InputEventKey):
+		var tween := create_tween().set_parallel()
+		tween.tween_property(self, "modulate:v", 0.0, 1.0)
+		tween.tween_property($AudioStreamPlayer, "volume_linear", 0.0, 1.0)
+		await tween.finished
+		queue_free()
+		get_tree().root.add_child(game_scene.instantiate())
 
 
 func move_airport(y_value : int = 0):
