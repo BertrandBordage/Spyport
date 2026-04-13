@@ -30,7 +30,3 @@ texture = ExtResource("2_qcy8p")
 position = Vector2(0, -6)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qcy8p")
-
-[node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=2023526968]
-avoidance_enabled = true
-neighbor_distance = 100.0
