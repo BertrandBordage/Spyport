@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://pnsaa268qcgv"]
+
+[ext_resource type="Script" uid="uid://cfm2jo0p17bdp" path="res://scenes/dead_component.gd" id="1_0svja"]
+[ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="1_skgcw"]
+
+[node name="DeadComponent" type="Node2D" unique_id=1315839435]
+script = ExtResource("1_0svja")
+
+[node name="Blood" type="Sprite2D" parent="." unique_id=1907079064]
+unique_name_in_owner = true
+z_index = -2
+position = Vector2(0, -6)
+scale = Vector2(1e-05, 1e-05)
+texture = ExtResource("1_skgcw")

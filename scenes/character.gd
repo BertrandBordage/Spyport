@@ -38,6 +38,7 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 }
 
 const player_component_scene: PackedScene = preload("res://scenes/player_component.tscn")
+const dead_component_scene: PackedScene = preload("res://scenes/dead_component.tscn")
 
 var bot_actions_probabilities = [
 	Action.WAIT,
@@ -71,6 +72,7 @@ var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
 var player_component: PlayerComponent
+var dead_component: DeadComponent
 
 var action := Action.WAIT:
 	set(value):
@@ -91,13 +93,8 @@ var is_dead := false:
 			%Danger.visible = false
 			agent.avoidance_enabled = false
 			sprite.rotation = randf_range(-PI/6, PI/6)
-			%Blood.scale = Vector2.ZERO
-			%Blood.rotation = randf_range(-PI/6, PI/6)
-			%Blood.visible = is_dead
-			var tween := create_tween()
-			tween.tween_property(
-				%Blood, 'scale', Vector2(1.5, 1.5), 5.0,
-			).set_ease(Tween.EASE_OUT)
+			dead_component = dead_component_scene.instantiate()
+			visuals.add_child(dead_component)
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
