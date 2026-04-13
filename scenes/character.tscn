@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://triwf4n52fmy" path="res://scenes/character.gd" id="1_my7n2"]
 [ext_resource type="Texture2D" uid="uid://bkv2hkpd2p0es" path="res://assets/characters/character-shadow.png" id="2_dp8ca"]
-[ext_resource type="Script" uid="uid://1tn8qt64sn3o" path="res://scenes/shadow.gd" id="3_cicko"]
 [ext_resource type="SpriteFrames" uid="uid://cuensagcjfs5d" path="res://assets/characters/tourist-frames.tres" id="4_2cgup"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
@@ -23,22 +22,21 @@ z_index = -2
 z_as_relative = false
 texture = ExtResource("2_dp8ca")
 region_rect = Rect2(0, 0, 32, 32)
-script = ExtResource("3_cicko")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="Visuals" unique_id=551960305]
 unique_name_in_owner = true
 position = Vector2(0, -16)
 sprite_frames = ExtResource("4_2cgup")
 
+[node name="HeadMarker" type="Marker2D" parent="Visuals" unique_id=1528939004]
+unique_name_in_owner = true
+position = Vector2(0, -24)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
 position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
-
-[node name="HeadMarker" type="Marker2D" parent="." unique_id=1528939004]
-unique_name_in_owner = true
-position = Vector2(0, -24)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
 unique_name_in_owner = true

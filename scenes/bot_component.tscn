@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://b83g6qwboy0ko" path="res://assets/audio/gasp-male-2.ogg" id="6_2bd2q"]
 [ext_resource type="AudioStream" uid="uid://07pmfdpr70y2" path="res://assets/audio/no-female.ogg" id="7_ucje5"]
 [ext_resource type="AudioStream" uid="uid://nrk1dq0bo0d3" path="res://assets/audio/no-male.ogg" id="8_j03bi"]
+[ext_resource type="Script" uid="uid://bxidheqpqpr7g" path="res://scenes/line_of_sight.gd" id="9_7hqay"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_76xt6"]
 random_pitch = 1.122462
@@ -25,12 +26,16 @@ stream_5/stream = ExtResource("8_j03bi")
 stream_5/weight = 0.25
 
 [node name="BotComponent" type="Node2D" unique_id=970665969]
+y_sort_enabled = true
 script = ExtResource("1_530kx")
+
+[node name="LineOfSight" type="Node2D" parent="." unique_id=47052962]
+script = ExtResource("9_7hqay")
 
 [node name="Danger" type="Sprite2D" parent="." unique_id=1812647249]
 unique_name_in_owner = true
 visible = false
-position = Vector2(0, -41)
+position = Vector2(0, -17)
 scale = Vector2(1, 1e-05)
 texture = ExtResource("2_wwb60")
 

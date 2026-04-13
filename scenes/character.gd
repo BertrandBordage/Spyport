@@ -25,7 +25,7 @@ var player_index: PlayerIndex = PlayerIndex.ONE:
 				add_child(player_component)
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var visuals: Node2D = %Visuals
-@onready var shadow: Shadow = %Shadow
+@onready var shadow: Sprite2D = %Shadow
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var head_marker: Marker2D = %HeadMarker
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
@@ -66,10 +66,10 @@ func _ready() -> void:
 	agent.max_speed = character_type.SPEED
 	sprite.sprite_frames = character_type.sprite_frames
 	visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
-	shadow.character = self
 	bot_component = bot_component_scene.instantiate()
 	bot_component.character = self
-	visuals.add_child(bot_component)
+	# Add it to the head, so the line of sight will be behind the sprite.
+	head_marker.add_child(bot_component)
 
 func move_slide_and_collide() -> void:
 	for i in get_slide_collision_count():
@@ -88,9 +88,6 @@ func update_collision() -> void:
 	set_collision_layer_value(1, not is_dead)
 	set_collision_mask_value(2, action not in [Action.EMBARK, Action.FLEE])
 
-func _process(_delta: float) -> void:
-	if action in [Action.PANIC, Action.FLEE]:
-		shadow.queue_redraw()
 
 func apply_generic_velocity() -> void:
 	if velocity.length() > 0.0:
