@@ -1,16 +1,21 @@
+class_name Shadow
 extends Sprite2D
 
-var seen_body_position
+
+const line_color := Color("#612447")
+var character: Character
 
 
 # We do this on the shadow because it has the correct Z index
 # to be below all character sprites.
 func _draw() -> void:
-	if seen_body_position != null:
+	if character.seen_dead != null:
 		draw_line(
-			to_local(global_position - Vector2(0.0, 24.0)),
-			to_local(seen_body_position),
-			Color("#612447"),
+			to_local(character.head_marker.global_position),
+			to_local(
+				character.seen_dead.dead_component.dead_alert_collision_shape.global_position
+			),
+			line_color,
 			-1,
 			true,
 		)

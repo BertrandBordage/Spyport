@@ -12,9 +12,6 @@
 [ext_resource type="AudioStream" uid="uid://07pmfdpr70y2" path="res://assets/audio/no-female.ogg" id="19_7qyni"]
 [ext_resource type="AudioStream" uid="uid://nrk1dq0bo0d3" path="res://assets/audio/no-male.ogg" id="20_sougf"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_8yvht"]
-size = Vector2(196, 196)
-
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qhqgy"]
 radius = 2.0
 height = 16.0
@@ -62,22 +59,15 @@ position = Vector2(0, -41)
 scale = Vector2(1, 1e-05)
 texture = ExtResource("5_8yvht")
 
-[node name="DeadAlertArea" type="Area2D" parent="Visuals" unique_id=236439470]
-collision_layer = 8388608
-collision_mask = 8388612
-monitorable = false
-
-[node name="DeadAlertCollisionShape" type="CollisionShape2D" parent="Visuals/DeadAlertArea" unique_id=1548483394]
-unique_name_in_owner = true
-position = Vector2(98, -23)
-shape = SubResource("RectangleShape2D_8yvht")
-debug_color = Color(0, 0.5950001, 0.7, 0.019607844)
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1601099611]
 unique_name_in_owner = true
 position = Vector2(0, -2)
 rotation = 1.5707964
 shape = SubResource("CapsuleShape2D_qhqgy")
+
+[node name="HeadMarker" type="Marker2D" parent="." unique_id=1528939004]
+unique_name_in_owner = true
+position = Vector2(0, -24)
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
 unique_name_in_owner = true
@@ -94,6 +84,5 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_p478o")
 volume_db = -5.0
 
-[connection signal="body_entered" from="Visuals/DeadAlertArea" to="." method="_on_dead_alert_area_body_entered"]
 [connection signal="velocity_computed" from="NavigationAgent2D" to="." method="_on_navigation_agent_2d_velocity_computed"]
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]

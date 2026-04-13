@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://cfm2jo0p17bdp" path="res://scenes/dead_component.gd" id="1_0svja"]
 [ext_resource type="Texture2D" uid="uid://be1us18vfyuva" path="res://assets/characters/blood.png" id="1_skgcw"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_0svja"]
+radius = 140.0
+
 [node name="DeadComponent" type="Node2D" unique_id=1315839435]
 script = ExtResource("1_0svja")
 
@@ -12,3 +15,17 @@ z_index = -2
 position = Vector2(0, -6)
 scale = Vector2(1e-05, 1e-05)
 texture = ExtResource("1_skgcw")
+
+[node name="DeadAlertArea" type="Area2D" parent="." unique_id=1478180767]
+collision_layer = 8388608
+collision_mask = 8388609
+monitorable = false
+
+[node name="DeadAlertCollisionShape" type="CollisionShape2D" parent="DeadAlertArea" unique_id=1732245277]
+unique_name_in_owner = true
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_0svja")
+debug_color = Color(0, 0.5950001, 0.7, 0.019607844)
+
+[connection signal="body_entered" from="DeadAlertArea" to="." method="_on_dead_alert_area_body_entered"]
+[connection signal="body_exited" from="DeadAlertArea" to="." method="_on_dead_alert_area_body_exited"]

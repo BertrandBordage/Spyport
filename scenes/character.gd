@@ -68,8 +68,9 @@ var player_index: PlayerIndex = PlayerIndex.ONE:
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var visuals: Node2D = %Visuals
-@onready var shadow: Sprite2D = %Shadow
+@onready var shadow: Shadow = %Shadow
 @onready var sprite: AnimatedSprite2D = %Sprite
+@onready var head_marker: Marker2D = %HeadMarker
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
 var player_component: PlayerComponent
 var dead_component: DeadComponent
@@ -94,17 +95,20 @@ var is_dead := false:
 			agent.avoidance_enabled = false
 			sprite.rotation = randf_range(-PI/6, PI/6)
 			dead_component = dead_component_scene.instantiate()
+			dead_component.character = self
 			visuals.add_child(dead_component)
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
 var has_panicked: bool = false
 var path_update_frame := randi_range(0, 59)
+var seen_dead: Character
 
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
 	sprite.sprite_frames = character_type.sprite_frames
 	visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
+	shadow.character = self
 	_on_wait_timer_timeout()
 
 func move_slide_and_collide() -> void:
@@ -122,11 +126,7 @@ func move_slide_and_collide() -> void:
 
 func update_collision() -> void:
 	set_collision_layer_value(1, not is_dead)
-	set_collision_layer_value(3, is_dead)
 	set_collision_mask_value(2, action not in [Action.EMBARK, Action.FLEE])
-	%DeadAlertCollisionShape.set_deferred(
-		"disabled", is_dead or has_panicked or not is_bot
-	)
 
 ## We do not use a property setter because they are not recursive,
 ## so actions could not trigger actions if this was a setter.
@@ -175,7 +175,7 @@ func panic() -> void:
 	action = Action.FLEE
 
 func flee() -> void:
-	shadow.seen_body_position = null
+	seen_dead = null
 	%Danger.visible = false
 	%Danger.scale.y = 0.0
 	set_action_target()
@@ -270,19 +270,6 @@ func _on_wait_timer_timeout() -> void:
 	if not is_bot:
 		return
 	action = bot_actions_probabilities.pick_random()
-
-
-func _on_dead_alert_area_body_entered(body: Node2D) -> void:
-	# Check if the body is not hidden by anything.
-	var query := PhysicsRayQueryParameters2D.create(
-		global_position, body.global_position, 0b1100
-	)
-	var result := Globals.physics_state.intersect_ray(query)
-	if "collider" in result and result.collider == body:
-		# Aim slightly above the character origin,
-		# to the center of the dead body.
-		%Shadow.seen_body_position = body.global_position - Vector2(0.0, 8.0)
-		action = Action.PANIC
 
 
 func _exit_tree() -> void:
