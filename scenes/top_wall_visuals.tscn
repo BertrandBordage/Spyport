@@ -91,3 +91,9 @@ player_index = 2
 position = Vector2(274, 10)
 scale = Vector2(1.5, 1.5)
 player_index = 3
+
+[node name="UpdateTimer" type="Timer" parent="." unique_id=76463410]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="UpdateTimer" to="." method="_on_update_timer_timeout"]
