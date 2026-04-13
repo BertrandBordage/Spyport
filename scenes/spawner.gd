@@ -3,7 +3,7 @@ extends Node2D
 
 const character_scene := preload("res://scenes/character.tscn")
 const trolley_scene := preload("res://scenes/obstacles/trolley.tscn")
-var max_characters := randi_range(50, 300)
+var max_characters := randi_range(100, 300)
 
 func _ready() -> void:
 	Globals.level_state = LevelState.new()
