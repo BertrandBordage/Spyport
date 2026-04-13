@@ -8,7 +8,7 @@ var seen_body_position
 func _draw() -> void:
 	if seen_body_position != null:
 		draw_line(
-			to_local(global_position),
+			to_local(global_position - Vector2(0.0, 24.0)),
 			to_local(seen_body_position),
 			Color("#612447"),
 			-1,
