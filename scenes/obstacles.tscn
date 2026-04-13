@@ -95,20 +95,8 @@ position = Vector2(1227, 240)
 [node name="Barrier4Horizontal11" parent="Barriers" unique_id=862707564 instance=ExtResource("1_8miae")]
 position = Vector2(1327, 240)
 
-[node name="Barrier4Horizontal12" parent="Barriers" unique_id=1279601588 instance=ExtResource("1_8miae")]
-position = Vector2(1427, 240)
-
-[node name="Barrier4Horizontal13" parent="Barriers" unique_id=510673561 instance=ExtResource("1_8miae")]
-position = Vector2(1527, 240)
-
 [node name="Barrier4Horizontal14" parent="Barriers" unique_id=187281296 instance=ExtResource("1_8miae")]
 position = Vector2(1327, 172)
-
-[node name="Barrier4Horizontal15" parent="Barriers" unique_id=1478842164 instance=ExtResource("1_8miae")]
-position = Vector2(1427, 172)
-
-[node name="Barrier4Horizontal16" parent="Barriers" unique_id=128854643 instance=ExtResource("1_8miae")]
-position = Vector2(1527, 172)
 
 [node name="Barrier4Horizontal10" parent="Barriers" unique_id=1239309658 instance=ExtResource("1_8miae")]
 position = Vector2(1127, 240)
