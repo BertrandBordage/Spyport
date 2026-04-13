@@ -51,7 +51,7 @@ func _unhandled_input(event: InputEvent) -> void:
 
 func pan_camera():
 	var tween = create_tween()
-	tween.tween_property(camera, "global_position:y", 0.0, 3).set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_CUBIC)
+	tween.tween_property(camera, "global_position:y", 0.0, 3).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 	await tween.finished
 
 func fade_title() -> void:
@@ -63,7 +63,8 @@ func fade_title() -> void:
 func show_panel(score : Array = []) :
 	panel_text.text = ""
 	if score.size() > 0 : # Show score
-		var tween = create_tween()
+		var tween = create_tween().set_parallel()
+		tween.tween_property(info_panel, "global_position:y", -64, 1).as_relative().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(info_panel, "size:y", 375 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		var final_text = "[center]- SCORE -[/center]\n"
