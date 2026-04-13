@@ -60,6 +60,9 @@ var bot_actions_probabilities = [
 		update_collision()
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
+@onready var visuals: Node2D = %Visuals
+@onready var shadow: Sprite2D = %Shadow
+@onready var sprite: AnimatedSprite2D = %Sprite
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
 var action := Action.WAIT:
 	set(value):
@@ -69,17 +72,17 @@ var action_target: ActionTarget
 var is_dead := false:
 	set(value):
 		is_dead = value
-		%Shadow.visible = not is_dead
-		%Sprite.z_index = (
+		shadow.visible = not is_dead
+		sprite.z_index = (
 			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
 		)
 		update_collision()
 		if is_dead:
-			%Sprite.play("dead")
+			sprite.play("dead")
 			%WaitTimer.stop()
 			%Danger.visible = false
 			agent.avoidance_enabled = false
-			%Sprite.rotation = randf_range(-PI/6, PI/6)
+			sprite.rotation = randf_range(-PI/6, PI/6)
 			%Blood.scale = Vector2.ZERO
 			%Blood.rotation = randf_range(-PI/6, PI/6)
 			%Blood.visible = is_dead
@@ -95,8 +98,8 @@ var path_update_frame := randi_range(0, 59)
 
 func _ready() -> void:
 	agent.max_speed = character_type.SPEED
-	%Sprite.sprite_frames = character_type.sprite_frames
-	%Visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
+	sprite.sprite_frames = character_type.sprite_frames
+	visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	_on_wait_timer_timeout()
 
 func move_slide_and_collide() -> void:
@@ -106,7 +109,7 @@ func move_slide_and_collide() -> void:
 		if collider is RigidBody2D:
 			collider.apply_central_impulse(
 				-collision.get_normal() * character_type.PUSH_STRENGTH
-				# Proportional to the player velocity when touching.
+				# Proportional to the character velocity when touching.
 				* abs(collision.get_travel().dot(collision.get_normal()))
 			)
 
@@ -140,7 +143,7 @@ func _on_action_changed() -> void:
 		flee()
 
 func turn() -> void:
-	%Visuals.scale.x = -%Visuals.scale.x
+	visuals.scale.x = -visuals.scale.x
 	action = Action.WAIT
 
 func _compare_target_distance(target_a: ActionTarget, target_b: ActionTarget) -> float:
@@ -167,7 +170,7 @@ func panic() -> void:
 	action = Action.FLEE
 
 func flee() -> void:
-	%Shadow.seen_body_position = null
+	shadow.seen_body_position = null
 	%Danger.visible = false
 	%Danger.scale.y = 0.0
 	set_action_target()
@@ -223,18 +226,18 @@ func _physics_process(_delta: float) -> void:
 
 func _process(_delta: float) -> void:
 	if action in [Action.PANIC, Action.FLEE]:
-		%Shadow.queue_redraw()
+		shadow.queue_redraw()
 
 func apply_generic_velocity() -> void:
 	if velocity.length() > 0.0:
-		%Sprite.play('walk' if velocity.length() > 1.0 else 'default')
-		%Sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
+		sprite.play('walk' if velocity.length() > 1.0 else 'default')
+		sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
 		if abs(velocity.x) > 0.5:
-			%Visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
+			visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
 		move_slide_and_collide()
 	else:
-		%Sprite.play('default')
-		%Sprite.speed_scale = 1.0
+		sprite.play('default')
+		sprite.speed_scale = 1.0
 
 func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	if is_dead or not is_bot:
