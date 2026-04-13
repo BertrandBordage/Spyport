@@ -57,7 +57,7 @@ func replace_bot_with_player(player_index: Character.PlayerIndex) -> void:
 		return
 	var character: Character = available_characters.pick_random()
 	character.player_index = player_index
-	Globals.level_state.players_characters[character.player_index] = character
+	Globals.level_state.add_player(character)
 	Globals.player_joined.emit(character)
 
 

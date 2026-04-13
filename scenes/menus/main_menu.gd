@@ -21,7 +21,6 @@ const SPAWN_MARGIN : float = 100
 @onready var info_panel : NinePatchRect = %InfoPanel
 @onready var panel_text : RichTextLabel = %Text
 const START_BBCODE_TEXT : String = "[pulse freq=2.0 color=#ffffff40 ease=-20.0]Press any key[/pulse]"
-var scores : Array = [13,null,2,35]
 var can_skip := false
 
 func _ready() -> void :
@@ -34,7 +33,7 @@ func _ready() -> void :
 	else:
 		camera.global_position.y = 0.0
 		title.modulate.a = 1.0
-		await show_panel(Globals.level_state.players_scores.values())
+		await show_panel(Globals.level_state.players_scores)
 	can_skip = true
 
 
@@ -60,24 +59,19 @@ func fade_title() -> void:
 	await tween.finished
 
 ## If Array is empty, it will show START_BBCODE_TEXT
-func show_panel(score : Array = []) :
+func show_panel(scores: Dictionary[Character.PlayerIndex, int] = {}) :
 	panel_text.text = ""
-	if score.size() > 0 : # Show score
+	if scores.size() > 0 : # Show score
 		var tween = create_tween().set_parallel()
 		tween.tween_property(info_panel, "global_position:y", -64, 1).as_relative().set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(info_panel, "size:y", 375 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
-		var final_text = "[center]- SCORE -[/center]\n"
-		for i in range(4) : # Add score 4 times
-			var score_int = score[i]
-			var score_str
-			if !score_int : # if score null
-				score_str = "\nPlayer "+ str(i+1) + ("".lpad(9))
-			else :
-				score_str = "\nPlayer "+ str(i+1) + (str(score_int).lpad(9))
-			final_text += score_str
-		final_text += "\n\n%s" % START_BBCODE_TEXT
-		panel_text.text = final_text
+		var final_text := ["[center]- SCORE -[/center]\n"]
+		for player_index in scores: # Add score 4 times
+			var score := scores[player_index]
+			final_text.append("Player %d%s" % [player_index + 1, str(score).lpad(9)])
+		final_text.append("\n%s" % START_BBCODE_TEXT)
+		panel_text.text = "\n".join(final_text)
 	else : # Show Press A
 		var tween = create_tween()
 		tween.tween_property(info_panel, "size:y", 80 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
