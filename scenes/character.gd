@@ -37,6 +37,8 @@ const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
 	PlayerIndex.BOT: {},
 }
 
+const player_component_scene: PackedScene = preload("res://scenes/player_component.tscn")
+
 var bot_actions_probabilities = [
 	Action.WAIT,
 	Action.WAIT,
@@ -52,18 +54,24 @@ var bot_actions_probabilities = [
 	Action.EMBARK,
 ]
 
-@export var player_index: PlayerIndex = PlayerIndex.ONE:
+var player_index: PlayerIndex = PlayerIndex.ONE:
 	set(value):
 		player_index = value
 		player_mapping = ACTIONS_MAPPING[player_index]
 		action = Action.WAIT
 		update_collision()
+		if not is_bot:
+			player_component = player_component_scene.instantiate()
+			player_component.character = self
+			add_child(player_component)
 @onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var visuals: Node2D = %Visuals
 @onready var shadow: Sprite2D = %Shadow
 @onready var sprite: AnimatedSprite2D = %Sprite
 @onready var agent: NavigationAgent2D = %NavigationAgent2D
+var player_component: PlayerComponent
+
 var action := Action.WAIT:
 	set(value):
 		action = value
@@ -220,8 +228,8 @@ func _physics_process(_delta: float) -> void:
 			player_mapping[Direction.UP],
 			player_mapping[Direction.DOWN],
 		)
-		if velocity.length() > 0 and %StepsTimer.is_stopped():
-			_on_steps_timer_timeout()
+		if player_component != null and velocity.length() > 0 and player_component.steps_timer.is_stopped():
+			player_component._on_steps_timer_timeout()
 		apply_generic_velocity()
 
 func _process(_delta: float) -> void:
@@ -257,65 +265,14 @@ func _on_navigation_agent_2d_velocity_computed(safe_velocity: Vector2) -> void:
 	)
 	apply_generic_velocity()
 
-func _unhandled_input(event: InputEvent) -> void:
-	if is_bot or is_dead:
-		return
-
-	if action != Action.ATTACK and event.is_action_pressed(player_mapping[Action.ATTACK]):
-		action = Action.ATTACK
-		%Sprite.play("attack")
-		%AttackCollisionShape.disabled = false
-		var attack_direction := (
-			Vector2(signf(%Visuals.scale.x), 0.0) if velocity.length() < 0.2
-			else velocity.normalized()
-		)
-		%AttackArea.rotation = attack_direction.angle()
-		%DashPlayer.play()
-		var tween := create_tween()
-		tween.tween_property(
-			self, "velocity",
-			-character_type.ATTACK_CHARGE_SPEED * attack_direction,
-			0.2,
-		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-		tween.tween_callback(on_attack_action)
-
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D
-
-
-func on_attack_action() -> void:
-	if is_dead:
-		return
-	for body in %AttackArea.get_overlapping_bodies():
-		if body is Character and body != self:
-			body.is_dead = true
-			Globals.character_died.emit(body, self)
-			%AttackPlayer.play()
-	%AttackCollisionShape.disabled = true
-	var tween := create_tween()
-	tween.tween_property(
-		self, "velocity",
-		-character_type.ATTACK_SPEED * velocity.normalized(),
-		0.1,
-	).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
-	tween.tween_callback(on_attack_end)
-
-func on_attack_end() -> void:
-	action = Action.WAIT
 
 func _on_wait_timer_timeout() -> void:
 	if not is_bot:
 		return
 	action = bot_actions_probabilities.pick_random()
-
-
-func _on_steps_timer_timeout() -> void:
-	if is_dead or is_bot or velocity.length() <= 1.0:
-		return
-
-	%StepsPlayer.play()
-	%StepsTimer.start(0.3 / clampf(velocity.length() / character_type.SPEED, 0.3, 1.0))
 
 
 func _on_dead_alert_area_body_entered(body: Node2D) -> void:

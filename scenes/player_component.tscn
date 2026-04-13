@@ -1,0 +1,73 @@
+[gd_scene format=3 uid="uid://c7mle7opwqh8p"]
+
+[ext_resource type="Script" uid="uid://dcuqoh8qlggpn" path="res://scenes/player_component.gd" id="1_0wvqp"]
+[ext_resource type="AudioStream" uid="uid://cqjm0leu4ycw5" path="res://assets/audio/thump.mp3" id="1_ah271"]
+[ext_resource type="AudioStream" uid="uid://bgifscvr7n3t1" path="res://assets/audio/frot_1.mp3" id="2_0wvqp"]
+[ext_resource type="AudioStream" uid="uid://ddnn2y7hauppp" path="res://assets/audio/frot_2.mp3" id="3_40cre"]
+[ext_resource type="AudioStream" uid="uid://dd4ywr0xlpkjh" path="res://assets/audio/frot_3.mp3" id="4_e0xfy"]
+[ext_resource type="AudioStream" uid="uid://b1fd7d2unwmeg" path="res://assets/audio/frot_4.mp3" id="5_vs7ig"]
+[ext_resource type="AudioStream" uid="uid://pdb0j32vqk1m" path="res://assets/audio/step_1.mp3" id="6_lknw5"]
+[ext_resource type="AudioStream" uid="uid://2wk2d8vcqr1f" path="res://assets/audio/step_2.mp3" id="7_0nm36"]
+[ext_resource type="AudioStream" uid="uid://qvavn8o4l2k1" path="res://assets/audio/step_3.mp3" id="8_voyvf"]
+[ext_resource type="AudioStream" uid="uid://c80ghc8aakit0" path="res://assets/audio/step_4.mp3" id="9_eahk3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_udn6o"]
+size = Vector2(16, 25)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_tveee"]
+random_pitch = 1.3348398
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("1_ah271")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_osvpw"]
+random_pitch = 1.1892071
+random_volume_offset_db = 5.0
+streams_count = 4
+stream_0/stream = ExtResource("2_0wvqp")
+stream_1/stream = ExtResource("3_40cre")
+stream_2/stream = ExtResource("4_e0xfy")
+stream_3/stream = ExtResource("5_vs7ig")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_gy4pk"]
+random_pitch = 1.3348398
+random_volume_offset_db = 5.0
+streams_count = 4
+stream_0/stream = ExtResource("6_lknw5")
+stream_1/stream = ExtResource("7_0nm36")
+stream_2/stream = ExtResource("8_voyvf")
+stream_3/stream = ExtResource("9_eahk3")
+
+[node name="PlayerComponent" type="Node2D" unique_id=1351843435]
+script = ExtResource("1_0wvqp")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1672102102]
+unique_name_in_owner = true
+collision_layer = 0
+monitorable = false
+
+[node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackArea" unique_id=493370631]
+unique_name_in_owner = true
+position = Vector2(17, -1.5)
+shape = SubResource("RectangleShape2D_udn6o")
+disabled = true
+
+[node name="AttackPlayer" type="AudioStreamPlayer2D" parent="." unique_id=729564649]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_tveee")
+volume_db = 5.0
+
+[node name="DashPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1769071515]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_osvpw")
+
+[node name="StepsPlayer" type="AudioStreamPlayer2D" parent="." unique_id=1449383573]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_gy4pk")
+volume_db = -5.0
+
+[node name="StepsTimer" type="Timer" parent="." unique_id=725487382]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="StepsTimer" to="." method="_on_steps_timer_timeout"]
