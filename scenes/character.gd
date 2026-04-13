@@ -3,39 +3,6 @@ extends CharacterBody2D
 
 enum Action { WAIT, WALK, TURN, EMBARK, ATTACK, PANIC, FLEE }
 enum PlayerIndex { ONE = 0, TWO = 1, THREE = 2, FOUR = 3, BOT = -1 }
-enum Direction { UP, DOWN, LEFT, RIGHT }
-
-const ACTIONS_MAPPING: Dictionary[PlayerIndex, Dictionary] = {
-	PlayerIndex.ONE: {
-		Direction.UP: "player_0_up",
-		Direction.DOWN: "player_0_down",
-		Direction.LEFT: "player_0_left",
-		Direction.RIGHT: "player_0_right",
-		Action.ATTACK: "player_0_attack",
-	},
-	PlayerIndex.TWO: {
-		Direction.UP: "player_1_up",
-		Direction.DOWN: "player_1_down",
-		Direction.LEFT: "player_1_left",
-		Direction.RIGHT: "player_1_right",
-		Action.ATTACK: "player_1_attack",
-	},
-	PlayerIndex.THREE: {
-		Direction.UP: "player_2_up",
-		Direction.DOWN: "player_2_down",
-		Direction.LEFT: "player_2_left",
-		Direction.RIGHT: "player_2_right",
-		Action.ATTACK: "player_2_attack",
-	},
-	PlayerIndex.FOUR: {
-		Direction.UP: "player_3_up",
-		Direction.DOWN: "player_3_down",
-		Direction.LEFT: "player_3_left",
-		Direction.RIGHT: "player_3_right",
-		Action.ATTACK: "player_3_attack",
-	},
-	PlayerIndex.BOT: {},
-}
 
 const player_component_scene: PackedScene = preload("res://scenes/player_component.tscn")
 const dead_component_scene: PackedScene = preload("res://scenes/dead_component.tscn")
@@ -58,14 +25,12 @@ var bot_actions_probabilities = [
 var player_index: PlayerIndex = PlayerIndex.ONE:
 	set(value):
 		player_index = value
-		player_mapping = ACTIONS_MAPPING[player_index]
 		action = Action.WAIT
 		update_collision()
 		if not is_bot:
 			player_component = player_component_scene.instantiate()
 			player_component.character = self
 			add_child(player_component)
-@onready var player_mapping := ACTIONS_MAPPING[player_index]
 var character_type: CharacterType = Globals.character_types.pick_random()
 @onready var visuals: Node2D = %Visuals
 @onready var shadow: Shadow = %Shadow
@@ -218,16 +183,6 @@ func _physics_process(_delta: float) -> void:
 				0.0,
 				1.0,
 			)
-	else:
-		velocity = character_type.SPEED * Input.get_vector(
-			player_mapping[Direction.LEFT],
-			player_mapping[Direction.RIGHT],
-			player_mapping[Direction.UP],
-			player_mapping[Direction.DOWN],
-		)
-		if player_component != null and velocity.length() > 0 and player_component.steps_timer.is_stopped():
-			player_component._on_steps_timer_timeout()
-		apply_generic_velocity()
 
 func _process(_delta: float) -> void:
 	if action in [Action.PANIC, Action.FLEE]:

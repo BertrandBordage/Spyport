@@ -66,7 +66,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		if player_index in Globals.level_state.players_characters:
 			continue
 		if event.is_action_pressed(
-			Character.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
+			PlayerComponent.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
 		):
 			replace_bot_with_player(player_index)
 

@@ -1,6 +1,39 @@
 class_name PlayerComponent
 extends Node2D
 
+enum Direction { UP, DOWN, LEFT, RIGHT }
+
+const ACTIONS_MAPPING: Dictionary[Character.PlayerIndex, Dictionary] = {
+	Character.PlayerIndex.ONE: {
+		Direction.UP: "player_0_up",
+		Direction.DOWN: "player_0_down",
+		Direction.LEFT: "player_0_left",
+		Direction.RIGHT: "player_0_right",
+		Character.Action.ATTACK: "player_0_attack",
+	},
+	Character.PlayerIndex.TWO: {
+		Direction.UP: "player_1_up",
+		Direction.DOWN: "player_1_down",
+		Direction.LEFT: "player_1_left",
+		Direction.RIGHT: "player_1_right",
+		Character.Action.ATTACK: "player_1_attack",
+	},
+	Character.PlayerIndex.THREE: {
+		Direction.UP: "player_2_up",
+		Direction.DOWN: "player_2_down",
+		Direction.LEFT: "player_2_left",
+		Direction.RIGHT: "player_2_right",
+		Character.Action.ATTACK: "player_2_attack",
+	},
+	Character.PlayerIndex.FOUR: {
+		Direction.UP: "player_3_up",
+		Direction.DOWN: "player_3_down",
+		Direction.LEFT: "player_3_left",
+		Direction.RIGHT: "player_3_right",
+		Character.Action.ATTACK: "player_3_attack",
+	},
+}
+
 
 var character: Character
 @onready var attack_area: Area2D = %AttackArea
@@ -9,13 +42,16 @@ var character: Character
 @onready var dash_player: AudioStreamPlayer2D = %DashPlayer
 @onready var steps_player: AudioStreamPlayer2D = %StepsPlayer
 @onready var steps_timer: Timer = %StepsTimer
+@onready var player_mapping := ACTIONS_MAPPING[character.player_index]
 
 
 func _unhandled_input(event: InputEvent) -> void:
 	if character.is_dead:
 		return
 
-	if character.action != Character.Action.ATTACK and event.is_action_pressed(character.player_mapping[Character.Action.ATTACK]):
+	if character.action != Character.Action.ATTACK and event.is_action_pressed(
+		player_mapping[Character.Action.ATTACK]
+	):
 		character.action = character.Action.ATTACK
 		character.sprite.play("attack")
 		attack_collision_shape.disabled = false
@@ -32,6 +68,18 @@ func _unhandled_input(event: InputEvent) -> void:
 			0.2,
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		tween.tween_callback(on_attack_action)
+
+
+func _physics_process(_delta: float) -> void:
+	character.velocity = character.character_type.SPEED * Input.get_vector(
+		player_mapping[Direction.LEFT],
+		player_mapping[Direction.RIGHT],
+		player_mapping[Direction.UP],
+		player_mapping[Direction.DOWN],
+	)
+	if character.velocity.length() > 0 and steps_timer.is_stopped():
+		_on_steps_timer_timeout()
+	character.apply_generic_velocity()
 
 
 func on_attack_action() -> void:
