@@ -59,7 +59,6 @@ var is_dead := false:
 var is_bot: bool:
 	get:
 		return player_index == PlayerIndex.BOT
-var has_panicked: bool = false
 var seen_dead: Character
 
 func _ready() -> void:

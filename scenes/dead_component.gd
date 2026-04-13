@@ -34,7 +34,7 @@ func _physics_process(_delta: float) -> void:
 
 
 func _on_dead_alert_area_body_entered(body: Node2D) -> void:
-	if body is Character and body.is_bot and not body.has_panicked:
+	if body is Character and body.is_bot and not body.bot_component.has_panicked:
 		others_in_range.append(body as Character)
 
 

@@ -6,6 +6,7 @@ var character: Character
 @onready var wait_timer: Timer = %WaitTimer
 @onready var panic_player: AudioStreamPlayer2D = %PanicPlayer
 var action_target: ActionTarget
+var has_panicked: bool = false
 var path_update_frame := randi_range(0, 59)
 
 
@@ -114,7 +115,7 @@ func embark() -> void:
 	character.update_collision()
 
 func panic() -> void:
-	character.has_panicked = true
+	has_panicked = true
 	character.update_collision()
 	danger.visible = true
 	panic_player.play()
