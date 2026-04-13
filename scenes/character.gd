@@ -167,6 +167,7 @@ func panic() -> void:
 	action = Action.FLEE
 
 func flee() -> void:
+	%Shadow.seen_body_position = null
 	%Danger.visible = false
 	%Danger.scale.y = 0.0
 	set_action_target()
@@ -219,6 +220,10 @@ func _physics_process(_delta: float) -> void:
 		if velocity.length() > 0 and %StepsTimer.is_stopped():
 			_on_steps_timer_timeout()
 		apply_generic_velocity()
+
+func _process(_delta: float) -> void:
+	if action in [Action.PANIC, Action.FLEE]:
+		%Shadow.queue_redraw()
 
 func apply_generic_velocity() -> void:
 	if velocity.length() > 0.0:
@@ -317,6 +322,9 @@ func _on_dead_alert_area_body_entered(body: Node2D) -> void:
 	)
 	var result := Globals.physics_state.intersect_ray(query)
 	if "collider" in result and result.collider == body:
+		# Aim slightly above the character origin,
+		# to the center of the dead body.
+		%Shadow.seen_body_position = body.global_position - Vector2(0.0, 8.0)
 		action = Action.PANIC
 
 
