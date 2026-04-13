@@ -71,6 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	if character.action == Character.Action.ATTACK:
+		character.move_slide_and_collide()
+		return
+
 	character.velocity = character.character_type.SPEED * Input.get_vector(
 		player_mapping[Direction.LEFT],
 		player_mapping[Direction.RIGHT],
