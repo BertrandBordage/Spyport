@@ -35,6 +35,7 @@ script = ExtResource("9_7hqay")
 [node name="Danger" type="Sprite2D" parent="." unique_id=1812647249]
 unique_name_in_owner = true
 visible = false
+z_index = 1
 position = Vector2(0, -17)
 scale = Vector2(1, 1e-05)
 texture = ExtResource("2_wwb60")
@@ -48,4 +49,9 @@ unique_name_in_owner = true
 stream = SubResource("AudioStreamRandomizer_76xt6")
 volume_db = -5.0
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=346328438]
+position = Vector2(0, 24)
+rect = Rect2(-16, -16, 32, 32)
+
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

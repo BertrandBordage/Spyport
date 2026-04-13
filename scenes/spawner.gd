@@ -41,9 +41,6 @@ static func is_available_character(node: Node):
 		and node is Character
 		and not node.is_dead
 		and node.character_type not in taken_character_types
-		# TODO: Allow spawning as an embarking/fleeing bot, but only
-		#       if it is fully visible on screen.
-		and node.action not in [Character.Action.EMBARK, Character.Action.FLEE]
 	)
 
 

@@ -43,10 +43,6 @@ func _physics_process(_delta: float) -> void:
 		# Updates the pathfinding.
 		agent.target_position = agent.target_position
 
-	if action in [Character.Action.EMBARK, Character.Action.FLEE]:
-		if agent.is_navigation_finished():
-			character.queue_free()
-			return
 	if agent.is_navigation_finished():
 		character.action = Character.Action.WAIT
 	elif action in [Character.Action.WALK, Character.Action.EMBARK, Character.Action.FLEE]:
@@ -136,3 +132,7 @@ func wait() -> void:
 	if not is_inside_tree():
 		await ready
 	wait_timer.start()
+
+
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	character.queue_free()
