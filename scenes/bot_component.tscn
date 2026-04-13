@@ -50,7 +50,7 @@ stream = SubResource("AudioStreamRandomizer_76xt6")
 volume_db = -5.0
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=346328438]
-position = Vector2(0, 24)
+position = Vector2(0, 8)
 rect = Rect2(-16, -16, 32, 32)
 
 [connection signal="timeout" from="WaitTimer" to="." method="_on_wait_timer_timeout"]
