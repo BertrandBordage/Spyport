@@ -25,16 +25,17 @@ var scores : Array = [13,null,2,35]
 var can_skip := false
 
 func _ready() -> void :
-	# Show AIRPORT and TITLE
-	await get_tree().create_timer(0.5).timeout
-	await pan_camera()
-	await get_tree().create_timer(1).timeout
-	fade_title()
-	show_panel()
+	if Globals.level_state == null:
+		await get_tree().create_timer(0.5).timeout
+		await pan_camera()
+		await get_tree().create_timer(1).timeout
+		fade_title()
+		show_panel()
+	else:
+		camera.global_position.y = 0.0
+		title.modulate.a = 1.0
+		await show_panel(Globals.level_state.players_scores.values())
 	can_skip = true
-	
-	# Show score
-	#show_panel(score)
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -63,7 +64,7 @@ func show_panel(score : Array = []) :
 	panel_text.text = ""
 	if score.size() > 0 : # Show score
 		var tween = create_tween()
-		tween.tween_property(info_panel, "size:y", 280 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(info_panel, "size:y", 375 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		var final_text = "[center]- SCORE -[/center]\n"
 		for i in range(4) : # Add score 4 times
@@ -74,6 +75,7 @@ func show_panel(score : Array = []) :
 			else :
 				score_str = "\nPlayer "+ str(i+1) + (str(score_int).lpad(9))
 			final_text += score_str
+		final_text += "\n\n%s" % START_BBCODE_TEXT
 		panel_text.text = final_text
 	else : # Show Press A
 		var tween = create_tween()
