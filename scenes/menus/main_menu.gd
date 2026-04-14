@@ -24,6 +24,7 @@ const START_BBCODE_TEXT : String = "[pulse freq=2.0 color=#ffffff40 ease=-20.0]P
 var can_skip := false
 
 func _ready() -> void :
+	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	if Globals.level_state == null:
 		await get_tree().create_timer(0.5).timeout
 		await pan_camera()
