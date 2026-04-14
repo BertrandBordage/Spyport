@@ -30,6 +30,8 @@ y_sort_enabled = true
 script = ExtResource("1_530kx")
 
 [node name="LineOfSight" type="Node2D" parent="." unique_id=47052962]
+process_mode = 4
+visible = false
 script = ExtResource("9_7hqay")
 
 [node name="Danger" type="Sprite2D" parent="." unique_id=1812647249]
