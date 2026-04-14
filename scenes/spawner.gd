@@ -36,11 +36,12 @@ static func is_available_character(node: Node):
 	var taken_character_types: Array[CharacterType] = []
 	for character in Globals.level_state.players_characters.values():
 		taken_character_types.append(character.character_type)
+	if not (is_instance_valid(node) and node is Character):
+		return false
+	var character: Character = node
 	return (
-		is_instance_valid(node)
-		and node is Character
-		and not node.is_dead
-		and node.character_type not in taken_character_types
+		not character.is_dead
+		and character.character_type not in taken_character_types
 	)
 
 
