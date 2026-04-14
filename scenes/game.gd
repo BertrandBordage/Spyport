@@ -1,5 +1,5 @@
 class_name Game
-extends NavigationRegion2D
+extends Node2D
 
 # We load instead of preloading, to avoid this error: https://github.com/godotengine/godot/issues/102073
 var main_menu_scene: PackedScene = load("res://scenes/menus/main_menu.tscn")
