@@ -68,7 +68,9 @@ func show_panel(scores: Dictionary[Character.PlayerIndex, int] = {}) :
 		tween.tween_property(info_panel, "size:y", 375 , 1).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_CUBIC)
 		await tween.finished
 		var final_text := ["[center]- SCORE -[/center]\n"]
-		for player_index in scores: # Add score 4 times
+		var sorted_player_indexes := scores.keys()
+		sorted_player_indexes.sort()
+		for player_index in sorted_player_indexes: # Add score 4 times
 			var score := scores[player_index]
 			final_text.append("Player %d%s" % [player_index + 1, str(score).lpad(9)])
 		final_text.append("\n%s" % START_BBCODE_TEXT)
