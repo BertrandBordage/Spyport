@@ -68,6 +68,7 @@ func get_help_texts() -> Array[String]:
 		],
 		"Players respawn as a new spy after a few seconds",
 		"Keep fighting until you are the last one standing!",
+		"5 points per spy, 1 per bot\n-5 when you die",
 	]
 
 
