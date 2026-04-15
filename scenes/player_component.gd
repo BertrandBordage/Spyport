@@ -3,37 +3,13 @@ extends Node2D
 
 enum Direction { UP, DOWN, LEFT, RIGHT }
 
-const ACTIONS_MAPPING: Dictionary[Character.PlayerIndex, Dictionary] = {
-	Character.PlayerIndex.ONE: {
-		Direction.UP: "player_0_up",
-		Direction.DOWN: "player_0_down",
-		Direction.LEFT: "player_0_left",
-		Direction.RIGHT: "player_0_right",
-		Character.Action.ATTACK: "player_0_attack",
-	},
-	Character.PlayerIndex.TWO: {
-		Direction.UP: "player_1_up",
-		Direction.DOWN: "player_1_down",
-		Direction.LEFT: "player_1_left",
-		Direction.RIGHT: "player_1_right",
-		Character.Action.ATTACK: "player_1_attack",
-	},
-	Character.PlayerIndex.THREE: {
-		Direction.UP: "player_2_up",
-		Direction.DOWN: "player_2_down",
-		Direction.LEFT: "player_2_left",
-		Direction.RIGHT: "player_2_right",
-		Character.Action.ATTACK: "player_2_attack",
-	},
-	Character.PlayerIndex.FOUR: {
-		Direction.UP: "player_3_up",
-		Direction.DOWN: "player_3_down",
-		Direction.LEFT: "player_3_left",
-		Direction.RIGHT: "player_3_right",
-		Character.Action.ATTACK: "player_3_attack",
-	},
+const GAMEPAD_ACTIONS := {
+	Direction.UP: "gamepad_up",
+	Direction.DOWN: "gamepad_down",
+	Direction.LEFT: "gamepad_left",
+	Direction.RIGHT: "gamepad_right",
+	Character.Action.ATTACK: "gamepad_attack",
 }
-
 
 var character: Character
 @onready var attack_area: Area2D = %AttackArea
@@ -42,8 +18,42 @@ var character: Character
 @onready var dash_player: AudioStreamPlayer2D = %DashPlayer
 @onready var steps_player: AudioStreamPlayer2D = %StepsPlayer
 @onready var steps_timer: Timer = %StepsTimer
-@onready var player_mapping := ACTIONS_MAPPING[character.player_index]
+@onready var player_mapping := build_mapping()
 
+
+func build_gamepad_mapping() -> Dictionary:
+	var mapping := {}
+	for action_or_direction in GAMEPAD_ACTIONS:
+		var action: String = GAMEPAD_ACTIONS[action_or_direction]
+		var device_action := "%s_%d" % [action, character.join_event.device]
+		for event in InputMap.action_get_events(action):
+			if event is InputEventJoypadButton or event is InputEventJoypadMotion:
+				if not InputMap.has_action(device_action):
+					InputMap.add_action(device_action)
+				var device_event := event.duplicate()
+				device_event.device = character.join_event.device
+				InputMap.action_add_event(device_action, device_event)
+		mapping[action_or_direction] = device_action
+	return mapping
+
+func build_mapping() -> Dictionary:
+	if character.join_event is InputEventJoypadButton:
+		return build_gamepad_mapping()
+	if character.join_event.is_action_pressed("keyboard_attack_0"):
+		return {
+			Direction.UP: "keyboard_up_0",
+			Direction.DOWN: "keyboard_down_0",
+			Direction.LEFT: "keyboard_left_0",
+			Direction.RIGHT: "keyboard_right_0",
+			Character.Action.ATTACK: "keyboard_attack_0",
+		}
+	return {
+		Direction.UP: "keyboard_up_1",
+		Direction.DOWN: "keyboard_down_1",
+		Direction.LEFT: "keyboard_left_1",
+		Direction.RIGHT: "keyboard_right_1",
+		Character.Action.ATTACK: "keyboard_attack_1",
+	}
 
 func _unhandled_input(event: InputEvent) -> void:
 	if character.is_dead:

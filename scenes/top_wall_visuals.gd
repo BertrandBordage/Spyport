@@ -58,13 +58,13 @@ func get_help_texts() -> Array[String]:
 		"[pulse freq=2.0 ease=-20.0]Press A on 2 to 4 gamepads to start playing with your friends![/pulse]",
 		"[pulse freq=2.0 ease=-20.0]Find your spy, locate other spies and kill them![/pulse]",
 		"Gamepad controls:\nLeft stick to move, A to kill",
-		"Keyboard controls (Player 1):\n%s to move, %s to kill" % [
-			get_keyboard_names(["player_0_up", "player_0_left", "player_0_down", "player_0_right"]),
-			get_keyboard_names(["player_0_attack"])
+		"Keyboard controls (variant 1):\n%s to move, %s to kill" % [
+			get_keyboard_names(["keyboard_up_0", "keyboard_left_0", "keyboard_down_0", "keyboard_right_0"]),
+			get_keyboard_names(["keyboard_attack_0"])
 		],
-		"Keyboard controls (Player 2):\n%s to move, %s to kill" % [
-			get_keyboard_names(["player_1_up", "player_1_left", "player_1_down", "player_1_right"]),
-			get_keyboard_names(["player_1_attack"])
+		"Keyboard controls (variant 2):\n%s to move, %s to kill" % [
+			get_keyboard_names(["keyboard_up_1", "keyboard_left_1", "keyboard_down_1", "keyboard_right_1"]),
+			get_keyboard_names(["keyboard_attack_1"])
 		],
 		"Players respawn as a new spy after a few seconds",
 		"Keep fighting until you are the last one standing!",

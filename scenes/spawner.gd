@@ -49,24 +49,40 @@ func get_available_characters() -> Array[Node]:
 	return get_children().filter(is_available_character)
 
 
-func replace_bot_with_player(player_index: Character.PlayerIndex) -> void:
+func replace_bot_with_player(player_index: Character.PlayerIndex, join_event: InputEvent = null) -> void:
 	var available_characters := get_available_characters()
 	if available_characters.size() == 0:
 		return
 	var character: Character = available_characters.pick_random()
+	if join_event != null:
+		character.join_event = join_event
 	character.player_index = player_index
 	Globals.level_state.add_player(character)
 	Globals.player_joined.emit(character)
 
 
+func get_join_event_key(join_event: InputEvent) -> String:
+	# For keys we use only the key label because we do not want modifiers (ctrl/shift)
+	# to affect the identification of the key.
+	if join_event is InputEventKey:
+		return "%d" % join_event.key_label
+	return "Device %d :: %s" % [join_event.device, join_event]
+
+
 func _unhandled_input(event: InputEvent) -> void:
-	for player_index in range(4):
-		if player_index in Globals.level_state.players_characters:
-			continue
-		if event.is_action_pressed(
-			PlayerComponent.ACTIONS_MAPPING[player_index][Character.Action.ATTACK]
+	var state := Globals.level_state
+	if event.is_action_pressed("player_join"):
+		if get_join_event_key(event) in state.players_characters.values().map(
+			func (character: Character): return get_join_event_key(character.join_event)
 		):
-			replace_bot_with_player(player_index)
+			return
+		var last_player_index = state.players_characters.keys().max()
+		var player_index: Character.PlayerIndex = (
+			0 if last_player_index == null else last_player_index + 1
+		)
+		if player_index in state.players_characters:
+			return
+		replace_bot_with_player(player_index, event)
 
 func _on_character_died(character: Character, _killer: Character) -> void:
 	if character.is_bot:

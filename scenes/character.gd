@@ -11,6 +11,7 @@ const player_component_scene: PackedScene = preload("res://scenes/player_compone
 const bot_component_scene: PackedScene = preload("res://scenes/bot_component.tscn")
 const dead_component_scene: PackedScene = preload("res://scenes/dead_component.tscn")
 
+var join_event: InputEvent
 var player_index: PlayerIndex = PlayerIndex.ONE:
 	set(value):
 		player_index = value
