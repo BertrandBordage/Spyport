@@ -88,7 +88,7 @@ func spawn_extra() :
 	if left_direction :
 		extra_position = SPAWN_RIGHT
 	extra_position.y += randf_range(-SPAWN_MARGIN, SPAWN_MARGIN)
-	
+
 	# SPAWN
 	var extra_instance = extra_scene.instantiate()
 	# ANIMATION

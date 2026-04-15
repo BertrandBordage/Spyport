@@ -28,7 +28,8 @@ Globals="*uid://cwcspjuvhktth"
 window/size/viewport_width=1280
 window/size/viewport_height=720
 window/size/mode=3
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
+window/snap/snap_2d_vertices_to_pixel=false
 
 [gui]
 
@@ -139,3 +140,4 @@ rendering_device/driver.windows="d3d12"
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0.7058824, 0.74509805, 0.7607843, 1)
+2d/snap/snap_2d_transforms_to_pixel=true
