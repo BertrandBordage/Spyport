@@ -74,7 +74,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		var tween := create_tween()
 		tween.tween_property(
 			character, "velocity",
-			-character.character_type.ATTACK_CHARGE_SPEED * attack_direction,
+			-character.type.ATTACK_CHARGE_SPEED * attack_direction,
 			0.2,
 		).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 		tween.tween_callback(on_attack_action)
@@ -85,7 +85,7 @@ func _physics_process(_delta: float) -> void:
 		character.move_slide_and_collide()
 		return
 
-	character.velocity = character.character_type.SPEED * Input.get_vector(
+	character.velocity = character.type.SPEED * Input.get_vector(
 		player_mapping[Direction.LEFT],
 		player_mapping[Direction.RIGHT],
 		player_mapping[Direction.UP],
@@ -109,7 +109,7 @@ func on_attack_action() -> void:
 	var tween := create_tween()
 	tween.tween_property(
 		character, "velocity",
-		-character.character_type.ATTACK_SPEED * character.velocity.normalized(),
+		-character.type.ATTACK_SPEED * character.velocity.normalized(),
 		0.1,
 	).set_ease(Tween.EASE_IN_OUT).set_trans(Tween.TRANS_QUAD)
 	tween.tween_callback(on_attack_end)
@@ -124,4 +124,4 @@ func _on_steps_timer_timeout() -> void:
 		return
 
 	steps_player.play()
-	steps_timer.start(0.3 / clampf(character.velocity.length() / character.character_type.SPEED, 0.3, 1.0))
+	steps_timer.start(0.3 / clampf(character.velocity.length() / character.type.SPEED, 0.3, 1.0))

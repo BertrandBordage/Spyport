@@ -35,13 +35,13 @@ func get_crowded_ratio() -> float:
 static func is_available_character(node: Node):
 	var taken_character_types: Array[CharacterType] = []
 	for character in Globals.level_state.players_characters.values():
-		taken_character_types.append(character.character_type)
+		taken_character_types.append(character.type)
 	if not (is_instance_valid(node) and node is Character):
 		return false
 	var character: Character = node
 	return (
 		not character.is_dead
-		and character.character_type not in taken_character_types
+		and character.type not in taken_character_types
 	)
 
 

@@ -46,7 +46,7 @@ func _physics_process(_delta: float) -> void:
 	if agent.is_navigation_finished():
 		character.action = Character.Action.WAIT
 	elif action in [Character.Action.WALK, Character.Action.EMBARK, Character.Action.FLEE]:
-		agent.velocity = character.character_type.SPEED * character.global_position.direction_to(
+		agent.velocity = character.type.SPEED * character.global_position.direction_to(
 			agent.get_next_path_position()
 		) * clampf(
 			agent.distance_to_target() / agent.target_desired_distance,
@@ -66,7 +66,7 @@ func _on_agent_velocity_computed(safe_velocity: Vector2) -> void:
 		safe_velocity,
 		0.1 if character.action == Character.Action.WAIT else 0.5,
 	).limit_length(
-		character.character_type.SPEED * (0.2 if character.action == Character.Action.WAIT else 1.0)
+		character.type.SPEED * (0.2 if character.action == Character.Action.WAIT else 1.0)
 	)
 	character.apply_generic_velocity()
 

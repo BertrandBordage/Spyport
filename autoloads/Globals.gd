@@ -8,15 +8,6 @@ signal game_over
 
 var width := DisplayServer.window_get_size().x
 var height := DisplayServer.window_get_size().y
-var character_types: Array[CharacterType] = [
-	preload("res://resources/characters/janitor.tres"),
-	preload("res://resources/characters/stewardess.tres"),
-	preload("res://resources/characters/guard.tres"),
-	preload("res://resources/characters/businessman.tres"),
-	preload("res://resources/characters/tourist.tres"),
-	preload("res://resources/characters/girl.tres"),
-	preload("res://resources/characters/manager.tres"),
-]
 var level_state: LevelState
 var physics_state: PhysicsDirectSpaceState2D
 var shape_params := PhysicsShapeQueryParameters2D.new()

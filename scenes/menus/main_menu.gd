@@ -101,7 +101,7 @@ func spawn_extra() :
 	# NODE
 	extras.add_child(extra_instance)
 	extra_instance.global_position = extra_position
-	
+
 	# MOVE
 	var distance = 1300
 	var time = randf_range(10.0,16.0)

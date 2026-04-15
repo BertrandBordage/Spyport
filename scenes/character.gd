@@ -10,6 +10,15 @@ signal action_changed(action: Action)
 const player_component_scene: PackedScene = preload("res://scenes/player_component.tscn")
 const bot_component_scene: PackedScene = preload("res://scenes/bot_component.tscn")
 const dead_component_scene: PackedScene = preload("res://scenes/dead_component.tscn")
+const TYPES: Array[CharacterType] = [
+	preload("res://resources/characters/janitor.tres"),
+	preload("res://resources/characters/stewardess.tres"),
+	preload("res://resources/characters/guard.tres"),
+	preload("res://resources/characters/businessman.tres"),
+	preload("res://resources/characters/tourist.tres"),
+	preload("res://resources/characters/girl.tres"),
+	preload("res://resources/characters/manager.tres"),
+]
 
 var join_event: InputEvent
 var player_index: PlayerIndex = PlayerIndex.ONE:
@@ -24,7 +33,7 @@ var player_index: PlayerIndex = PlayerIndex.ONE:
 				player_component = player_component_scene.instantiate()
 				player_component.character = self
 				add_child(player_component)
-var character_type: CharacterType = Globals.character_types.pick_random()
+var type: CharacterType = TYPES.pick_random()
 @onready var visuals: Node2D = %Visuals
 @onready var shadow: Sprite2D = %Shadow
 @onready var sprite: AnimatedSprite2D = %Sprite
@@ -63,8 +72,8 @@ var is_bot: bool:
 var seen_dead: Character
 
 func _ready() -> void:
-	agent.max_speed = character_type.SPEED
-	sprite.sprite_frames = character_type.sprite_frames
+	agent.max_speed = type.SPEED
+	sprite.sprite_frames = type.sprite_frames
 	visuals.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 	bot_component = bot_component_scene.instantiate()
 	bot_component.character = self
@@ -77,7 +86,7 @@ func move_slide_and_collide() -> void:
 		var collider := collision.get_collider()
 		if collider is RigidBody2D:
 			collider.apply_central_impulse(
-				-collision.get_normal() * character_type.PUSH_STRENGTH
+				-collision.get_normal() * type.PUSH_STRENGTH
 				# Proportional to the character velocity when touching.
 				* abs(collision.get_travel().dot(collision.get_normal()))
 			)
@@ -92,7 +101,7 @@ func update_collision() -> void:
 func apply_generic_velocity() -> void:
 	if velocity.length() > 0.0:
 		sprite.play('walk' if velocity.length() > 1.0 else 'default')
-		sprite.speed_scale = clampf(velocity.length() / character_type.SPEED, 0.25, 1.0)
+		sprite.speed_scale = clampf(velocity.length() / type.SPEED, 0.25, 1.0)
 		if abs(velocity.x) > 0.5:
 			visuals.scale.x = 1.0 if velocity.x > 0.0 else -1.0
 		move_slide_and_collide()

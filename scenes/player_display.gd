@@ -30,7 +30,7 @@ func _on_player_joined(_character: Character) -> void:
 	if _character.player_index == player_index:
 		character = _character
 		%EmptySprite.visible = false
-		%Sprite.sprite_frames = character.character_type.sprite_frames
+		%Sprite.sprite_frames = character.type.sprite_frames
 		%Sprite.animation = "default"
 		%Sprite.visible = true
 	elif _character.player_index == player_index - 1:
