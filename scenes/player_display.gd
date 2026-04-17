@@ -45,6 +45,10 @@ func _on_character_died(_character: Character, _killer: Character) -> void:
 
 
 func set_shaking(value: float) -> void:
+	if value > 0.0:
+		var strength := pow(value, 2.0)
+		character.vibrate(strength / 3.0, strength / 6.0, 0.1)
+
 	%Sprite.set_instance_shader_parameter("shaking", value)
 
 

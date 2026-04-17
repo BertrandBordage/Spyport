@@ -37,10 +37,16 @@ func on_attack_action() -> void:
 	if character.is_dead:
 		return
 
+	var made_kills := false
 	for body in attack_area.get_overlapping_bodies():
 		if body is Character and body != character:
 			body.die(character)
-			attack_player.play()
+			made_kills = true
+	if made_kills:
+		attack_player.play()
+		character.vibrate(0.4, 1.0, 0.1)
+	else:
+		character.vibrate(0.4, 0.0, 0.1)
 	attack_collision_shape.disabled = true
 	var tween := create_tween()
 	tween.tween_property(

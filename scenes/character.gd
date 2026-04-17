@@ -115,7 +115,16 @@ func die(killer: Character) -> void:
 	visuals.add_child(dead_component)
 	dead_component.killed_by = killer
 	update_collision()
+	stop_vibration()
 	Globals.character_died.emit(self, killer)
+
+func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) -> void:
+	if join_event != null:
+		Input.start_joy_vibration(join_event.device, weak_magnitude, strong_magnitude, duration)
+
+func stop_vibration() -> void:
+	if join_event != null:
+		Input.stop_joy_vibration(join_event.device)
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D
