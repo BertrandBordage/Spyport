@@ -17,7 +17,8 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
-	for other_character in others_in_range:
+	# We duplicate because we modify the array as we iterate on it.
+	for other_character in others_in_range.duplicate():
 		var dead_position: Vector2 = character.global_position
 		var character_position: Vector2 = other_character.global_position
 		if sign((dead_position - character_position).x) != sign(other_character.visuals.scale.x):
