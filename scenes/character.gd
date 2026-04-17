@@ -19,6 +19,7 @@ const TYPES: Array[CharacterType] = [
 	preload("res://resources/characters/girl.tres"),
 	preload("res://resources/characters/manager.tres"),
 ]
+const MASS := 60.0 # kg
 
 var join_event: InputEvent
 var player_index: PlayerIndex = PlayerIndex.ONE:
@@ -85,10 +86,17 @@ func move_slide_and_collide() -> void:
 		var collision := get_slide_collision(i)
 		var collider := collision.get_collider()
 		if collider is RigidBody2D:
-			collider.apply_central_impulse(
-				-collision.get_normal() * type.PUSH_STRENGTH
-				# Proportional to the character velocity when touching.
-				* abs(collision.get_travel().dot(collision.get_normal()))
+			var push_direction := -collision.get_normal()
+			var velocity_difference_in_push_direction := maxf(
+				velocity.dot(push_direction)
+				- collider.linear_velocity.dot(push_direction),
+				0.0
+			)
+			var mass_ratio := minf(1.0, MASS / collider.mass)
+			collider.apply_force(
+				push_direction * velocity_difference_in_push_direction
+				* mass_ratio * type.PUSH_STRENGTH,
+				collision.get_position() - collider.global_position,
 			)
 
 	move_and_slide()

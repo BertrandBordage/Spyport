@@ -14,5 +14,10 @@ func _ready() -> void:
 	%Sprite.scale.x = -1.0 if randi_range(0, 1) == 0 else 1.0
 
 
+func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	# Makes the trolleys move a lot less on the Y axis.
+	state.linear_velocity.y *= 0.88
+
+
 func get_collision_shape() -> CollisionShape2D:
 	return $CollisionShape2D
