@@ -44,9 +44,9 @@ func on_attack_action() -> void:
 			made_kills = true
 	if made_kills:
 		attack_player.play()
-		character.vibrate(0.4, 1.0, 0.1)
+		character.vibrate(0.5, 1.0, 0.1)
 	else:
-		character.vibrate(0.4, 0.0, 0.1)
+		character.vibrate(0.5, 0.0, 0.1)
 	attack_collision_shape.disabled = true
 	var tween := create_tween()
 	tween.tween_property(
