@@ -84,7 +84,7 @@ func _on_update_timer_timeout() -> void:
 			skipped_help_text_indexes.append(0)
 
 		while true:
-			help_text_index = help_text_index + 1 % help_texts.size()
+			help_text_index = (help_text_index + 1) % help_texts.size()
 			if help_text_index not in skipped_help_text_indexes:
 				break
 
