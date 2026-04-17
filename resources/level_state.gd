@@ -10,4 +10,5 @@ var spawner: Spawner
 
 func add_player(character: Character) -> void:
 	players_characters[character.player_index] = character
-	players_scores[character.player_index] = 0
+	if character.player_index not in players_scores:
+		players_scores[character.player_index] = 0
