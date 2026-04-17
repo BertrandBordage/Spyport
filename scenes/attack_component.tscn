@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://c63dooxla0e28"]
+
+[ext_resource type="Script" uid="uid://i6m8nsv34qfu" path="res://scenes/attack_component.gd" id="1_1fun5"]
+[ext_resource type="AudioStream" uid="uid://cqjm0leu4ycw5" path="res://assets/audio/thump.mp3" id="1_xjhra"]
+[ext_resource type="AudioStream" uid="uid://bgifscvr7n3t1" path="res://assets/audio/frot_1.mp3" id="2_1fun5"]
+[ext_resource type="AudioStream" uid="uid://ddnn2y7hauppp" path="res://assets/audio/frot_2.mp3" id="3_163m2"]
+[ext_resource type="AudioStream" uid="uid://dd4ywr0xlpkjh" path="res://assets/audio/frot_3.mp3" id="4_y74h0"]
+[ext_resource type="AudioStream" uid="uid://b1fd7d2unwmeg" path="res://assets/audio/frot_4.mp3" id="5_2q3pr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhpae"]
+size = Vector2(16, 25)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_g716i"]
+random_pitch = 1.1892071
+random_volume_offset_db = 5.0
+streams_count = 4
+stream_0/stream = ExtResource("2_1fun5")
+stream_1/stream = ExtResource("3_163m2")
+stream_2/stream = ExtResource("4_y74h0")
+stream_3/stream = ExtResource("5_2q3pr")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_5l4qr"]
+random_pitch = 1.3348398
+random_volume_offset_db = 5.0
+streams_count = 1
+stream_0/stream = ExtResource("1_xjhra")
+
+[node name="AttackComponent" type="Node2D" unique_id=1823759994]
+script = ExtResource("1_1fun5")
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=397940743]
+unique_name_in_owner = true
+collision_layer = 0
+monitorable = false
+
+[node name="AttackCollisionShape" type="CollisionShape2D" parent="AttackArea" unique_id=994040087]
+unique_name_in_owner = true
+position = Vector2(17, -1.5)
+shape = SubResource("RectangleShape2D_lhpae")
+disabled = true
+
+[node name="DashPlayer" type="AudioStreamPlayer2D" parent="." unique_id=631718943]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_g716i")
+
+[node name="AttackPlayer" type="AudioStreamPlayer2D" parent="." unique_id=116651826]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_5l4qr")
+volume_db = 5.0
