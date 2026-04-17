@@ -33,16 +33,10 @@ func get_crowded_ratio() -> float:
 
 
 static func is_available_character(node: Node):
-	var taken_character_types: Array[CharacterType] = []
-	for character in Globals.level_state.players_characters.values():
-		taken_character_types.append(character.type)
 	if not (is_instance_valid(node) and node is Character):
 		return false
 	var character: Character = node
-	return (
-		not character.is_dead
-		and character.type not in taken_character_types
-	)
+	return character.is_bot and not character.is_dead
 
 
 func get_available_characters() -> Array[Node]:
@@ -53,7 +47,16 @@ func replace_bot_with_player(player_index: Character.PlayerIndex, join_event: In
 	var available_characters := get_available_characters()
 	if available_characters.size() == 0:
 		return
-	var character: Character = available_characters.pick_random()
+	var taken_character_types: Array[CharacterType] = []
+	for character in Globals.level_state.players_characters.values():
+		taken_character_types.append(character.type)
+	var available_other_types := available_characters.filter(
+		func (c): return c.type not in taken_character_types
+	)
+	var character: Character = (
+		available_characters.pick_random() if available_other_types.size() == 0
+		else available_other_types.pick_random()
+	)
 	character.join_event = join_event
 	character.player_index = player_index
 	Globals.level_state.add_player(character)
