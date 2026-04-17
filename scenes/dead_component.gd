@@ -3,9 +3,11 @@ extends Node2D
 
 
 var character: Character
+var killed_by: Character
 @onready var blood: Sprite2D = %Blood
 @onready var dead_alert_collision_shape: CollisionShape2D = %DeadAlertCollisionShape
 var others_in_range: Array[Character] = []
+var killed_at: float
 
 
 func _ready() -> void:
@@ -14,6 +16,7 @@ func _ready() -> void:
 	tween.tween_property(
 		blood, 'scale', Vector2(1.5, 1.5), 5.0,
 	).set_ease(Tween.EASE_OUT)
+	killed_at = Time.get_ticks_msec() / 1_000.0
 
 
 func _physics_process(_delta: float) -> void:
@@ -29,8 +32,9 @@ func _physics_process(_delta: float) -> void:
 		)
 		var result := Globals.physics_state.intersect_ray(query)
 		if "collider" not in result:
-			other_character.seen_dead = character
-			other_character.action = Character.Action.PANIC
+			# We check again, because the character could no longer be a bot.
+			if other_character.is_bot:
+				other_character.bot_component.see_dead(character)
 			others_in_range.erase(other_character)
 
 
@@ -42,3 +46,7 @@ func _on_dead_alert_area_body_entered(body: Node2D) -> void:
 func _on_dead_alert_area_body_exited(body: Node2D) -> void:
 	if body in others_in_range:
 		others_in_range.erase(body)
+
+
+func is_just_killed() -> bool:
+	return Time.get_ticks_msec() / 1_000.0 - killed_at < 0.3

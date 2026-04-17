@@ -24,7 +24,8 @@ func _on_player_joined(character: Character) -> void:
 
 func _on_character_died(character: Character, killer: Character) -> void:
 	var players_scores := Globals.level_state.players_scores
-	players_scores[killer.player_index] += 1 if character.is_bot else 5
+	if not killer.is_bot:
+		players_scores[killer.player_index] += 1 if character.is_bot else 5
 	if not character.is_bot:
 		players_scores[character.player_index] -= 5
 	for player_index in players_scores:

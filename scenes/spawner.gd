@@ -49,13 +49,12 @@ func get_available_characters() -> Array[Node]:
 	return get_children().filter(is_available_character)
 
 
-func replace_bot_with_player(player_index: Character.PlayerIndex, join_event: InputEvent = null) -> void:
+func replace_bot_with_player(player_index: Character.PlayerIndex, join_event: InputEvent) -> void:
 	var available_characters := get_available_characters()
 	if available_characters.size() == 0:
 		return
 	var character: Character = available_characters.pick_random()
-	if join_event != null:
-		character.join_event = join_event
+	character.join_event = join_event
 	character.player_index = player_index
 	Globals.level_state.add_player(character)
 	Globals.player_joined.emit(character)
@@ -90,4 +89,4 @@ func _on_character_died(character: Character, _killer: Character) -> void:
 
 	await get_tree().create_timer(5.0).timeout
 
-	replace_bot_with_player(character.player_index)
+	replace_bot_with_player(character.player_index, character.join_event)

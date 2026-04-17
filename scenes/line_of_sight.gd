@@ -3,14 +3,15 @@ extends Node2D
 
 
 const line_color := Color("6124467f")
-@onready var character: Character = get_parent().character
+@onready var bot_component: BotComponent = get_parent()
+@onready var character := bot_component.character
 
 
 func _draw() -> void:
-	if character.seen_dead != null:
+	if bot_component.seen_dead != null:
 		draw_line(
-			to_local(character.head_marker.global_position),
-			to_local(character.seen_dead.dead_component.dead_alert_collision_shape.global_position),
+			to_local(bot_component.character.head_marker.global_position),
+			to_local(bot_component.seen_dead.dead_component.dead_alert_collision_shape.global_position),
 			line_color,
 			-1,
 			true,

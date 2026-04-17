@@ -1,14 +1,20 @@
 class_name AttackComponent
 extends Node2D
 
-
 var character: Character
+var cooldown := 0.0  # No cooldown by default
+var last_attack := 0.0
 @onready var attack_collision_shape: CollisionShape2D = %AttackCollisionShape
 @onready var attack_area: Area2D = %AttackArea
 @onready var dash_player: AudioStreamPlayer2D = %DashPlayer
 @onready var attack_player: AudioStreamPlayer2D = %AttackPlayer
 
 func start_attack() -> void:
+	if character.action == Character.Action.ATTACK or (
+		Time.get_ticks_msec() / 1_000.0 < last_attack + cooldown
+	):
+		return
+	last_attack = Time.get_ticks_msec() / 1_000.0
 	character.action = character.Action.ATTACK
 	character.sprite.play("attack")
 	attack_collision_shape.disabled = false
@@ -46,4 +52,4 @@ func on_attack_action() -> void:
 
 
 func on_attack_end() -> void:
-	character.action = Character.Action.WAIT
+	character.action = Character.Action.WALK

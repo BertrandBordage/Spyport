@@ -27,9 +27,8 @@ var player_index: PlayerIndex = PlayerIndex.ONE:
 		player_index = value
 		action = Action.WAIT
 		update_collision()
-		if not is_bot:
-			if bot_component != null:
-				bot_component.queue_free()
+		if player_index != PlayerIndex.BOT:
+			bot_component.queue_free()
 			if player_component == null:
 				player_component = player_component_scene.instantiate()
 				player_component.character = self
@@ -49,28 +48,11 @@ var action := Action.WAIT:
 		action = value
 		action_changed.emit(action)
 var is_dead := false:
-	set(value):
-		is_dead = value
-		shadow.visible = not is_dead
-		sprite.z_index = (
-			-1 if is_dead else 0 # Makes the body "part of the ground" when dead.
-		)
-		update_collision()
-		if is_dead:
-			sprite.play("dead")
-			agent.avoidance_enabled = false
-			sprite.rotation = randf_range(-PI/6, PI/6)
-			if player_component != null:
-				player_component.queue_free()
-			if bot_component != null:
-				bot_component.queue_free()
-			dead_component = dead_component_scene.instantiate()
-			dead_component.character = self
-			visuals.add_child(dead_component)
+	get:
+		return dead_component != null
 var is_bot: bool:
 	get:
-		return player_index == PlayerIndex.BOT
-var seen_dead: Character
+		return bot_component != null
 
 func _ready() -> void:
 	agent.max_speed = type.SPEED
@@ -117,6 +99,23 @@ func apply_generic_velocity() -> void:
 		sprite.play('default')
 		sprite.speed_scale = 1.0
 
+
+func die(killer: Character) -> void:
+	shadow.visible = false
+	sprite.z_index = -1 # Makes the body "part of the ground" when dead.
+	sprite.play("dead")
+	agent.avoidance_enabled = false
+	sprite.rotation = randf_range(-PI/6, PI/6)
+	if player_component != null:
+		player_component.queue_free()
+	if bot_component != null:
+		bot_component.queue_free()
+	dead_component = dead_component_scene.instantiate()
+	dead_component.character = self
+	visuals.add_child(dead_component)
+	dead_component.killed_by = killer
+	update_collision()
+	Globals.character_died.emit(self, killer)
 
 func get_collision_shape() -> CollisionShape2D:
 	return %CollisionShape2D

@@ -6,4 +6,5 @@
 [resource]
 script = ExtResource("1_p2ee3")
 sprite_frames = ExtResource("2_4pgwb")
+can_pursuit = true
 metadata/_custom_type_script = "uid://cuvctrqtn5qxf"
