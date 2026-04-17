@@ -43,6 +43,7 @@ shape = SubResource("CapsuleShape2D_qhqgy")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="." unique_id=495895397]
 unique_name_in_owner = true
+path_desired_distance = 12.0
 target_desired_distance = 16.0
 avoidance_enabled = true
 neighbor_distance = 100.0
