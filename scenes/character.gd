@@ -52,7 +52,7 @@ var is_dead := false:
 		return dead_component != null
 var is_bot: bool:
 	get:
-		return bot_component != null
+		return bot_component != null or player_index == PlayerIndex.BOT
 
 func _ready() -> void:
 	agent.max_speed = type.SPEED
