@@ -15,7 +15,7 @@ agent_radius = 16.0
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_uwrxv"]
 normal = Vector2(0, 1)
-distance = 28.0
+distance = 90.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqjtg"]
 size = Vector2(1320, 90)
