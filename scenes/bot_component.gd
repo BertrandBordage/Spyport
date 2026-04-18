@@ -38,6 +38,8 @@ func _ready() -> void:
 		attack_component = attack_component_scene.instantiate()
 		attack_component.character = character
 		add_child(attack_component)
+		# Fixes the attack area position, otherwise it's too high.
+		attack_component.global_position = character.global_position
 	_on_wait_timer_timeout()
 
 
