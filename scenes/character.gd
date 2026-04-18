@@ -119,12 +119,8 @@ func die(killer: Character) -> void:
 	Globals.character_died.emit(self, killer)
 
 func vibrate(weak_magnitude: float, strong_magnitude: float, duration: float) -> void:
-	if join_event != null:
+	if join_event != null and join_event is InputEventJoypadButton:
 		Input.start_joy_vibration(join_event.device, weak_magnitude, strong_magnitude, duration)
-		Input.vibrate_handheld(int(duration * 1_000.0), clampf(
-			(strong_magnitude * 2.0 + weak_magnitude) / 3.0,
-			0.0, 1.0,
-		))
 
 func stop_vibration() -> void:
 	if join_event != null:
