@@ -23,13 +23,11 @@ func _on_character_died(_character: Character, _killer: Character) -> void:
 
 
 func _on_character_count_changed() -> void:
-	if (
-		level_state.spawner.get_available_characters().size() == 0
-		# And at max 1 player alive
-		and level_state.players_characters.values().filter(
-			func (character: Character): return not character.is_dead
-		).size() <= 1
-	):
+	var available_characters := level_state.spawner.get_available_characters().size()
+	var alive_players := level_state.players_characters.values().filter(
+		func (character: Character): return not character.is_dead
+	).size()
+	if available_characters + alive_players <= 1:
 		game_over.emit()
 
 
